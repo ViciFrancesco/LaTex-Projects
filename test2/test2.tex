@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{listings}
+\usepackage[margin=10pt]{geometry}
+
+\begin{document}
+\blindtext
+	\begin{multicols}{3}
+	\setlength{\columnseprule}{1pt}
+		\blindtext[2]
+	\end{multicols}
+\blindtext
+\begin{multicols}{2}
+		\blindtext[2]
+	\end{multicols}
+\lstset{tabsize=3}
+\begin{lstlisting}
+funzione(A)
+	b=1
+	b=2
+	for (x){
+		carlo
+	}
+\end{lstlisting}
+\end{document}
+

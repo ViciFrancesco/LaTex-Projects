@@ -1,0 +1,237 @@
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper, margin=30pt]{geometry}
+\usepackage{listings}
+\usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
+\usepackage{amsfonts} 		%used for \mathbb{} -> numerical sets
+\usepackage{amsmath}			%used for \text{} inside math equations
+\usepackage{enumitem}
+\usepackage{bm}					%used for bold math expressions
+\usepackage{calc}				%used for algebric operations inside \newenvironment
+\usepackage{graphicx}			%used for custom limits
+
+
+\newenvironment{formulario}
+{
+\setlength{\columnsep}{3em}
+\twocolumn
+\lstset{tabsize=3}
+\begin{spacing}{1}
+\begin{flushleft}
+}{
+\end{flushleft}
+\end{spacing}
+}
+
+
+
+\newenvironment{tcenter}{
+  \par
+  \centering
+  \setlength{\parskip}{0pt} % Rimuovi spaziatura verticale
+  \noindent
+}{
+  \par
+}
+
+
+
+\newenvironment{descr}[1]
+{
+\setlist[description,1]{leftmargin=2em + (2em * #1),labelindent=0em + (2em * #1)}
+\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+\end{description}
+}
+
+
+
+\newcommand{\norma}[1]{\lvert\lvert #1\rvert\rvert}
+\newcommand{\module}[1]{\lvert #1\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\myRule}{\rule{250pt}{0.1pt}}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+
+
+
+\begin{document}
+
+	\begin{formulario}
+
+%PARAGRAFO 1
+		\begin{tcenter}
+\textbf{FUNZIONI A PIÙ VARIABILI}
+		\end{tcenter}
+Si dice funzione a più variabili una funzione del tipo: 
+		\begin{tcenter}
+$f:\R^n\to\R^m$
+		\end{tcenter}
+Inoltre possiamo definire "scalare" una funzione del tipo $f:\R^n\to\R$ mentre viene definita vettoriale una funzione del tipo $f:\R^n\to\R^m$.
+\myRule
+
+%PARAGRAFO 2
+		\begin{tcenter}
+\textbf{FUNZIONI A DUE VARIABILI SCALARI}
+		\end{tcenter}
+È una funzione del tipo $f:\R^2\to\R$, chiamo le variabili $x,y$. \\
+		\begin{descr}{0}
+\item[Dominio] $\rightarrow$ In generale, dati $f:D\to\R$ con $D\subset\R^2$, $D$ viene detto dominio.
+\item[Segno] $\rightarrow$ Studio dove $f:(x,y)>0,\text{ }=0 \text{ oppure }<0$. Si tratta quindi di determinare uno di questi sottoinsiemi (spesso è utile rappresentarlo graficamente). 
+		\end{descr}
+Al fine di definire la continuità di una funzione è necessario definire i concetti di "distanza" e tutti i concetti che ne derivano e quello di "limite":
+		
+		\begin{descr}{1}
+\item[Distanza in $\R^2$] $\rightarrow$ Dati due punti $(x,y) \text{ e } (x_0,y_0)$ la distanza tra loro è data dalla norma a 2, cioè: \\
+			\begin{tcenter}
+$\mathbf{\norma{(x,y)-(x_0,y_0)}=\sqrt{(x-x_0)^2+(y-y_0)^2}}$
+			\end{tcenter}
+\item[Intorno (Circolare)] $\rightarrow$ Dato un punto $(x_0,y_0)$, $I$ viene detto intorno circolare di $(x_0,y_0)$ se:\\
+			\begin{tcenter}
+$\mathbf{I(x_0,y_0)=\{(x,y)\;\big\vert\;\norma{(x-y)-(x_0,y_0)}<r\}}$
+			\end{tcenter}
+\item[Interno] $\rightarrow$ Dato un punto $(x_0,y_0)\in A$, tale punto si dice interno ad $A$ se:\\
+			\begin{tcenter}
+$\mathbf{\exists  I(x_0,y_0)\subset A}$
+			\end{tcenter}
+\item[Frontiera (o Bordo)] $\rightarrow$ Un punto $(x_0,y_0)$ si dice appartenere alla frontiera (o bordo) di $A$, e si scrive $(x_0,y_0)\in\partial A$ se:\\
+			\begin{tcenter}
+$\mathbf{\forall I(x_0,y_0)
+			\begin{cases}
+   	\exists (x,y)\neq(x_0,y_0)\text{ t.c. } (x,y)\in A\cap I(x_0,y_0) \\
+   	\exists (z,t)\neq(x_0,y_0)\text{ t.c. } (z,t)\in A^c\cap I(x_0,y_0)
+  			\end{cases}}$
+			\end{tcenter}
+\item[Punto di Accumulazione] $\rightarrow$ Dato un punto $(x_0,y_0)$, questo si dice punto di accumulazione per $A$ se: \\
+			\begin{tcenter}
+$\forall I(x_0,y_0)\; \exists(x.y)\neq(x_0,y_0) \text{ t.c. } (x,y)\in I(x_0,y_0)\cap A$
+			\end{tcenter}
+\item[Insieme Aperto/Chiuso] $\rightarrow$ A è un insieme aperto se coincide con l'insieme dei sui punti interni (cioè $\mathbf{A}$ \textbf{ha tutto il bordo "tratteggiato"}), mentre A è un insieme se $\partial A\subset A$ (cioè $\mathbf{A}$ \textbf{ha tutto il bordo "continuo"}).
+
+\item[Chiusura di un Insieme] $\rightarrow$ La chiusura di un insieme $A$ è data dall'insieme stesso unito con la sua frontiera, cioè:
+			\begin{tcenter}
+		$\mathbf{\overline{A}=A\cup\partial A}$
+			\end{tcenter}
+		\end{descr}
+Inoltre possono anche essere utili altre definizioni secondarie come:
+		\begin{descr}{1}
+\item[Insieme Limitato] $\rightarrow$ Un insieme $A$ è limitato in $\R^2$ se: 
+			\begin{tcenter}
+$\mathbf{\exists a,b,c,d \in \R \text{ t.c. } \forall (x,y)\in A: a\leq x\leq b,\; c\leq y\leq d}$\\ 
+oppure \\
+$\mathbf{\exists c\in\R^+ \text{ t.c. } \forall (x,y)\in A: x^2+y^2\leq c }$  
+			\end{tcenter} 
+\item[Insieme non Limitato] $\rightarrow$ Un insieme $A$ è non limitato se:
+			\begin{tcenter}
+$\mathbf{\forall c\; \exists (x,y) \text{ t.c. } \norma{(x,y)}>c}$ 
+			\end{tcenter}
+\item[Insieme Compatto] $\rightarrow$ Un insieme si dice compatto se è chiuso e limitato.
+\item[Insieme Connesso] $\rightarrow$ Un insieme si dice connesso non ai può ricoprire con due insiemi non vuoti, aperti e disgiunti.
+		\end{descr} 
+\myRule
+
+%PARAGRAFO 3
+		\begin{tcenter}
+\textbf{LIMITI DI FUNZIONI IN DUE VARIABILI}
+		\end{tcenter}
+La principale differenza con i limiti di funzioni in una variabile sta nel fatto che in $\R$ esistono solo due possibili "direzioni" per cui una funzione può tendere ad un punto, mentre in $\R^2$ le direzioni sono infinite.
+		\begin{descr}{0}
+\item [\underline{DEF:} (Per Intorni)] $\rightarrow$ Data $f:D\to\R,D\subset\R^2$ e dato $(x_0,y_0)$ punto di accumulazione per $D$ dico che $\Lim{(x,y)\to(x_0,y_0)}f(x,y)=l$ se $\forall\epsilon >0 \; \exists\delta>0 \;$ t.c. se $(x,y)\in D, \; (x,y)\neq(x_0,y_0)$:
+			\begin{tcenter}
+$\mathbf{\norma{(x,y)-(x_0,y_0)}<\delta \implies \module{f(x,y)-l}<\epsilon}$
+			\end{tcenter}
+\item [\underline{DEF:} (Per Successioni)] $\rightarrow$ Data $f:D\to\R,D\subset\R^2$ e dato $(x_0,y_0)$ punto di accumulazione per $D$ dico che $\Lim{(x,y)\to(x_0,y_0)}f(x,y)=l$ se $\forall (x_n,y_n)\in D\setminus{(x_0,y_0)}, n\in \N$ t.c. se:
+			\begin{tcenter}
+$\mathbf{(x_n,y_n)\to (x_0,y_0) \text{ allora } f(x_n,y_n)\to l}$
+			\end{tcenter}
+		\end{descr}
+È anche possibile approcciare il problema sotto il punto di vista delle coordinate polari $(\rho,\Theta)$, questo riduce il problema ad un limite ad una variabile in quanto il parametro $\Theta$ è libero è dobbiamo verificare solo la tendenza di $\rho$.
+\myRule
+
+%PARAGRAFO 4
+		\begin{tcenter}
+\textbf{CONTINUITÀ DI FUNZIONI A DUE VARIABILI}
+		\end{tcenter}
+		\begin{descr}{0}
+\item[\underline{DEF:}] $\rightarrow$ Data $f:D\to\R, D\subset\R$ e dato $(x_0,y_0)\in D$ punto di accumulazione per D, si dice che $f$ è continua in $(x_0,y_0)$ se:
+			\begin{tcenter}
+$\mathbf{\exists\Lim{(x,y)\to(x_0,y_0)}f(x,y) \text{ \textbf{ed è pari a} } f(x_0,y_0)}$.
+			\end{tcenter}
+		\end{descr}
+Se la funzione è definita "a tratti" allora la continuità è da verificare nei punti di frontiera comune.
+		\begin{descr}{0}
+\item[Teorema di Weierstrass] $\rightarrow$ Data $f:K\to\R$ con $K$ compatto e $f$ continua in $\R$ allora:
+			\begin{tcenter}
+$\mathbf{f}$ \textbf{ha massimo e minimo assoluti in} $\mathbf{K}$
+			\end{tcenter}
+		\end{descr}
+\myRule
+
+%PARAGRAFO 5
+		\begin{tcenter}
+\textbf{RAPPRESENTAZIONE GRAFICA DI FUNZIONI A DUE VARIABILI}
+		\end{tcenter}
+		\begin{descr}{0}
+\item[Superficie Associata] $\rightarrow$ Data $f:D\to\R,\; D\subset\R^2$ definisco la superficie associata ad $f$ come:
+ 			\begin{tcenter}
+$\mathbf{S_f=\left\{ (x,y,z)\in\R^3 \bigg\vert 
+\begin{array}{l}
+	\mathbf{(x,y)\in D }\\
+	\mathbf{z=f(x,y)}
+\end{array}
+\right\}} \mathbf{\subset\R^3}$
+			\end{tcenter}
+\item[Insiemi di Livello] $\rightarrow$ Data $f:D\to\R,\; D\subset\R^2$ e dato $c\in\R$, chiamo "insieme di livello di $f$ a livello $c$" l'insieme:
+			\begin{tcenter}
+$\mathbf{U_c:= \left\{ (x,y)\in D \big\vert f(x,y)=c \right\}\subset D}$
+			\end{tcenter}
+\underline{OSS:} 
+			\begin{tcenter}
+$U_c$ può essere: 
+	$\begin{cases}
+\emptyset \\
+\text{insieme di punti isolati} \\
+\text{curva} \\
+\text{regione bidimensionale}
+	\end{cases}$
+			\end{tcenter}
+		\end{descr}
+\myRule
+
+%PARAGRAFO 6
+		\begin{tcenter}
+\textbf{DERIVATE PARZIALI}
+		\end{tcenter}
+		\begin{descr}{0}
+\item[\underline{DEF:}] $\rightarrow$ Sia $(x_0,y_0)$ un punto interno al dominio di $f$. si chiama derivata parziale di $f$ rispetto ad $x$ nel punto $(x_0,y_0)$ , la derivata classica di:
+			\begin{tcenter}
+$x \to f(x,y_0) \text{ in } x=x_0$
+			\end{tcenter}
+e si indica con $\frac{\partial f}{\partial x}(x_0,y_0)$. Ricordando la definizione di derivata classica si ha che:		
+			\begin{tcenter}
+$\mathbf{\frac{\partial f}{\partial x}(x_0,y_0)=\Lim{h\to 0} \frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}}$
+			\end{tcenter}
+\underline{OSS:} Si possono usare le stesse regole di derivazione classiche considerando l'altra variabile come una costante. 
+		\end{descr}
+\myRule
+
+%PARAGRAFO 7
+		\begin{tcenter}
+\textbf{DERIVATA DIREZIONALE}
+		\end{tcenter}
+		\begin{descr}{0}
+\item[\underline{DEF:}] $\rightarrow$ Dato $\overrightarrow{\nu}$ un vettore unitario di $\R^2$ (cioè $\norma{\overrightarrow{\nu}}=1$) la derivata direzionale di $f$ in direzione $\overrightarrow{\nu}$ nel punto $(x_0,y_0)$ è la derivata classica di:
+			\begin{tcenter}
+$t \to f((x_0,y_0)+t\cdot\overrightarrow{\nu})$
+			\end{tcenter} 
+cioè:
+			\begin{tcenter}
+$\mathbf{\Lim{f\to0} \frac{f((x_0,y_0)+h\cdot\overrightarrow{\nu})-f(x_0,y_0)}{h}}$
+			\end{tcenter}
+e si indica con $\frac{\partial f}{\partial \nu}(x_0,y_0)$.
+		\end{descr}
+		
+		
+		
+
+	\end{formulario}
+\end{document}

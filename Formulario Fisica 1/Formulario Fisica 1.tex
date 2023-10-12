@@ -1,0 +1,174 @@
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper, margin=30pt]{geometry}
+\usepackage{listings}
+\usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
+\usepackage{amsfonts} 		%used for \mathbb{} -> numerical sets
+\usepackage{amsmath}			%used for \text{} inside math equations
+\usepackage{enumitem}
+\usepackage{bm}					%used for bold math expressions
+\usepackage{calc}				%used for algebric operations inside \newenvironment
+
+
+
+\newenvironment{formulario}
+{
+\setlength{\columnsep}{3em}
+\twocolumn
+\lstset{tabsize=3}
+\begin{spacing}{1}
+\begin{flushleft}
+}{
+\end{flushleft}
+\end{spacing}
+}
+
+
+
+\newenvironment{tcenter}{
+  \par
+  \centering
+  \setlength{\parskip}{0pt} % Rimuovi spaziatura verticale
+  \noindent
+}{
+  \par
+}
+
+
+
+\newenvironment{descr}[1]
+{
+\setlist[description,1]{leftmargin=2em + (2em * #1),labelindent=0em + (2em * #1)}
+\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+\end{description}
+}
+
+
+
+\newcommand{\normadue}[1]{\lvert\lvert #1\rvert\rvert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\myRule}{\rule{250pt}{0.1pt}}
+
+
+
+
+
+\begin{document}
+	\begin{formulario}
+	
+%PARAGRAFO 1
+		\begin{tcenter}
+\textbf{CINEMATICA DEL PUNTO}
+		\end{tcenter}
+È una parte della fisica che studia il moto dei corpi. Per punto materiale si intende un qualsiasi corpo le cui dimensioni sono trascurabili, e se ne considerano solo le traslazioni. 
+		\begin{descr}{0}
+\item[Coordinate] $\rightarrow$ sono utili alla descrizione della posizione di un punto nello spazio, esistono due rappresentazioni principali:
+		\end{descr}
+		\begin{tcenter}
+\textbf{Cartesiane} $\rightarrow$ $\begin{cases} x=x(t)\\ y=y(t)\\ z=z(t) \end{cases}$ \quad
+\textbf{Polari} $\rightarrow$ $\begin{cases}	r=r(t)\\ \Theta=\Theta(t) \end{cases}$
+		\end{tcenter}
+Voglio studiare la traiettoria del punto materiale tramite 3 grandezze fondamentali, cioè Spazio, Velocità e Grandezza. 
+		\begin{descr}{0}
+\item[Velocità Media] $\rightarrow$ è la rapidità con cui avviene lo spostamento tra due punti nello spazio in un intervallo di tempo:
+			\begin{tcenter}
+$\mathbf{v_m=\frac{\Delta x}{\Delta t}=\frac{x_2-x_1}{t_2-t_1}}$
+			\end{tcenter}
+\item[Velocità Istantanea] $\rightarrow$ è la rapidità con cui avviene lo spostamento in un punto esatto dello spazio:
+			\begin{tcenter}
+$\mathbf{v(t)=x'(t)}$
+			\end{tcenter}
+\underline{DIM}: $v(t)=\lim_{\Delta t\to 0}\frac{\Delta x}{\Delta t}=\frac{x(t+\Delta t)-x(t)}{\Delta t}= \frac{dx}{dt}$.
+		\end{descr}
+\myRule
+
+% PARAGRAFO 2
+		\begin{tcenter}
+\textbf{MOTO RETTILINEO}
+		\end{tcenter}
+In un qualsiasi moto rettilineo, conoscendo la posizione iniziale $x_0$ e la velocità istantanea $v(t)$ è possibile calcolare lo spazio percorso, cioè:
+		\begin{tcenter}
+$\mathbf{x=x_0+\int_{t_0}^t v(t) dt}$
+		\end{tcenter}
+		\begin{descr}{1}
+\item\underline{DIM}: $dx(t)=v(t)\;dt \implies \int_{x_0}^x dx = \int_{t_0}^t v(t)\; dt \implies$ \\ $x-x_0=\int_{t_0}^t v(t)\; dt \implies x=x_0+\int_{t_0}^t v(t)\; dt$
+		\end{descr} 
+Questo permette di stabilire anche una relazione tra velocità media e istantanea, cioè:
+		\begin{tcenter}
+$\mathbf{v_m=\frac{\Delta x}{\Delta t}=\frac{1}{t-t_0}\int_{t_0}^t v(t)\; dt}$
+		\end{tcenter}
+\myRule
+
+%PARAGRAFO 3
+		\begin{tcenter}
+\textbf{MOTO RETTILINEO UNIFORME}
+		\end{tcenter}
+È caratterizzato dalla velocità costante in ogni momento, cioè: $v(t)=v_m=c$. Questo implica che $x(t)=x_0+\int_{t_0}^t v \; dt$ permettendomi di descrivere il moto con una \textbf{legge oraria}:		
+		\begin{tcenter}
+$\mathbf{x(t)=x_0+v(t-t_0)}$
+		\end{tcenter}
+\myRule
+
+%PARAGRAFO 4
+		\begin{tcenter}
+\textbf{MOTO ACCELLERATO}
+		\end{tcenter}
+È un moto in cui $v(t)$ varia nel tempo. Definisco quindi l'accelerazione come: 
+		\begin{tcenter}
+$\mathbf{a_m=\frac{v_2-v_1}{t_2-t_1}}$ \quad e \quad $\mathbf{a(t)=\frac{dv(t)}{dt}}$
+		\end{tcenter}
+È quindi possibile ricavare la velocità $v(t)$ tramite l'accelerazione, infatti:
+		\begin{tcenter}
+$\mathbf{v(t)=v(t_0)+\int_{t_0}^t a(t)\; dt}$
+		\end{tcenter}
+		\begin{descr}{1}
+\item\underline{DIM}: $a(t)=v(t)\; dt \implies \int_{t_0}^t a(t)\; dt=\int_{v_0}^v dv \implies v(t)-v(t_0)=\int_{t_0}^t a(t)\; dt \implies v(t)=v_0+\int_{t_0}^t a(t)\; dt$
+		\end{descr}
+L'accelerazione può anche essere descritta in funzione della posizione, come segue:
+		\begin{tcenter}
+$a(t)=\frac{d\; v(t)}{dt}=\frac{d}{dt}(\frac{d\;x(t)}{dt})=\ddot{x}(t)$.
+		\end{tcenter}
+\myRule
+
+%PARAGRAFO 5
+		\begin{tcenter}
+\textbf{MOTO RETTILINEO UNIFORM. ACCELERATO}
+		\end{tcenter}
+È un moto rettilineo con accelerazione costante. Quindi avremo che la velocità è $v(t)=v_0+a(t-t_0)$. Anche in questo caso è possibile descrivere il moto con una \textbf{legge oraria}:
+		\begin{tcenter}
+$\mathbf{x(t)=x_0+v_0(t-t_0)+\frac{1}{2}\cdot a(t-t_0)^2}$
+		\end{tcenter}
+		\begin{descr}{1}
+\item\underline{DIM}: $x(t)=x_0+\int_{t_0}^t [v_0+a(t-t_0)]\; dt =$\\$= x_0+\int_{t_0}^t v_0\; dt+\int_{t_0}^t a(t-t_0)\; dt =$\\$= x_0+v_0(t-t_0)+\frac{1}{2}\cdot a(t-t_0)^2 $
+		\end{descr}
+\myRule
+
+%PARAGRAFO 6
+		\begin{tcenter}
+\textbf{MOTO VERTICALE}
+		\end{tcenter}
+Trascurando l'attrito dell'aria, il un corpo che cade in vicinanza della superficie terrestre ha un'accelerazione $a=-g=-9.8\; ms^{-2}$. Essendo $a$ costante, questo può essere considerato un moto rettilineo uniform. accelerato.
+		\begin{descr}{0}
+\item[Corpo in Caduta] $\rightarrow$ Punto materiale lasciato cadere da un'altezza $h$, con $v_0=0$ e $t_0=0$. Si ha che:\\ 
+			\begin{tcenter}
+$\mathbf{v(t)=-gt}$ \qquad $\mathbf{x(t)=h-\frac{1}{2}gt^2}$
+			\end{tcenter}
+Inoltre il tempo di caduta è $t_c=\sqrt{\frac{2h}{g}}$ mentre la velocità al suolo è $v_c=\sqrt{2gh}$.
+\item[Lancio Verso il Basso] $\rightarrow$ Punto materiale lanciato da un'altezza $h$ con velocità iniziale $v_0=-v_1$. Si ha che:
+			\begin{tcenter}
+$\mathbf{v(t)=-v_1-gt}$ \qquad $\mathbf{x(t)=h-v_1t-\frac{1}{2}gt^2}$
+			\end{tcenter}
+Inoltre il tempo di caduta è $t_c=-\frac{v_1}{g}+\sqrt{\frac{v_1^2}{g^2}+\frac{2h}{g}}$ mentre la velocità al suolo è $v_c=\sqrt{v_1^2+2gh}$.
+\item[Lancio Verso l'Alto] $\rightarrow$ Punto materiale lanciato dal suolo verso l'alto con velocità iniziale $v_0=v_2$. Si ha che:
+			\begin{tcenter}
+$\mathbf{v(t)=v_2-gt}$ \qquad $\mathbf{x(t)=v_2t-\frac{1}{2}gt^2}$. 
+			\end{tcenter}
+Il punto materiale si ferma all'istante $t_m=\frac{v_2}{t}$ e nella posizione $x_m=x(t_m)=\frac{v_2^2}{2g}$. Per quanto riguarda la fase di discesa, il tempo di caduta è $t_c=\sqrt{\frac{2x_m}{g}}=t_m$ mentre la durata complessiva del moto è $2t_m=\frac{2v_2}{g}$. 
+		\end{descr}
+\myRule
+		
+		
+		
+
+	\end{formulario}
+\end{document}
