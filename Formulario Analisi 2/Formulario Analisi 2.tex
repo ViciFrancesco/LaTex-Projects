@@ -1,5 +1,5 @@
 \documentclass[9pt]{extarticle}
-\usepackage[a4paper, margin=30pt]{geometry}
+\usepackage[a4paper,headsep=10pt, top=30pt, bottom=30pt, left=30pt, right=30pt, footskip=10pt]{geometry}
 \usepackage{listings}
 \usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
 \usepackage{amsfonts} 		%used for \mathbb{} -> numerical sets
@@ -8,6 +8,27 @@
 \usepackage{bm}					%used for bold math expressions
 \usepackage{calc}				%used for algebric operations inside \newenvironment
 \usepackage{graphicx}			%used for custom limits
+\usepackage{fancyhdr}			%used for head and foot settings
+%\usepackage{draftwatermark}		%used for watermark
+%
+%
+%%%watermark settings
+%\SetWatermarkText{Vici Francesco}
+%\SetWatermarkScale{2}
+%\SetWatermarkAngle{60}
+%%end watermark settings
+
+
+
+\fancypagestyle{plain}
+{
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{\vspace{0pt}   Formulario Analisi II}
+\fancyfoot[R]{Vici Francesco}
+\fancyfoot[C]{\thepage}
+}
+\pagestyle{plain}
+
 
 
 \newenvironment{formulario}
@@ -41,6 +62,17 @@
 \begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
 }{
 \end{description}
+}
+
+
+
+\newenvironment{myParagraph}[1]
+{
+\begin{tcenter}
+\textbf{#1}
+\end{tcenter}
+}{
+\myRule
 }
 
 
