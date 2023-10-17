@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.8)  17 OCT 2023 17:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.8)  17 OCT 2023 22:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -195,31 +195,18 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count286
 \calc@Cskip=\skip56
 )
-(c:/texlive/2023/texmf-dist/tex/latex/algorithms/algorithmic.sty
-Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-
-(c:/texlive/2023/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
-)
-\c@ALC@unique=\count287
-\c@ALC@line=\count288
-\c@ALC@rem=\count289
-\c@ALC@depth=\count290
-\ALC@tlm=\skip57
-\algorithmicindent=\skip58
-)
 (c:/texlive/2023/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 
-\f@nch@headwidth=\skip59
-\f@nch@O@elh=\skip60
-\f@nch@O@erh=\skip61
-\f@nch@O@olh=\skip62
-\f@nch@O@orh=\skip63
-\f@nch@O@elf=\skip64
-\f@nch@O@erf=\skip65
-\f@nch@O@olf=\skip66
-\f@nch@O@orf=\skip67
+\f@nch@headwidth=\skip57
+\f@nch@O@elh=\skip58
+\f@nch@O@erh=\skip59
+\f@nch@O@olh=\skip60
+\f@nch@O@orh=\skip61
+\f@nch@O@elf=\skip62
+\f@nch@O@erf=\skip63
+\f@nch@O@olf=\skip64
+\f@nch@O@orf=\skip65
 )
 (c:/texlive/2023/texmf-dist/tex/latex/clrscode3e/clrscode3e.sty
 Package: clrscode3e 
@@ -238,35 +225,35 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 (c:/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
-\c@codelinenumber=\count291
-\c@indent=\count292
-\digitwidth=\skip68
+\c@codelinenumber=\count287
+\c@indent=\count288
+\digitwidth=\skip66
 \savecode=\box56
-\codeboxwidth=\skip69
-\c@thisindent=\count293
+\codeboxwidth=\skip67
+\c@thisindent=\count289
 )
 (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count294
+\l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box57
 )
 (./Sommario ASD.aux)
 \openout1 = `"Sommario ASD.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
+LaTeX Font Info:    ... okay on input line 109.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -302,19 +289,19 @@ LaTeX Font Info:    ... okay on input line 117.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count295
+\c@lstlisting=\count291
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count296
+\scratchcounter=\count292
 \scratchdimen=\dimen166
 \scratchbox=\box58
-\nofMPsegments=\count297
-\nofMParguments=\count298
+\nofMPsegments=\count293
+\nofMParguments=\count294
 \everyMPshowfont=\toks27
-\MPscratchCnt=\count299
+\MPscratchCnt=\count295
 \MPscratchDim=\dimen167
-\MPnumerator=\count300
-\makeMPintoPDFobject=\count301
+\MPnumerator=\count296
+\makeMPintoPDFobject=\count297
 \everyMPtoPDFconversion=\toks28
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -325,13 +312,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 131
+LaTeX Font Info:    Trying to load font information for U+msa on input line 123
 .
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 131
+LaTeX Font Info:    Trying to load font information for U+msb on input line 123
 .
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -347,21 +334,16 @@ Package fancyhdr Warning: \footskip is too small (10.0pt):
 
 
 ]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
-50.
-
-(c:/texlive/2023/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 350.
-
 
 Package fancyhdr Warning: \footskip is too small (10.0pt): 
 (fancyhdr)                Make it at least 10.94998pt, for example:
 (fancyhdr)                \setlength{\footskip}{10.94998pt}.
 
 [2]
+Overfull \hbox (28.64055pt too wide) in paragraph at lines 584--584
+[]| []  
+ []
+
 
 Package fancyhdr Warning: \footskip is too small (10.0pt): 
 (fancyhdr)                Make it at least 10.94998pt, for example:
@@ -382,13 +364,13 @@ L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5145 strings out of 474934
- 78348 string characters out of 5763815
- 1957801 words of memory out of 5000000
- 26634 multiletter control sequences out of 15000+600000
+ 4906 strings out of 474934
+ 74857 string characters out of 5763815
+ 1953801 words of memory out of 5000000
+ 26405 multiletter control sequences out of 15000+600000
  566524 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,12n,65p,451b,690s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,12n,65p,451b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy6.pfb><c
 :/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy9.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><c:/texlive/2023
@@ -401,16 +383,16 @@ cmmi6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb>
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb><c:/
 texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb><c:/texl
 ive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2023/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><c
-:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "Sommario ASD.pdf" (4 pages, 234757 bytes).
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2023/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mti9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
+.pfb>
+Output written on "Sommario ASD.pdf" (4 pages, 228143 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

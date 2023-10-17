@@ -7,11 +7,12 @@
 \usepackage{enumitem}
 \usepackage{bm}					%used for bold math expressions
 \usepackage{calc}				%used for algebric operations inside \newenvironment
-\usepackage{algorithmic}		%used for pseudocode 
 \usepackage{fancyhdr}			%used for head and foot settings
 %\usepackage{draftwatermark}		%used for watermark
 \usepackage{clrscode3e}		%pseudocde 
 \usepackage{graphics}
+
+
 
 %%watermark settings
 %\SetWatermarkText{Vici Francesco}
@@ -68,17 +69,6 @@
 
 
 
-\newenvironment{oldcode}[1]					%TODO Da cancellare
-{
-\textbf{#1}
-%\algorithmicindent{2em}
-\begin{algorithmic}[1]
-}{
-\end{algorithmic}
-}
-
-
-
 \newenvironment{code}[1]
 {
 \begin{codebox}
@@ -109,7 +99,9 @@
 \newcommand{\ra}{\rightarrow}
 \newcommand{\sse}{\leftrightarrow}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
-
+\newcommand{\FOR}[1]{\For $#1$ \Do}
+\newcommand{\WHILE}[1]{\While $#1$ \Do}
+\newcommand{\IF}[1]{\If $#1$ \Then}
 
 
 
@@ -333,43 +325,36 @@ $\mathbf{T(n)=\Theta(f(n))}$
 		\end{tcenter}
 Divide ricorsivamente l'array da ordinare in due sottoarray di uguale lunghezza. Una volta arrivato alla lunghezza unitaria combina ricorsivamente i sottoarray ordinandoli. Lo pseudocodice è:
 		\begin{code}{MergeSort(A,p,r)}
-\li \If $p<r$ \Then 
+\li \IF{p<r} 
 	\li $q\la \floor{(p+r)/2}$ 
 	\li \proc{MergeSort}(A,p,q)
 	\li \proc{MergeSort}(A,q+1,r)
 	\li \proc{Merge}(A,p,q,r)
 \End
 		\end{code}		
-		
-		
-		
-%TODO Finire sostituzione pseudocodice 
-		
-		
-		
-		\begin{oldcode}{Merge(A,p,q,r)}
-\STATE $n_1 \gets q-p+1$
-\STATE $n_2 \gets r-q$
-\FOR{$i \gets 1 \text{ to } n_1$} 
-	\STATE $L[i] \gets A[p+i-1]$		$\qquad$\COMMENT {Crea il sottoarray sinistro}
-\ENDFOR
-\FOR{$j \gets 1 \text{ to } n_2$} 
-	\STATE $R[j] \gets A[q+j]$			$\qquad$\COMMENT{Crea il sottoarray destro}
-\ENDFOR
-\STATE $L[n_1+1]\gets \infty$
-\STATE $R[n_2+1]\gets \infty$
-\STATE $i \gets 1$
-\STATE $j \gets 1$
-\FOR{$k\gets p \text{ to } r$}
-	\IF{$L[i]\leq R[j]$}
-		\STATE $A[k]\gets L[i]$
-		\STATE $i \gets i+1$
-	\ELSE
-		\STATE $A[k]\gets R[j]$
-		\STATE $j \gets j+1$
-	\ENDIF
-\ENDFOR
-		\end{oldcode}
+		\begin{code}{Merge(A,p,q,r)}
+\li $n_1 \la q-p+1$
+\li $n_2 \la r-q$
+\li \FOR{i \la 1 \To n-1} 
+	\li $L[i] \la A[p+i-1]$
+\End
+\li \FOR{j \la 1 \To n_2} 
+	\li $R[i] \la A[q+j]$
+\End
+\li $L[n_1+1]\la \infty$
+\li $R[n_2+1]\la \infty$
+\li $i \la 1$
+\li $j \la 1$
+\li \FOR{k \la \To r}
+	\li \IF{L[i]\leq R[j]}
+		\li $A[k]\la L[i]$
+		\li $i \la i+1$
+	\Else
+		\li $A[k]\la R[j]$
+		\li $j \la j+1$
+	\End
+\End
+		\end{code}		
 \bo{Costo}\\
 Ho che il costo di divisione è $D(n)=\Theta(1)$ mentre il costo di combinazione è $C(n)=\Theta(n)$ Inoltre ad ogni ricorrenza successiva l'algoritmo risolve $2$ problemi di dimensione $\frac{n}{2}$. Allora l'equazione di ricorrenza sarà: 
 		\begin{tcenter}
@@ -392,25 +377,26 @@ $\mathbf{T(n)=}\Theta(n\cdot \log_2 n) + \Theta(n) + \Theta(1)=\mathbf{\Theta(n\
 \bf{ALGORITMI RICORSIVI - QUICKSORT}
 		\end{tcenter}
 Divide ricorsivamente l'array da ordinare in due sottoarray grazie all'uso di due indici (ordina sul posto) grazie all'algoritmo "partition" per poi riordinarli e combinarli grazie all'algoritmo "quicksort". Lo pseudocodice è:
-		\begin{oldcode}{QuickSort(A,p,r)}
-\IF{$p<r$}
-	\STATE $q \gets \text{\bo{Partition}(A,p,r)}$
-	\STATE \bo{QuickSort}(A,p,q-1)
-	\STATE \bo{QuickSort}(A,q+1,r)
-\ENDIF
-		\end{oldcode}
-		\begin{oldcode}{Partition(A,p,r)}
-\STATE $x\gets A[r]$
-\STATE $i\gets p-1$
-\FOR{$j\gets p \text{ to }r-1$}
-	\IF{$A[j]\leq x$}
-		\STATE $i \gets i+1$
-		\STATE \bo{exchange }$A[i] \leftrightarrow A[j]$
-	\ENDIF
-\ENDFOR
-\STATE \bo{exchange }$A[i+1]\leftrightarrow A[r]$
-\STATE \bo{return }$i+1$
-		\end{oldcode}
+
+		\begin{code}{QuickSort(A,p,r)}
+\li \IF{p<r}
+	\li $q \la \proc{Partition}(A,p,r)$
+	\li $\proc{QuickSort}(A,p,q-1)$
+	\li $\proc{QuickSort}(A,q+1,r)$
+\End
+		\end{code}
+		\begin{code}{Partition(A,p,r)}
+\li $x\la A[r]$
+\li $i\la p-1$
+\li \FOR{j\la p \To r-1}
+	\li \IF{A[j]\leq x}
+		\li $i \la i+1$
+		\li	 $\proc{Exchange }A[i] \sse A[j]$
+	\End
+\End
+\li $\proc{Exchange } A[i+1]\sse A[r]$
+\li \Return $i+1$	
+		\end{code}
 \bo{Costo}\\
 		\begin{descr}{1}
 \item[Partition] $\rightarrow$ ha costo fisso $\Theta(n)$.
@@ -505,13 +491,13 @@ $\bm{I\{A\}\text{ oppure }X_A=}
 		\begin{tcenter}
 \bf{ALGORITMI RANDOMIZZATI}
 		\end{tcenter}
-Poiché non posso conoscere l'ordine in cui l'algoritmo riceverà gli input, non posso, allo stesso modo, conoscere la probabilità delle $n!$ possibili permutazioni. Uso l'algoritmo "random" per forzare l'ordine casuale. Lo pseudocodice è: 
-		\begin{oldcode}{RandomizeInPlace(A)}
-\STATE $n \gets A.lenght$
-\FOR{$i \gets 1 \text{ to }n$}
-	\STATE $\text{\bf{excange }} A[i]\leftrightarrow A[\text{\bf{Random}}(i,n)]$
-\ENDFOR 
-		\end{oldcode}
+Poiché non posso conoscere l'ordine in cui l'algoritmo riceverà gli input, non posso, allo stesso modo, conoscere la probabilità delle $n!$ possibili permutazioni. Uso l'algoritmo "random" per forzare l'ordine casuale. Lo pseudocodice è:
+		\begin{code}{RandomizeInPlace(A)}
+\li $n \la A.lenght$
+\li \FOR{i \la 1 \To n}
+	\li $\proc{excange } A[i]\sse A[\proc{Random}(i,n)]$
+\End
+		\end{code}
 \bo{Costo:}\\
 $\Theta(1)$ per ogni iterazione, quindi $\Theta(n)$ in totale.
 \myRule
@@ -520,22 +506,20 @@ $\Theta(1)$ per ogni iterazione, quindi $\Theta(n)$ in totale.
 		\begin{tcenter}
 \bo{ALGORITMI RANDOMIZZATI - QUICKSORT} 
 		\end{tcenter}
-Cerco di avvicinarmi il più possibile all'ipotesi di caso medio, per farlo randomizzo la scelta del pivot $q$ per l'algoritmo "partition". Lo pseudocodice è: 
+Cerco di avvicinarmi il più possibile all'ipotesi di caso medio. Per farlo, randomizzo la scelta del pivot $q$ per l'algoritmo "partition", mentre l'algoritmo "quicksort" rimane uguale. Lo pseudocodice è: 
+		\begin{code}{RandomizedPartition(A,p,r)}
+\li $i\la \proc{Random}(p,r)$
+\li \proc{Exchange }$A[r]\sse A[i]$
+\li \Return $\proc{Partition} (A,p,r)$
 
-		\begin{oldcode}{RandPartition(A,p,r)}
-\STATE $i\gets$ \bo{Random}(p,r)
-\STATE \bo{exchange} $A[r]\leftrightarrow A[i]$
-\STATE \bo{return Partition} (A,p,r)
-		\end{oldcode}
-		
-		
-		\begin{oldcode}{RandQuickSort(A,p,r)}
-\IF{$p<r$}
-	\STATE $q\gets$ \bo{RandomizedPartition}(A,p,r)
-	\STATE	 \bo{RandomizedQuickSort}(A,p,q-1)
-	\STATE \bo{RandomizedQuickSort}(A,q+1,r)
-\ENDIF
-		\end{oldcode}
+		\end{code}
+		\begin{code}{RandomizedQuickSort(A,p,r)}
+\li \IF{p<r}
+	\li $q\la$ \proc{RandomizedPartition}(A,p,r)
+	\li \proc{RandomizedQuickSort}(A,p,q-1)
+	\li \proc{RandomizedQuickSort}(A,q+1,r)
+\End
+		\end{code}
 \bo{Costo}\\
 Il tempo di esecuzione atteso di RandomizedQuickSort è $O(n\log_2n)$ in quanto statisticamente rispecchia il caso medio di QuickSort. 
 \myRule
@@ -565,22 +549,22 @@ Gli algoritmi visti fino ad ora non raggiungono un costo minore di $\Theta(n\log
 		\begin{tcenter}
 \bo{ALGORITMI ITERATIVI - COUNTING SORT}
 		\end{tcenter}
-È un algoritmo di ordinamento che non si basa sui confronti, ma richiede due array di supporto per effettuare l'ordinamento. Inoltre può ordinare solo numeri naturali. Lo pseudocodice è: \\
-		\begin{oldcode}{CountingSort(A,B,k)}
-\FOR{$i\gets 0\text{ to }k$}
-	\STATE $C[i]\gets0$
-\ENDFOR
-\FOR{$j\gets 1\text{ to }A.lenght$}
-	\STATE $C[A[j]]\gets C[A[j]]+1$
-\ENDFOR
-\FOR{$i\gets 1\text{ to }k$}
-	\STATE $C[i]\gets C[i]+C[i-1]$
-\ENDFOR
-\FOR{$j\gets A.lenght\text{ downto }1$}
-	\STATE $B[C[A[j]]]\gets A[j]$
-	\STATE $C[A[j]]\gets C[A[j]]-1$
-\ENDFOR
-		\end{oldcode}
+È un algoritmo di ordinamento che non si basa sui confronti, ma richiede due array di supporto per effettuare l'ordinamento. Inoltre può ordinare solo numeri naturali. Lo pseudocodice è: 
+		\begin{code}{CountingSort(A,B,k)}
+\li \FOR{i\la 0\To k}
+	\li $C[i]\la 0$
+\End
+\li \FOR{j\la 1 \To \attrib{A}{lenght}}
+	\li $C[A[j]]\la C[A[j]]+1$
+\End
+\li \FOR{i\la 1\To k}
+	\li $C[i]\la C[i]+C[i-1]$
+\End
+\li \FOR{j\la \attrib{A}{lenght}\Downto 1}
+	\li $B[C[A[j]]]\la A[j]$
+	\li $C[A[j]]\la C[A[j]]-1$
+\End
+		\end{code}
 \bo{Costo}\\
 Il costo di CountingSort è $\Theta(n+k)$, che diventa $\Theta(n)$ se $k=O(n)$. Imponendo la dimensione massima di $k$ come condizione iniziale ottengo un ordinamento in tempo lineare.
 		\begin{descr}{1}
@@ -592,12 +576,12 @@ Il costo di CountingSort è $\Theta(n+k)$, che diventa $\Theta(n)$ se $k=O(n)$. 
 		\begin{tcenter}
 \bo{ALGORITMI ITERATIVI - RADIX SORT}
 		\end{tcenter}
-È un algoritmo di ordinamento che usa il concetto controintuitivo di ordinare le singole cifre a partire dalla meno significativa. Necessita inoltre di riceve in ingresso in numero di cifre "d". Lo pseudocodice è: \\
-		\begin{oldcode}{RadixSort(A,d)}
-\FOR{$i \gets 1 \text{ to }d$}
-	\STATE "usa ordinamento stabile per ordinare l'array $A$ sulla cifra $i$"
-\ENDFOR
-		\end{oldcode}
+È un algoritmo di ordinamento che usa il concetto controintuitivo di ordinare le singole cifre a partire dalla meno significativa. Necessita inoltre di riceve in ingresso in numero di cifre "d". Lo pseudocodice è: 
+		\begin{code}{RadixSort(A,d)}
+\li \FOR{i \la 1 \To d}
+	\li "usa ordinamento stabile per ordinare l'array $A$ sulla cifra $i$"
+\End
+		\end{code}
 \bo{Correttezza con I.C.}\\
 "Prima della $i$-esima iterazione i numeri sono ordinati sulla base della $i-1$esima cifra meno significativa". \\
 \bo{Costo}\\
@@ -627,7 +611,7 @@ Un buon criterio di scelta per la variabile $m$ è un numero primo non troppo vi
 		\end{myParagraph}
 
 
-
+%TODO Aggiungere 2° parte tabelle hash
 
 
 
