@@ -9,14 +9,15 @@
 \usepackage{calc}				%used for algebric operations inside \newenvironment
 \usepackage{algorithmic}		%used for pseudocode 
 \usepackage{fancyhdr}			%used for head and foot settings
-\usepackage{draftwatermark}		%used for watermark
+%\usepackage{draftwatermark}		%used for watermark
+\usepackage{clrscode3e}		%pseudocde 
+\usepackage{graphics}
 
-
-%watermark settings
-\SetWatermarkText{Vici Francesco}
-\SetWatermarkScale{2}
-\SetWatermarkAngle{60}
-%end watermark settings
+%%watermark settings
+%\SetWatermarkText{Vici Francesco}
+%\SetWatermarkScale{2}
+%\SetWatermarkAngle{60}
+%%end watermark settings
 
 
 
@@ -67,13 +68,23 @@
 
 
 
-\newenvironment{code}[1]
+\newenvironment{oldcode}[1]					%TODO Da cancellare
 {
 \textbf{#1}
 %\algorithmicindent{2em}
 \begin{algorithmic}[1]
 }{
 \end{algorithmic}
+}
+
+
+
+\newenvironment{code}[1]
+{
+\begin{codebox}
+\Procname{$#1$}
+}{
+\end{codebox}
 }
 
 
@@ -94,6 +105,11 @@
 \newcommand{\co}[1]{\textit{#1}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\la}{\leftarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sse}{\leftrightarrow}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
 
 
 
@@ -202,17 +218,18 @@ Per categorizzare la complessità degli algoritmi faccio riferimento alla cresci
 \textbf{ALGORITMI ITERATIVI - INSERTION SORT}
 	\end{tcenter}
 È uno degli algoritmi iterativi più semplici. Ordina "in place" ed è efficiente per insiemi quasi ordinati. Lo pseudocodice è:
-	\begin{code}{InsertionSort(A)}
-\FOR{$j\gets2 \text{ to } A.lenght$}
-	\STATE $key \gets A[j]$
-	\STATE $i\gets j-1$
-	\WHILE{$i>0 \text{ AND } A[i]>key$}
-		\STATE $A[i+1]\gets A[i]$
-		\STATE $i\gets i-1$
-	\ENDWHILE
-	\STATE $A[i+1]\gets key$
-\ENDFOR
-	\end{code}
+		\begin{codebox}
+\Procname{$\proc{Insertion-Sort}(A)$}
+\li \For $j \la 2$ \To $\attrib{A}{length}$ \Do
+	\li $\id{key} \la A[j]$
+	\li $i \la j-1$
+	\li \While $i > 0$ \const{and} $A[i] > \id{key}$ \Do
+		\li $A[i+1] \la A[i]$
+		\li $i \la i-1$
+	\End
+	\li $A[i+1] \la \id{key}$
+\End
+		\end{codebox}
 \textbf{Correttezza con I.C.} \\
 "All'inizio di ogni iterazione del ciclo \textit{for}, il sottoarray $A[1,\dots,j-1]$ è ordinato ed è formato dagli stessi elementi che erano originariamente in $A[1,\dots,j-1]$, ma ordinati".\\
 \textbf{Costo}
@@ -227,19 +244,18 @@ Per categorizzare la complessità degli algoritmi faccio riferimento alla cresci
 		\begin{tcenter}
 \textbf{ALGORITMI ITERATIVI - SELECTION SORT}
 		\end{tcenter}
-È un algoritmo molto semplice, opera "in place". Il suo obbiettivo è quello di trovare il minimo all'interno dell'array e inserirlo nella sequenza ordinata fino a qual momento. Lo pseudocodice è: \\
- 		\begin{code}{SelectionSort(A)}
-\STATE $n \gets A.lenght$
-\FOR{$j\gets 1 \text{ to } n-1$}
-	\STATE{$smallest \gets j$}
-	\FOR{$i\gets j+1\text{ to } n$}
-		\IF{$A[I]<A[smallest]$}
-			\STATE $smallest \gets i$
-		\ENDIF
-	\ENDFOR
-	\STATE \textbf{exchange} $A[j]\leftrightarrow A[smallest]$
-\ENDFOR
-		\end{code}
+È un algoritmo molto semplice, opera "in place". Il suo obbiettivo è quello di trovare il minimo all'interno dell'array e inserirlo nella sequenza ordinata fino a qual momento. Lo pseudocodice è: \\		
+		\begin{code}{SelectionSort(A)}
+\li $n\la\attrib{A}{lenght}$
+\li \For $j\la1 \To n-1$ \Do
+	\li $\id{smallest}\la j$
+	\li \For $i \la j+1 \To n$ \Do
+		\li \If $A[i]<A[\id{smallest}]$ \Then
+			\li $\id{smallest}\la i$
+		\End
+	\End
+	\li \bf{exchange }$A[j]\sse A[smallest]$
+		\end{code}				
 \textbf{Correttezza con I.C.}
 		\begin{descr}{1}
 \item[Ciclo Interno] $\rightarrow$ "All'inizio della $i$-esima iterazione del \textit{for} interno, $A[min]$ è minore o uguale di ogni elemento di $A[j,\dots,i-1]$ cioè $\forall j\in [j,\dots,i-1]$ si ha che $A[min]\leq A[j]$". 
@@ -315,16 +331,23 @@ $\mathbf{T(n)=\Theta(f(n))}$
 		\begin{tcenter}
 \bo{ALGORITMI RICORSIVI - MERGE SORT}
 		\end{tcenter}
-Divide ricorsivamente l'array da ordinare in due sottoarray di uguale lunghezza. Una volta arrivato alla lunghezza unitaria combina ricorsivamente i sottoarray ordinandoli. Lo pseudocodice è:	\\
+Divide ricorsivamente l'array da ordinare in due sottoarray di uguale lunghezza. Una volta arrivato alla lunghezza unitaria combina ricorsivamente i sottoarray ordinandoli. Lo pseudocodice è:
 		\begin{code}{MergeSort(A,p,r)}
-\IF{$p<r$}
-	\STATE $q \gets \lfloor (p+r)/2 \rfloor$
-	\STATE MergeSort(A,p,q)
-	\STATE MergeSort(A,q+1,r)
-	\STATE Merge(A,p,q,r)
-\ENDIF
-		\end{code}
-		\begin{code}{Merge(A,p,q,r)}
+\li \If $p<r$ \Then 
+	\li $q\la \floor{(p+r)/2}$ 
+	\li \proc{MergeSort}(A,p,q)
+	\li \proc{MergeSort}(A,q+1,r)
+	\li \proc{Merge}(A,p,q,r)
+\End
+		\end{code}		
+		
+		
+		
+%TODO Finire sostituzione pseudocodice 
+		
+		
+		
+		\begin{oldcode}{Merge(A,p,q,r)}
 \STATE $n_1 \gets q-p+1$
 \STATE $n_2 \gets r-q$
 \FOR{$i \gets 1 \text{ to } n_1$} 
@@ -346,7 +369,7 @@ Divide ricorsivamente l'array da ordinare in due sottoarray di uguale lunghezza.
 		\STATE $j \gets j+1$
 	\ENDIF
 \ENDFOR
-		\end{code}
+		\end{oldcode}
 \bo{Costo}\\
 Ho che il costo di divisione è $D(n)=\Theta(1)$ mentre il costo di combinazione è $C(n)=\Theta(n)$ Inoltre ad ogni ricorrenza successiva l'algoritmo risolve $2$ problemi di dimensione $\frac{n}{2}$. Allora l'equazione di ricorrenza sarà: 
 		\begin{tcenter}
@@ -369,14 +392,14 @@ $\mathbf{T(n)=}\Theta(n\cdot \log_2 n) + \Theta(n) + \Theta(1)=\mathbf{\Theta(n\
 \bf{ALGORITMI RICORSIVI - QUICKSORT}
 		\end{tcenter}
 Divide ricorsivamente l'array da ordinare in due sottoarray grazie all'uso di due indici (ordina sul posto) grazie all'algoritmo "partition" per poi riordinarli e combinarli grazie all'algoritmo "quicksort". Lo pseudocodice è:
-		\begin{code}{QuickSort(A,p,r)}
+		\begin{oldcode}{QuickSort(A,p,r)}
 \IF{$p<r$}
 	\STATE $q \gets \text{\bo{Partition}(A,p,r)}$
 	\STATE \bo{QuickSort}(A,p,q-1)
 	\STATE \bo{QuickSort}(A,q+1,r)
 \ENDIF
-		\end{code}
-		\begin{code}{Partition(A,p,r)}
+		\end{oldcode}
+		\begin{oldcode}{Partition(A,p,r)}
 \STATE $x\gets A[r]$
 \STATE $i\gets p-1$
 \FOR{$j\gets p \text{ to }r-1$}
@@ -387,7 +410,7 @@ Divide ricorsivamente l'array da ordinare in due sottoarray grazie all'uso di du
 \ENDFOR
 \STATE \bo{exchange }$A[i+1]\leftrightarrow A[r]$
 \STATE \bo{return }$i+1$
-		\end{code}
+		\end{oldcode}
 \bo{Costo}\\
 		\begin{descr}{1}
 \item[Partition] $\rightarrow$ ha costo fisso $\Theta(n)$.
@@ -483,12 +506,12 @@ $\bm{I\{A\}\text{ oppure }X_A=}
 \bf{ALGORITMI RANDOMIZZATI}
 		\end{tcenter}
 Poiché non posso conoscere l'ordine in cui l'algoritmo riceverà gli input, non posso, allo stesso modo, conoscere la probabilità delle $n!$ possibili permutazioni. Uso l'algoritmo "random" per forzare l'ordine casuale. Lo pseudocodice è: 
-		\begin{code}{RandomizeInPlace(A)}
+		\begin{oldcode}{RandomizeInPlace(A)}
 \STATE $n \gets A.lenght$
 \FOR{$i \gets 1 \text{ to }n$}
 	\STATE $\text{\bf{excange }} A[i]\leftrightarrow A[\text{\bf{Random}}(i,n)]$
 \ENDFOR 
-		\end{code}
+		\end{oldcode}
 \bo{Costo:}\\
 $\Theta(1)$ per ogni iterazione, quindi $\Theta(n)$ in totale.
 \myRule
@@ -499,20 +522,20 @@ $\Theta(1)$ per ogni iterazione, quindi $\Theta(n)$ in totale.
 		\end{tcenter}
 Cerco di avvicinarmi il più possibile all'ipotesi di caso medio, per farlo randomizzo la scelta del pivot $q$ per l'algoritmo "partition". Lo pseudocodice è: 
 
-		\begin{code}{RandPartition(A,p,r)}
+		\begin{oldcode}{RandPartition(A,p,r)}
 \STATE $i\gets$ \bo{Random}(p,r)
 \STATE \bo{exchange} $A[r]\leftrightarrow A[i]$
 \STATE \bo{return Partition} (A,p,r)
-		\end{code}
+		\end{oldcode}
 		
 		
-		\begin{code}{RandQuickSort(A,p,r)}
+		\begin{oldcode}{RandQuickSort(A,p,r)}
 \IF{$p<r$}
 	\STATE $q\gets$ \bo{RandomizedPartition}(A,p,r)
 	\STATE	 \bo{RandomizedQuickSort}(A,p,q-1)
 	\STATE \bo{RandomizedQuickSort}(A,q+1,r)
 \ENDIF
-		\end{code}
+		\end{oldcode}
 \bo{Costo}\\
 Il tempo di esecuzione atteso di RandomizedQuickSort è $O(n\log_2n)$ in quanto statisticamente rispecchia il caso medio di QuickSort. 
 \myRule
@@ -543,7 +566,7 @@ Gli algoritmi visti fino ad ora non raggiungono un costo minore di $\Theta(n\log
 \bo{ALGORITMI ITERATIVI - COUNTING SORT}
 		\end{tcenter}
 È un algoritmo di ordinamento che non si basa sui confronti, ma richiede due array di supporto per effettuare l'ordinamento. Inoltre può ordinare solo numeri naturali. Lo pseudocodice è: \\
-		\begin{code}{CountingSort(A,B,k)}
+		\begin{oldcode}{CountingSort(A,B,k)}
 \FOR{$i\gets 0\text{ to }k$}
 	\STATE $C[i]\gets0$
 \ENDFOR
@@ -557,7 +580,7 @@ Gli algoritmi visti fino ad ora non raggiungono un costo minore di $\Theta(n\log
 	\STATE $B[C[A[j]]]\gets A[j]$
 	\STATE $C[A[j]]\gets C[A[j]]-1$
 \ENDFOR
-		\end{code}
+		\end{oldcode}
 \bo{Costo}\\
 Il costo di CountingSort è $\Theta(n+k)$, che diventa $\Theta(n)$ se $k=O(n)$. Imponendo la dimensione massima di $k$ come condizione iniziale ottengo un ordinamento in tempo lineare.
 		\begin{descr}{1}
@@ -570,11 +593,11 @@ Il costo di CountingSort è $\Theta(n+k)$, che diventa $\Theta(n)$ se $k=O(n)$. 
 \bo{ALGORITMI ITERATIVI - RADIX SORT}
 		\end{tcenter}
 È un algoritmo di ordinamento che usa il concetto controintuitivo di ordinare le singole cifre a partire dalla meno significativa. Necessita inoltre di riceve in ingresso in numero di cifre "d". Lo pseudocodice è: \\
-		\begin{code}{RadixSort(A,d)}
+		\begin{oldcode}{RadixSort(A,d)}
 \FOR{$i \gets 1 \text{ to }d$}
 	\STATE "usa ordinamento stabile per ordinare l'array $A$ sulla cifra $i$"
 \ENDFOR
-		\end{code}
+		\end{oldcode}
 \bo{Correttezza con I.C.}\\
 "Prima della $i$-esima iterazione i numeri sono ordinati sulla base della $i-1$esima cifra meno significativa". \\
 \bo{Costo}\\

@@ -84,6 +84,8 @@
 \newcommand{\myRule}{\rule{250pt}{0.1pt}}
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
 
+\newcommand{\scalare}{\mathbin{\vcenter{\hbox{\scalebox{.6}{\;$\bullet$\;}}}}}
+
 
 
 \begin{document}
@@ -242,26 +244,79 @@ e si indica con $\frac{\partial f}{\partial x}(x_0,y_0)$. Ricordando la definizi
 			\begin{tcenter}
 $\mathbf{\frac{\partial f}{\partial x}(x_0,y_0)=\Lim{h\to 0} \frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}}$
 			\end{tcenter}
-\underline{OSS:} Si possono usare le stesse regole di derivazione classiche considerando l'altra variabile come una costante. 
+\underline{\textbf{OSS:}} Si possono usare le stesse regole di derivazione classiche considerando l'altra variabile come una costante. 
+		\end{descr}
+Le derivate parziali si mettono in un vettore chiamato gradiente. Questo, come funzione di $x,y$ è un campo vettoriale:
+		\begin{tcenter}
+$\nabla f(x,y)=(\frac{\partial f}{\partial x}(x,y)\; ,\; \frac{\partial f}{\partial y}(x,y))$
+		\end{tcenter} 
+		\begin{descr}{0}
+\item[Derivate Parziali di Ordine Superiore] $\rightarrow$ Per una funzione a due variabili esistono 4 derivate di secondo ordine, infatti ogni derivata prima può essere derivata rispetto ad $x$ o rispetto ad $y$:
+			\begin{tcenter}
+$D^2\, f(x,y)= 
+\begin{pmatrix}
+\frac{\partial^2 f}{\partial^2 x} & \frac{\partial^2 f}{\partial x\partial y} \\
+\frac{\partial^2 f}{\partial y\partial x} & \frac{\partial^2 f}{\partial^2 y}
+\end{pmatrix}$
+			\end{tcenter}
+Tale matrice viene detta Matrice Essiana.
+			\begin{descr}{0}
+\item[Teorema di Schwarz] $\rightarrow$ Se f è di classe $C^2$, cioè le derivate seconde esistono e sono continue allora:
+				\begin{tcenter}
+$\frac{\partial^2 f}{\partial x\partial y}(x,y)=\frac{\partial^2 f}{\partial y\partial x}(x,y)$
+				\end{tcenter}
+cioè la matrice essiana è simmetrica.
+			\end{descr}
+		\end{descr}
+		\begin{descr}{0}
+\item[Differenziabilità] $\rightarrow$ Data $f:A\to\R$ con $A$ aperto di $\R^2$, $\nu\in\R^2$ ($\nu\to0$ significa $\norma{\nu}\to0$), allora $f$ si dice differenziabile  se:
+			\begin{tcenter}
+$\Lim{\nu \to \underline{0}} \frac{f((x,y)+\nu)-f(x,y)-\nabla f(x,y)\cdot\nu}{\norma{\nu}}=0$ 
+			\end{tcenter}
+			\begin{descr}{0}
+\item[Teorema del Differenziale] $\rightarrow$ Data $f:A\to\R$ con $A$ aperto di $\R^2$ se:
+				\begin{tcenter}
+$f$ è di classe $C^1 \implies f$ è differenziabile. 
+				\end{tcenter}
+				\begin{descr}{0}
+\item[\underline{OSS:}] Se $f$ è di classe $C^1 \implies f$ differenziabile $\implies$ $f$ è di classe $C^0 \implies f$ continua.  
+				\end{descr}
+			\end{descr}
 		\end{descr}
 \myRule
 
 %PARAGRAFO 7
+		\begin{myParagraph}{PIANO TANGENTE}
+Se una funzione è differenziabile, si può approssimare "bene" con un piano. Si chiama Piano Tangente il piano in $\R^3$ di equazione:
+			\begin{tcenter}
+$z:=f(x_0,y_0)+\nabla f(x_o,y_0)\scalare (x-x_0,y-y_0)$
+			\end{tcenter}
+è della forma $z=ax+by+c$ e il punto $(x_0,y_0,f(x_0,y_0))$ è il punto di contatto tra il piano e la funzione.
+		\end{myParagraph}
+
+%PARAGRAFO 8
 		\begin{tcenter}
 \textbf{DERIVATA DIREZIONALE}
 		\end{tcenter}
-		\begin{descr}{0}
-\item[\underline{DEF:}] $\rightarrow$ Dato $\overrightarrow{\nu}$ un vettore unitario di $\R^2$ (cioè $\norma{\overrightarrow{\nu}}=1$) la derivata direzionale di $f$ in direzione $\overrightarrow{\nu}$ nel punto $(x_0,y_0)$ è la derivata classica di:
-			\begin{tcenter}
+		
+Dato $\overrightarrow{\nu}$ un vettore unitario di $\R^2$ (cioè $\norma{\overrightarrow{\nu}}=1$) la derivata direzionale di $f$ in direzione $\overrightarrow{\nu}$ nel punto $(x_0,y_0)$ è la derivata classica di:
+		\begin{tcenter}
 $t \to f((x_0,y_0)+t\cdot\overrightarrow{\nu})$
-			\end{tcenter} 
+		\end{tcenter} 
 cioè:
-			\begin{tcenter}
+		\begin{tcenter}
 $\mathbf{\Lim{f\to0} \frac{f((x_0,y_0)+h\cdot\overrightarrow{\nu})-f(x_0,y_0)}{h}}$
+		\end{tcenter}
+e si indica con $\frac{\partial f}{\partial \overrightarrow{\nu}}(x_0,y_0)$.
+		\begin{descr}{1}
+\item[Teorema] $\rightarrow$ Se $f$ è differenziabile, allora:
+			\begin{tcenter}
+$\frac{\partial f}{\partial\overrightarrow{\nu}}(x,y)=\nabla f(x,y)\scalare\overrightarrow{\nu}$
 			\end{tcenter}
-e si indica con $\frac{\partial f}{\partial \nu}(x_0,y_0)$.
 		\end{descr}
 		
+		
+%TODO Inserire esempio finale lezione 5		
 		
 		
 
