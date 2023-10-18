@@ -604,7 +604,87 @@ Un buon criterio di scelta per la variabile $m$ è un numero primo non troppo vi
 						\item[Risoluzione delle Collisioni] $\rightarrow$ le funzioni Hash non sono iniettive quindi dovrò risolvere le collisioni che si creeranno, esistono 2 metodi: 
 						\begin{descr}{0}
 							\item[Concatenamento] $\rightarrow$ tutti gli elementi con lo stesso Hash sono memorizzati in una lista concatenata. 
-							\item[Indirizzamento Aperto] $\rightarrow$
+							\begin{descr}{0}
+								\item[Costo] $\rightarrow$ Definisco il fattore di caricamento $\alpha=\frac{n}{m}$, ovvero il numero medio di elementi in ogni lista collegata, con $n$ numero di elementi memorizzati e $m$ dimensione della tabella hash.
+								\begin{descr}{0}
+									\item[Caso Peggiore] $\rightarrow$ tutte le $n$ chiavi nello stesso slot, cioè si ha una singola lista di dimensione $n$:
+									\begin{tcenter}
+										$\Theta(1)+\Theta(n)=\Theta(n)$
+									\end{tcenter}
+									\item[Caso Medio] $\rightarrow$ Impongo come ipotesi di avere una funzione hash uniforme semplice (cioè per ogni elemento ognuno degli $m$ slot è ugualmente probabile come hash). Definisco $n_j$, dimensione della $j$-esima lista concatenata. Il suo valore atteso sarà $E[n_j]=\alpha=\frac{n}{m}$. Inoltre il calcolo della funzione hash avviene in $O(1)$.
+									\begin{descr}{0}
+										\item[Ricerca Senza Successo] $\rightarrow$ È necessario ricercare fino alla fine di ogni lista, quindi aggiungendo il costo del calcolo dell'hash avrò:
+										\begin{tcenter}
+											$\Theta(\alpha+1)$
+										\end{tcenter}
+										\item[Ricerca Con Successo] $\rightarrow$ Devo compiere un'analisi probabilistica sul numero di elementi esaminati $n_x+1$ ("$+1$" poiché esamino anche l'elemento che sto cercando $x$). Ottengo che il costo medio è:
+										\begin{tcenter}
+											$\Theta(2+\frac{\alpha}{2}-\frac{\alpha}{2n})=\Theta(1+\alpha)$  \\
+											Se $n=O(m) \implies \alpha=O(1) \implies \Theta(1)$
+										\end{tcenter}  
+ 									\end{descr}
+ 								\end{descr}								
+							\end{descr}
+							\item[Indirizzamento Aperto] $\rightarrow$ Memorizza tutte le chiavi nella tabella hash, ogni slot contiene una chiave o NIL. La funzione hash è nella forma $h(k,i)=(h'(k)+i)\mod m$ (è una delle possibili forme). Gli pseudocodici di inserimento e ricerca sono:
+							\begin{code}{HashInsert(T,k)}
+\li $i\la0$
+\li \Repeat 
+	\li	 $j\la h(k,i)$
+		\li	 \IF{T[j]=\const{nil}}
+			\li $T[j]\la k$
+			\li \Return $j$
+		\li \Else
+			\li $i\la i+1$ 
+		\End
+\li \Until $i=m$
+\li \Error "hash table overflow"
+							\end{code}
+							\begin{code}{HashSearch(T,k)}
+\li $i\la0$
+\li \Repeat 
+	\li	 $j\la h(k,i)$
+		\li	 \IF{T[j]=k}
+			\li \Return $j$
+		\End
+		\li $i\la i+1$
+\li \Until $T[j]=\const{nil } \const{or } i=m$
+\li \Return \const{nil}
+							\end{code}
+							Per quanto riguarda la cancellazione si può sostituire il valore da cancellare con "DEL" che viene visto dalla ricerca come una chiave diversa da quella cercata e dall'inserimento come uno slot vuoto (il costo non dipenderà più da $\alpha$).
+							\begin{descr}{0}
+								\item[Hash Uniforme] $\rightarrow$ Ciascuna chiave ha la stessa probabilità che generi una delle $m!$ possibili sequenze di esplorazione. È difficile da implementare, quindi si approssima garantendo che la sequenza di esplorazione sia una delle $m!$ permutazioni. Per questo è necessario utilizzare funzioni hash ausiliari $h'():U\to\{ 0,1,...,m-1 \}$.
+								\item[Esplorazione Lineare] $\rightarrow$ La funzione hash, data la chiave $k$ e il numero di esplorazione $i$, è nella forma:
+									\begin{tcenter}
+										$h(k,i)=(h'(k)+ci)\mod m$
+									\end{tcenter}
+Si hanno solo $m$ possibili sequenze e non $m!$. Si rischia di avere "\bo{clustering primario}" cioè lunghe sequenze di slot occupati.
+								\item[Esplorazione Quadratica] $\rightarrow$ La funzione hash, data la chiave $k$ e il numero di esplorazione $i$, è nella forma:
+									\begin{tcenter}
+										$h(k,i)=(h'(k)+c_1i+c_2i^2)\mod m$
+									\end{tcenter}
+$c_1,c_2$ devono essere costanti e $\neq0$ e vanno scelti affinchè si abbia una permutazione completa (ES: $c_1=\frac{1}{2},c_2=\frac{1}{2}$).Si rischia di avere "\bo{clustering secondario}", cioè se $h'(k)=h'(k')$ con $k\neq k'$ allora le due chiavi avranno la stessa sequenza di esplorazione.
+								\item[Doppio Hash] $\rightarrow$ Si va a definire il passo dell'esplorazione lineare usando una seconda funzione hash, la forma è:
+									\begin{tcenter}
+										$h(k,i)=(h_1'(k)+h_2'(k)i)\mod m$
+									\end{tcenter}
+$h_2'$ deve essere scelto affinché sia "primo" rispetto ad $m$ (non devono avere fattori comuni), per garantire che la sequenza di esplorazione una permutazione completa (ES: $h_1'(k)=k \mod m$, $h_2'(k)=1+(k \mod m')$). Si hanno $\Theta(m^2)$ diverse sequenze di esplorazione (molto meglio di $m$).
+							\end{descr}
+								\item[Metodo delle Moltiplicazioni] $\rightarrow$ Data una costante $A: 0<A<1$ la funzione hash è:
+									\begin{tcenter}
+										$\bm{h(k)=\floor{m(kA \mod 1)}}$
+									\end{tcenter}
+dove $kA \mod 1=$ "parte frazionaria di $kA$". Nonostante questo metodo sia più lento di quello delle divisioni, il valore di $m$ non è critico. La sua implementazione in base 2 è molto semplice infatti basta moltiplicare $k$ e $A$ per poi selezionare dal risultato i $p$ bit più significativi della parte frazionaria ($p=\log_2 m$). Anche la scelta di $A$ è importante (Knuth $\rightarrow A\approx \frac{\sqrt{5}-1}{2}$).
+								\item[Hash Randomizzato] $\rightarrow$ Supponendo che la scelta delle chiavi sia affidata ad un avversario sleale, tutte le chiavi potrebbero essere inviate nello stesso slot. In questo caso sarebbe vantaggioso scegliere randomicamente la funzione la funzione hash da usare ogni volta che si inizia una nuova tabella (non ad ogni chiave inserita). 
+								\item[Hash Universale] $\rightarrow$  La funzione hash ha la forma:
+									\begin{tcenter}
+										$h_{a,b}=((a\cdot k+b)\mod p)\mod m$
+									\end{tcenter}
+dove $p$ è un numero primo t.c. $\forall k \; 0\leq k\leq p-1$ e dove $a,b$ sono due numeri naturali t.c. $0\leq a\leq p-1 \text{ e }0\leq b\leq p$. In questo modo per ogni diverso $m$ si ha una famiglia di $p(p-1)$ diverse hash.
+								\item[Hash Perfetto] $\rightarrow$ Si basa sull'ipotesi di avere un insieme di chiavi statico. Provo diverse funzioni hash fino a trovarne una che non genera collisioni. La complessità è $O(1)$ nel caso peggiore. Se $m$ è troppo grande o se devo provare la funzione hash troppe volte posso usare due livelli di hash:				
+							\begin{descr}{0}
+								\item[1° livello] $\rightarrow$ è un hash con concatenamento.
+								\item[2° livello] $\rightarrow$ creo tabelle hash per ogni lista concatenata $T[i]$ del 1° livello di dimensione $n_i^2$ (dove $n_i$ è il numero di elementi nella $i$-esima lista concatenata). Sul 2° livello devo provare varie funzioni hash affinchè non si abbiano collisioni (la probabilità di averne è meno di metà della funzione hash perfetto ad un livello). 
+							\end{descr}
 						\end{descr}
 					\end{descr}
 			\end{descr}
