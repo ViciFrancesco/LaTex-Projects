@@ -690,8 +690,34 @@ dove $p$ è un numero primo t.c. $\forall k \; 0\leq k\leq p-1$ e dove $a,b$ son
 			\end{descr}
 		\end{myParagraph}
 
+%PARAGARFO 20
+		\begin{myParagraph}{ANALISI AMMORTIZZATA}
+Si studia il tempo per eseguire una sequenza di operazioni (diverse) su una struttura dati. In questo caso non si fa una media su una distribuzione di input ma considero sempre il costo medio del caso peggiore per una sequenza di $n$ operazioni.
+			\begin{descr}{0}
+				\item[Tabelle Dinamiche] $\ra$ Data una tabella hash di dimensione $m$ con $n$ che varia, ho che se:
+				\begin{descr}{0}
+					\item[$\alpha=\frac{n}{m}=1$] $\ra$ rialloco la tabella, stavolta con dimensione $m'>m$, e copio gli oggetti;
+					\item[$\alpha=\frac{n}{m}\leq0.5$] $\ra$ alloco la tabella, con dimensione $m'<m$, e copio gli oggetti.
+				\end{descr}
+È molto utile avere una tabella dinamica in quanto riduce lo spazio inutilizzato e permette di avere un costo ammortizzato per un'operazione di $O(1)$.
+				\begin{code}{DynamicTableInsert(T,x)}
+\li \IF{\attrib{T}{size}=0}
+	\li "alloca tabella $\attrib{T}{size}$ con 1 elemento"
+	\li $\attrib{T}{size} \la 1$
+\End
+\li \IF{\attrib{T}{num}=\attrib{T}{size}}
+	\li "alloca NT (new table) con $2\cdot \attrib{T}{size}$ elementi"
+	\li "inserisci gli elementi di $\attrib{T}{table}$ in NT"
+	\li \func{free} $\attrib{T}{table}$
+	\li $\attrib{T}{table}\la$ NT
+	\li $\attrib{T}{size}\la 2\attrib{T}{size}$
+\End
+\li "inserisci $x$ in $\attrib{T}{table}$"
+\li $\attrib{T}{num}\la \attrib{T}{num}+1$
 
-%TODO Aggiungere 2° parte tabelle hash
+				\end{code}
+			\end{descr}
+		\end{myParagraph}
 
 
 
