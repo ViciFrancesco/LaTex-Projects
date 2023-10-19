@@ -718,10 +718,30 @@ Si studia il tempo per eseguire una sequenza di operazioni (diverse) su una stru
 			\end{descr}
 \bo{Costo}\\
 Supponendo di compiere solo inserimenti avrò che costo della $i$-esima operazione $c_i=1$ se la tabella è non piena, mentre $c_i=i$ se la tabella è piena (copio $i$ elementi). Quindi $c_i=O(i)$ in generale. Invece nel caso peggiore, considerando n operazioni di costo $c_i$ avrò che il costo complessivo è $O(n^2)$. Infine per compiere un'analisi esatta (considerando solo le espansioni della tabella che realmente avvengono) avrò che il costo per $n$ operazioni è $<3n$.
-			
 		\end{myParagraph}
 
+%PARAGRAFO 21
+		\begin{myParagraph}{ALBERI BINARI DI RICERCA}
+È una struttura dati spesso usata come dizionario e che supporta operazioni dinamiche. Esegue le operazioni base in $O(h)$ (dove $h$ è l'altezza dell'albero). Viene rappresentato con una struttura dati collegata $T$ dove ogni nodo è un oggetto.
+			\begin{descr}{0}
+				\item[Campi] $\rightarrow$
+					$root$ (punta alla radice dell'albero),
+					$key$ (il valore del nodo),
+					$left$ (punta al figlio sinistro),
+					$right$ (punta al figlio destro),
+					$p$ (punta al padre($T.root$ non ha padre)).
+				\item[Proprietà] $\rightarrow$
+					se $y$ è nel sottoalbero sinistro di $x$ allora $y.key\leq x.key$,
+					se $y$ è nel sottoalbero destro di $x$ allora $y.key\geq x.key$,
+			\end{descr} 
 
+
+
+%TODO Continua da qui
+
+
+
+		\end{myParagraph}
 
 
 
