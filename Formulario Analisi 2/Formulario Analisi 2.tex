@@ -299,25 +299,34 @@ $z:=f(x_0,y_0)+\nabla f(x_o,y_0)\scalare (x-x_0,y-y_0)$
 \textbf{DERIVATA DIREZIONALE}
 		\end{tcenter}
 		
-Dato $\overrightarrow{\nu}$ un vettore unitario di $\R^2$ (cioè $\norma{\overrightarrow{\nu}}=1$) la derivata direzionale di $f$ in direzione $\overrightarrow{\nu}$ nel punto $(x_0,y_0)$ è la derivata classica di:
+Dato $\nu$ un vettore unitario di $\R^2$ (cioè $\norma{\nu}=1$) la derivata direzionale di $f$ in direzione $\nu$ nel punto $(x_0,y_0)$ è la derivata classica di:
 		\begin{tcenter}
-$t \to f((x_0,y_0)+t\cdot\overrightarrow{\nu})$
+$t \to f((x_0,y_0)+t\cdot\nu)$
 		\end{tcenter} 
 cioè:
 		\begin{tcenter}
-$\mathbf{\Lim{f\to0} \frac{f((x_0,y_0)+h\cdot\overrightarrow{\nu})-f(x_0,y_0)}{h}}$
+$\mathbf{\Lim{f\to0} \frac{f((x_0,y_0)+h\cdot\nu)-f(x_0,y_0)}{h}}$
 		\end{tcenter}
-e si indica con $\frac{\partial f}{\partial \overrightarrow{\nu}}(x_0,y_0)$.
-		\begin{descr}{1}
+e si indica con $\frac{\partial f}{\partial \nu}(x_0,y_0)$.
+		\begin{descr}{0}
 \item[Teorema] $\rightarrow$ Se $f$ è differenziabile, allora:
 			\begin{tcenter}
-$\frac{\partial f}{\partial\overrightarrow{\nu}}(x,y)=\nabla f(x,y)\scalare\overrightarrow{\nu}$
+$\frac{\partial f}{\partial\nu}(x,y)=\nabla f(x,y)\scalare\nu$
 			\end{tcenter}
 		\end{descr}
-		
-		
-%TODO Inserire esempio finale lezione 5		
-		
+		\begin{descr}{1}
+			\item[\underline{ESEMPIO}:] Data $f(x,y)$ e $(x_0,y_0)$ trovare $\nu$ t.c. $\frac{\partial f}{\partial \nu}(x_0,y_0)$ sia massima/minima. \\ 
+				Il modo migliore per svolgerlo è trovare il versore del gradiente e e il suo opposto. Quelli saranno i due $\nu$ che minimizzeranno/massimizzeranno la derivata direzionale in $(x_0,y_0)$. 
+			\begin{tcenter}
+				$\nu_{MAX}=\frac{\nabla f(x_0,y_0)}{\norma{f(x_0,y_0)}}$ \\
+				$\nu_{MIN}=-\frac{\nabla f(x_0,y_0)}{\norma{f(x_0,y_0)}}$
+			\end{tcenter}
+		\end{descr}
+\myRule
+
+
+
+%TODO Iniziare lezione 6 		
 		
 
 	\end{formulario}
