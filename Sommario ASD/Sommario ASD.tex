@@ -714,9 +714,11 @@ Si studia il tempo per eseguire una sequenza di operazioni (diverse) su una stru
 \End
 \li "inserisci $x$ in $\attrib{T}{table}$"
 \li $\attrib{T}{num}\la \attrib{T}{num}+1$
-
 				\end{code}
 			\end{descr}
+\bo{Costo}\\
+Supponendo di compiere solo inserimenti avrò che costo della $i$-esima operazione $c_i=1$ se la tabella è non piena, mentre $c_i=i$ se la tabella è piena (copio $i$ elementi). Quindi $c_i=O(i)$ in generale. Invece nel caso peggiore, considerando n operazioni di costo $c_i$ avrò che il costo complessivo è $O(n^2)$. Infine per compiere un'analisi esatta (considerando solo le espansioni della tabella che realmente avvengono) avrò che il costo per $n$ operazioni è $<3n$.
+			
 		\end{myParagraph}
 
 
