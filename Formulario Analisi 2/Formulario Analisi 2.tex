@@ -4,6 +4,7 @@
 \usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
 \usepackage{amsfonts} 		%used for \mathbb{} -> numerical sets
 \usepackage{amsmath}			%used for \text{} inside math equations
+\usepackage{amssymb}			%more math symbols
 \usepackage{enumitem}
 \usepackage{bm}					%used for bold math expressions
 \usepackage{calc}				%used for algebric operations inside \newenvironment
@@ -83,9 +84,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\myRule}{\rule{250pt}{0.1pt}}
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
-
 \newcommand{\scalare}{\mathbin{\vcenter{\hbox{\scalebox{.6}{\;$\bullet$\;}}}}}
-
+\newcommand{\bo}[1]{\textbf{#1}}
 
 
 \begin{document}
@@ -324,10 +324,65 @@ $\frac{\partial f}{\partial\nu}(x,y)=\nabla f(x,y)\scalare\nu$
 		\end{descr}
 \myRule
 
+		\begin{myParagraph}{MASSIMI E MINIMI (ESTREMI)}
+\bo{Estremi Assoluti}\\
+Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Assoluto (o Globale)" se $f(x,y)\leq f(x_0,y_0) \quad \forall(x,y)\in D$, mentre si chiama "Punto di Minimo Assoluto (o Globale)" se $f(x,y)\geq f(x_0,y_0) \quad \forall(x,y)\in D$.\\
+\bo{Estremi Relativi}\\
+Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Relativo (o Locale)" se $f(x,y)\leq f(x_0,y_0) \quad \forall(x,y)\in \mathit{U}(x_0,y_0)$ intorno di $(x_0,y_0)$, mentre si chiama "Punto di Minimo Relativo (o Locale)" se $f(x,y)\geq f(x_0,y_0) \quad \forall(x,y)\in \mathit{U}(x_0,y_0)$ intorno di $(x_0,y_0)$.
+			\begin{descr}{0}
+				\item[Individuazione dei Punti Critici] $\rightarrow$ Come nel caso 1D non è sufficiente che $\nabla f(x_0,y_0)=(0,0)$ affinché $(x_0,y_0)$ sia un massimo/minimo. Devo quindi caratterizzare maggiormente la natura di questi punti.
+				\begin{descr}{0}
+					\item[Condizione Necessaria] $\rightarrow$ se $(x_0,y_0)\in D_f$ (dominio della funzione) è un estremo locale/globale $\implies 		
+					\begin{cases}
+						\nabla f(x_0,y_0)=(0,0)\implies \text{PUNTO CRITICO}\\
+						\nexists \nabla f(x_0,y_0)\implies \text{PUNTO SINGOLARE}\\
+						(x_0,y_0)\in \partial D_f\implies \text{PUNTO DI BORDO}
+					\end{cases}$
+					\item[\underline{DIM:}] Dato $(x_0,y_0)\in D°_f$ (parte interna di $D_f$)  estremo locale/globale, supponiamo che $\exists\nabla f(x_0,y_0)$. Per assurdo supponiamo che sia $\neq(0,0)$:\\
+					\begin{tcenter}
+					$\implies$ \underline{wlog} $\frac{\partial f}{\partial x}(x_0,y_0)\neq0 \implies$\\
+					$\implies \Lim{h\to0}\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}=l\neq0, $ \underline{wlog} $ l>0 \implies$\\
+					$\implies$ per $h$ piccolo si ha $\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}>0\implies$\\
+					\end{tcenter}
+					$\begin{cases}
+					\text{se prendo }h>0 \implies f(x_0+h,y_0)>f(x_0,y_0)\implies\\
+					\text{se prendo }h<0 \implies f(x_0+h,y_0)<f(x_0,y_0)\implies\\
+					\end{cases}$ 
+					$\begin{array}{l}
+						\implies \text{NO MAX LOCALE}\\
+						\implies \text{NO MIN LOCALE}
+					\end{array} \implies$ \underline{Contraddizione}.
+					\item[N.B.] $\rightarrow$ se $f:D\to\R$ continua su $D$ compatto allora trovo sicuramente max/min assoluti confrontando punti critici/singolari/bordo.
+				\end{descr}
+				\item[Caratterizzazione dei Punti Critici] Nel caso 1D si osserva la derivata seconda per capire la natura dei punti critici. Poiché la derivata seconda in 2D corrisponde alla matrice essiana abbiamo bisogno di ulteriori osservazioni:
+				\begin{descr}{0}
+					\item[\underline{DEF}:(Preliminare)] $\rightarrow$ Data $M$ matrice $2\times2$ diagonalizzabile (ha 2 autovalori reali $\lambda_1,\lambda_2$) si dice:
+					$\begin{array}{l}
+					\text{(SEMI) DEF. POS. se }\lambda_1>0,\lambda_2>0 \; (\lambda_1\geq0,\lambda_2\geq0) \\
+					\text{(SEMI) DEF. NEG. se } \lambda_1<0,\lambda_2<0 \; (\lambda_1\leq0,\lambda_2\leq0)\\
+					\text{INDEFINITA se} \lambda_1>0,\lambda_2<0 \text{ (o viceversa) }.
+					\end{array}$
+					\item[Teorema] $\rightarrow$ sia $f\in C^2$ definita su un aperto $A\subseteq \R^2$ si ha:
+					\begin{descr}{0}
+						\item[Condizione Necessaria] $\rightarrow$ $(x_0,y_0)$ è un max (min) locale $\implies D^2f(x_0,y_0)$ è Semi Definita Negativa (Positiva).
+						\item[Condizione Sufficiente] $\rightarrow$ $(x_0,y_0)$ t.c. $\nabla f(x_0,y_0)=(0,0)$ se $D^2f(x_0,y_0)$ DEF. NEG. (POS.) $\implies (x_0,y_0)$ è max (min locale);  se invece è INDEFINITA $\implies (x_0,y_0)$ è un PUNTO DI SELLA. \\
+						\underline{N.B.}: Negli altri casi devo analizzare le derivate di ordine superiore.
+						\item[\underline{OSS:}] $\rightarrow$ $D^2f$ è simmetrica perché $f\in C^2 \implies D^2f$ è diagonalizzabile.
+					\end{descr}
+				\end{descr}
+			\end{descr}
+		\end{myParagraph}
 
 
-%TODO Iniziare lezione 6 		
+
+
+
+
+	
 		
 
+	
+	
+	
 	\end{formulario}
 \end{document}
