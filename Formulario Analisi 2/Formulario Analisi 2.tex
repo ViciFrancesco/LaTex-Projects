@@ -1,4 +1,4 @@
-\documentclass[9pt]{extarticle}
+\documentclass[8pt]{extarticle}
 \usepackage[a4paper,headsep=10pt, top=30pt, bottom=30pt, left=30pt, right=30pt, footskip=10pt]{geometry}
 \usepackage{listings}
 \usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
@@ -18,7 +18,7 @@
 %\SetWatermarkScale{2}
 %\SetWatermarkAngle{60}
 %%end watermark settings
-
+\usepackage{relsize}
 
 
 \fancypagestyle{plain}
@@ -79,6 +79,7 @@
 
 
 \newcommand{\norma}[1]{\lvert\lvert #1\rvert\rvert}
+\newcommand{\modulo}[1]{\lvert #1\rvert}
 \newcommand{\module}[1]{\lvert #1\rvert}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
@@ -86,6 +87,10 @@
 \newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
 \newcommand{\scalare}{\mathbin{\vcenter{\hbox{\scalebox{.6}{\;$\bullet$\;}}}}}
 \newcommand{\bo}[1]{\textbf{#1}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\lefttarrow}
+\newcommand{\sse}{\leftrightarrow}
+\newcommand{\SSE}{\Longleftrightarrow}
 
 
 \begin{document}
@@ -324,6 +329,7 @@ $\frac{\partial f}{\partial\nu}(x,y)=\nabla f(x,y)\scalare\nu$
 		\end{descr}
 \myRule
 
+%PARAGRAFO 9
 		\begin{myParagraph}{MASSIMI E MINIMI (ESTREMI)}
 \bo{Estremi Assoluti}\\
 Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Assoluto (o Globale)" se $f(x,y)\leq f(x_0,y_0) \quad \forall(x,y)\in D$, mentre si chiama "Punto di Minimo Assoluto (o Globale)" se $f(x,y)\geq f(x_0,y_0) \quad \forall(x,y)\in D$.\\
@@ -369,16 +375,149 @@ Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Relativo (o Locale)" se $f
 						\underline{N.B.}: Negli altri casi devo analizzare le derivate di ordine superiore.
 						\item[\underline{OSS:}] $\rightarrow$ $D^2f$ è simmetrica perché $f\in C^2 \implies D^2f$ è diagonalizzabile.
 					\end{descr}
+					\item[Teorema di Weierstrass] $\rightarrow$ Data $f$ continua definita su $A$ compatto $\implies$ \\
+					\begin{tcenter}
+						$\exists \max_A f, \exists \min_A f$.
+					\end{tcenter}
+					\begin{descr}{0}
+					\item[\underline{OSS:}] $\rightarrow$ $A$ è limitato e chiuso perché $\partial A\subset A$.
+					\end{descr}
+					I punti di $\max / \min$ vanno cercati tra:
+					\begin{tcenter}
+						$\begin{cases}
+							\text{Punti Critici Interni }\ra \text{non ci sono} \\
+							\nexists\nabla f \ra \text{non ci sono} \\
+							\partial A \ra \text{\underline{ci sono}}
+						\end{cases}$
+					\end{tcenter}
 				\end{descr}
 			\end{descr}
 		\end{myParagraph}
 
 
+%PARAGRAFO 10
+		\begin{myParagraph}{SVILUPPI DI TAYLOR}
+Data una funzione $f$ differenziabile in $(x_0,y_0)\in D$ aperto di $\R^2$ allora lo sviluppo di Taylor sono:\\
+			\begin{descr}{0}
+				\item[Grado 1]:\\
+				\begin{descr}{0}
+					\item[$f(x,y)=$]$f(x_0,y_0)+\nabla f(x_0,y_0)\cdot(x-x_0,y-y_0)+$ $+\underbrace{(\norma{(x-x_0,y-y_0)})}_\text{Resto}$;
+					\item[$f(x+h,y+k)=$]$=f(x_0,y_0)+\nabla f(x_0,y_0)\cdot (h,k)+\underbrace{o(\sqrt{h^2+k^2})}_\text{Resto}$
+				\end{descr}
+					\item[Grado 2]:\\
+				\begin{descr}{0}
+					\item[$f(x,y)=$]$f(x_0,y_0)+\nabla f(x_0,y_0)\cdot(x-x_0,y-y_0)+$ $+\frac{1}{2}\left[D^2f(x_0,y_0)
+					\left(	\begin{array}{c}
+						x-x_0\\
+						y-y_0
+					\end{array}\right)\right]
+					\scalare 
+					\left(\begin{array}{c}
+						x-x_0\\
+						y-y_0
+					\end{array}\right)+$
+					$+\underbrace{(\norma{(x-x_0,y-y_0)}^2)}_\text{Resto}$
+				\end{descr}
+				\item[\underline{OSS:}] (Sviluppo di Taylor vicino ad un punto critico) \\ 
+					Dato $(x_0,y_0)$ punto critico, $f$ vicino a $(x_0,y_0)$ è della forma $f(x_0+h,y_0+k)$ con $h,k$ piccoli. Supponiamo inoltre che $D^2 f(x_0,y_0)=
+					\begin{pmatrix}
+					 	\lambda_1 & 0 \\
+					 	0 & \lambda_2
+					\end{pmatrix}$
+					diagonale, allora, poiché il vettore delle derivate parziali è $(0,0)$(dalla definizione di punto critico):
+				$\begin{cases}
+					se \lambda_1,\lambda_2>0 \implies (x_0,y_0)\text{ è un MIN. LOC.}\\
+					se \lambda_1,\lambda_2<0 \implies (x_0,y_0)\text{ è un MAX. LOC.}\\
+					se \lambda_1<(>)0,\lambda_2>(<)0 \implies (x_0,y_0)\text{ è un punto di SELLA}
+				\end{cases}$
+			\end{descr}
 
+		\end{myParagraph}
 
+%PARAGRAFO 11
+		\begin{myParagraph}{FUNZIONI SCALARI IN $\bm{n}$ VARIABILI}
+Prendo una funzione del tipo $f:\R^n\to\R$ allora:
+			\begin{descr}{0}
+				\item[Dominio] $\rightarrow$ $D:=\{\underline{x}\in\R^n|f(\underline{x})\in\R\}$;
+				\item[Intorni] $\rightarrow$ $\{\underline{x}\in\R^n|\;\norma{\underline{x}-\underline{x_0}}<r\}$ è l'intorno sferico di $\underline{x_0}$;
+				\item[Continuità] $\rightarrow$ \quad $\underline{n}^{(n)}\to\underline{x_0}\implies\modulo{f(\underline{n}^{(n)})-f(\underline{x_0})}\to0$?;
+				\item[Gradiente] $\rightarrow$ $\nabla f(\underline{x})=\left( \frac{\partial f}{\partial x_1}(\underline{x}),...,\frac{\partial f}{\partial x_n}(\underline{x}) \right)$ vettore di $\R^n$;
+				\item[Matrice Essiana] $\rightarrow$ $D^2f(\underline{x})=\text{matr. }n\times, n$,\\
+				$(D^2f)_{ij}(\underline{x})=\frac{\partial^2 f}{\partial x_i\partial y_i}(\underline{x})$ (se $f\in C^2\implies D^2$è simmetrica);
+				\item[Taylor] $\rightarrow$ continua a valere.
+			\end{descr}
+		\end{myParagraph}
+		
+%PARAGRAFO 12
+		\begin{myParagraph}{FUNZIONI VETTORIALI IN $\bm{n}$ VARIABILI}
+Prendo una funzione del tipo $F:\R^n\to\R^m$ allora possiamo considerare $F$ come avente $m$ componenti, cioè:
+			\begin{tcenter}
+				$F(\underline{x})=(f_1(\underline{x}),...,f_m(\underline{x})) \text{ con } f_i:\R^n\to\R$.
+			\end{tcenter}
+Ognuna di queste componenti ha $n$ derivate parziali. Possiamo quindi definire la Matrice Jacobiana delle derivate parziali:
+			\begin{tcenter}
+				$DF(\underline{x})=
+				\underbrace{\begin{pmatrix}
+					\frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
+					\vdots & & \vdots \\
+					\frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \\
+				\end{pmatrix}}_{m\times n}$
+				, con $(DF)_{ij}=\frac{\partial f_i}{\partial x_i}$.
+			\end{tcenter}
+		\end{myParagraph}
 
+%PARAGRAFO 13
+		\begin{myParagraph}{DERIVAZIONE DI FUNZIONI COMPOSTE}
+Date 2 funzioni del tipo $f:\R^2\to\R$ e $\gamma:\R\to\R^2$, allora la derivata della loro composizione $f \circ \gamma:\R\to\R$ è:
+			\begin{tcenter}
+				$\frac{d}{dt}(f \circ \gamma)(t)=\underbrace{\nabla f(\gamma(t))}_{\text{vett. di }\R^2}\scalare\underbrace{\dot{\gamma}(t)}_{\text{vett. di }\R^2}=$ \\$=\frac{\partial f}{\partial x}(\gamma(t))\cdot\frac{dx}{dt}(t)+\frac{\partial f}{\partial y}(\gamma(t))\cdot\frac{dy}{dt}(t)$
+			\end{tcenter}
+con $\gamma$ derivabile in $t$ e $f$ differenziabile in $\gamma(t)$. \\
+\bo{Generalizzazione Vettore Gradiente:}\\
+Date due funzioni del tipo $f:\R^n\to\R^m$ e $g:\R^m\to\R$, allora il gradiente della loro composizione è: 
+			\begin{descr}{1}
+				\item[Def. Estesa:] $\nabla(g\circ f)$ è un vettore riga di $\R^n$. In particolare la $i$-esima componente di tale vettore è:\\
+					\begin{tcenter}
+						$\frac{\partial}{\partial x_i}(g \circ f)=\sum_j=1^n \frac{\partial g}{\partial y_j}(f(x))\cdot\frac{\partial f_j}{\partial x_i}(x)$;
+					\end{tcenter}
+				\item[Def. Matriciale:] $\underbrace{\nabla(g\circ f)}_{1\times n}=\underbrace{\nabla g}_{1\times m} \cdot \underbrace{Df}_{m \times n}$.
+				\begin{descr}{0}
+					\item[\underline{OSS:}] $\nabla(g\circ f)(\underline{x})=\nabla g(f(\underline{x}))\cdot Df(\underline{x})$ (come la derivata classica).
+				\end{descr}
+			\end{descr}
+\bo{Generalizzazione Matrice Jacobiana:}\\
+Date due funzioni vettoriali del tipo $f:\R^n\to\R^m$ e $g:\R^m\to\R^k$ la loro composizione sarà $g\circ f:R^n\to\R^k$. Allora la matrice Jacobiana delle derivate parziali è data da:
+			\begin{tcenter}
+				$\underbrace{D(g\circ f)(\underline{x})}_{k\times n}=\underbrace{\nabla g(f(\underline{x}))}_{k\times m}\cdot \underbrace{Df(\underline{x})}_{m\times n}$
+			\end{tcenter}
+		\end{myParagraph}
 
-	
+%PARAGRAFO 14
+		\begin{myParagraph}{CURVE NELLO SPAZIO}
+Una curva è una funzione $\gamma:I\subset\R\to\R^n$. Uso $t\in I$ come variabile (tempo). Allora:
+			\begin{descr}{0}
+				\item[Vettore Posizione] $\rightarrow$ $\gamma(t)=(\gamma_1(t),...,\gamma_n(t))$ con $\gamma_i\in \R$;
+				\item[Vettore Velocità] $\rightarrow$ se $\exists \dot{\gamma_i}, \dot{\gamma_i}:I\to\R^n$ allora: 
+				\begin{tcenter}
+					$\dot{\gamma}(t)=(\dot{\gamma_1}(t),...,\dot{\gamma_n}(t))$;
+				\end{tcenter}
+				\item[Vettore Accelerazione] $\rightarrow$ se $\exists \ddot{\gamma_i}, \ddot{\gamma_i}:I\to\R^n$ allora:
+				\begin{tcenter}
+					$\ddot{\gamma}(t)=(\ddot{\gamma_1}(t),...,\ddot{\gamma_n}(t))$;
+				\end{tcenter}
+				\item[Sostegno] $\rightarrow$ $\Gamma=\gamma(I)$ (è un' "immagine" della curva). Curve diverse possono avere lo stesso sostegno.
+				\item[Curva Semplice] $\rightarrow$ Data $\gamma:[a,b]\to\R^n$, questa si dice Semplice se $\gamma(t_1)\neq \gamma(t_2)\quad \forall t_1\neq t_2$ con almeno uno dei $t_i\in(a,b)$.
+				\begin{descr}{0}
+					\item[\underline{OSS:}] $\gamma$ è semplice $\SSE\gamma_{|(a,b)}$
+è iniettiva.
+				\end{descr}
+				\item[Curva Chiusa] $\rightarrow$ Una curva $\gamma$ si dice chiusa se $\gamma(a)=\gamma(b)$.
+				\item[Curva Regolare] $\rightarrow$ Una curva $\gamma$ si dice regolare se $\in C^1((a,b);\R)$ (cioè ogni componente è di classe $C^1$) e se $\dot{\gamma}\neq\underline{0}\quad \forall t\in (a,b)$.
+				\begin{descr}{0}
+					\item[\underline{OSS:}] $\exists$ sempre il vettore velocità ed è $\neq 0 \implies \exists \;\tau(t)=\frac{\dot{\gamma}(t)}{\norma{\dot{\gamma}(t)}}$ (viene detto Versore Tangente).
+				\end{descr}
+			\end{descr}
+ 		\end{myParagraph}
 		
 
 	
