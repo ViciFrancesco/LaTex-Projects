@@ -97,16 +97,16 @@
 
 	\begin{formulario}
 
-%PARAGRAFO 1
-		\begin{tcenter}
-\textbf{FUNZIONI A PIÙ VARIABILI}
-		\end{tcenter}
-Si dice funzione a più variabili una funzione del tipo: 
-		\begin{tcenter}
-$f:\R^n\to\R^m$
-		\end{tcenter}
-Inoltre possiamo definire "scalare" una funzione del tipo $f:\R^n\to\R$ mentre viene definita vettoriale una funzione del tipo $f:\R^n\to\R^m$.
-\myRule
+%%PARAGRAFO 1
+%		\begin{tcenter}
+%\textbf{FUNZIONI A PIÙ VARIABILI}
+%		\end{tcenter}
+%Si dice funzione a più variabili una funzione del tipo: 
+%		\begin{tcenter}
+%$f:\R^n\to\R^m$
+%		\end{tcenter}
+%Inoltre possiamo definire "scalare" una funzione del tipo $f:\R^n\to\R$ mentre viene definita "vettoriale" una funzione del tipo $f:\R^n\to\R^m$.
+%\myRule
 
 %PARAGRAFO 2
 		\begin{tcenter}
@@ -114,20 +114,27 @@ Inoltre possiamo definire "scalare" una funzione del tipo $f:\R^n\to\R$ mentre v
 		\end{tcenter}
 È una funzione del tipo $f:\R^2\to\R$, chiamo le variabili $x,y$. \\
 		\begin{descr}{0}
-\item[Dominio] $\rightarrow$ In generale, dati $f:D\to\R$ con $D\subset\R^2$, $D$ viene detto dominio.
+			\item[Dominio:] (funzioni più comuni)\\	 
+			\begin{descr}{0}
+				\item[Frazioni] $\rightarrow$ denominatore $\neq 0$;
+				\item[	Radici Pari] $\rightarrow$ argomento $\geq 0$;
+				\item[	Logaritmo] $\rightarrow$ argomento $>0$;
+				\item[	Funzioni continue] $\rightarrow$ somma, prodotto e composizione di funzioni continue sono a loro volta continue.
+			\end{descr} 
+%\item[Dominio] $\rightarrow$ In generale, dati $f:D\to\R$ con $D\subset\R^2$, $D$ viene detto dominio.
 \item[Segno] $\rightarrow$ Studio dove $f:(x,y)>0,\text{ }=0 \text{ oppure }<0$. Si tratta quindi di determinare uno di questi sottoinsiemi (spesso è utile rappresentarlo graficamente). 
-		\end{descr}
-Al fine di definire la continuità di una funzione è necessario definire i concetti di "distanza" e tutti i concetti che ne derivano e quello di "limite":
+%		\end{descr}
+%Al fine di definire la continuità di una funzione è necessario definire i concetti di "distanza" e tutti i concetti che ne derivano e quello di "limite":
 		
-		\begin{descr}{1}
-\item[Distanza in $\R^2$] $\rightarrow$ Dati due punti $(x,y) \text{ e } (x_0,y_0)$ la distanza tra loro è data dalla norma a 2, cioè: \\
-			\begin{tcenter}
-$\mathbf{\norma{(x,y)-(x_0,y_0)}=\sqrt{(x-x_0)^2+(y-y_0)^2}}$
-			\end{tcenter}
-\item[Intorno (Circolare)] $\rightarrow$ Dato un punto $(x_0,y_0)$, $I$ viene detto intorno circolare di $(x_0,y_0)$ se:\\
-			\begin{tcenter}
-$\mathbf{I(x_0,y_0)=\{(x,y)\;\big\vert\;\norma{(x-y)-(x_0,y_0)}<r\}}$
-			\end{tcenter}
+%		\begin{descr}{1}
+%\item[Distanza in $\R^2$] $\rightarrow$ Dati due punti $(x,y) \text{ e } (x_0,y_0)$ la distanza tra loro è data dalla norma a 2, cioè: \\
+%			\begin{tcenter}
+%$\mathbf{\norma{(x,y)-(x_0,y_0)}=\sqrt{(x-x_0)^2+(y-y_0)^2}}$
+%			\end{tcenter}
+%\item[Intorno (Circolare)] $\rightarrow$ Dato un punto $(x_0,y_0)$, $I$ viene detto intorno circolare di $(x_0,y_0)$ se:\\
+%			\begin{tcenter}
+%$\mathbf{I(x_0,y_0)=\{(x,y)\;\big\vert\;\norma{(x-y)-(x_0,y_0)}<r\}}$
+%			\end{tcenter}
 \item[Interno] $\rightarrow$ Dato un punto $(x_0,y_0)\in A$, tale punto si dice interno ad $A$ se:\\
 			\begin{tcenter}
 $\mathbf{\exists  I(x_0,y_0)\subset A}$
@@ -140,25 +147,26 @@ $\mathbf{\forall I(x_0,y_0)
    	\exists (z,t)\neq(x_0,y_0)\text{ t.c. } (z,t)\in A^c\cap I(x_0,y_0)
   			\end{cases}}$
 			\end{tcenter}
-\item[Punto di Accumulazione] $\rightarrow$ Dato un punto $(x_0,y_0)$, questo si dice punto di accumulazione per $A$ se: \\
-			\begin{tcenter}
-$\forall I(x_0,y_0)\; \exists(x.y)\neq(x_0,y_0) \text{ t.c. } (x,y)\in I(x_0,y_0)\cap A$
-			\end{tcenter}
-\item[Insieme Aperto/Chiuso] $\rightarrow$ A è un insieme aperto se coincide con l'insieme dei sui punti interni (cioè $\mathbf{A}$ \textbf{ha tutto il bordo "tratteggiato"}), mentre A è un insieme se $\partial A\subset A$ (cioè $\mathbf{A}$ \textbf{ha tutto il bordo "continuo"}).
+%\item[Punto di Accumulazione] $\rightarrow$ Dato un punto $(x_0,y_0)$, questo si dice punto di accumulazione per $A$ se: \\
+%			\begin{tcenter}
+%$\forall I(x_0,y_0)\; \exists(x.y)\neq(x_0,y_0) \text{ t.c. } (x,y)\in I(x_0,y_0)\cap A$
+%			\end{tcenter}
+\item[Insieme Aperto/Chiuso] $\rightarrow$ A è un insieme aperto se coincide con l'insieme dei sui punti interni (cioè $\mathbf{A}$ \textbf{ha tutto il bordo "tratteggiato"}($\bm{</>}$)), mentre A è un insieme se $\partial A\subset A$ (cioè $\mathbf{A}$ \textbf{ha tutto il bordo "continuo"}($\bm{\leq/\geq}$)).
 
-\item[Chiusura di un Insieme] $\rightarrow$ La chiusura di un insieme $A$ è data dall'insieme stesso unito con la sua frontiera, cioè:
-			\begin{tcenter}
-		$\mathbf{\overline{A}=A\cup\partial A}$
-			\end{tcenter}
+%\item[Chiusura di un Insieme] $\rightarrow$ La chiusura di un insieme $A$ è data dall'insieme stesso unito con la sua frontiera, cioè:
+%			\begin{tcenter}
+%		$\mathbf{\overline{A}=A\cup\partial A}$
+%			\end{tcenter}
 		\end{descr}
 Inoltre possono anche essere utili altre definizioni secondarie come:
-		\begin{descr}{1}
+		\begin{descr}{0}
 \item[Insieme Limitato] $\rightarrow$ Un insieme $A$ è limitato in $\R^2$ se: 
 			\begin{tcenter}
 $\mathbf{\exists a,b,c,d \in \R \text{ t.c. } \forall (x,y)\in A: a\leq x\leq b,\; c\leq y\leq d}$\\ 
 oppure \\
 $\mathbf{\exists c\in\R^+ \text{ t.c. } \forall (x,y)\in A: x^2+y^2\leq c }$  
 			\end{tcenter} 
+\bo{\underline{PER ES}:} Se ho dubbi faccio limiti agli estremi del dominio e nei punti esclusi dal dominio.
 \item[Insieme non Limitato] $\rightarrow$ Un insieme $A$ è non limitato se:
 			\begin{tcenter}
 $\mathbf{\forall c\; \exists (x,y) \text{ t.c. } \norma{(x,y)}>c}$ 
@@ -174,30 +182,39 @@ $\mathbf{\forall c\; \exists (x,y) \text{ t.c. } \norma{(x,y)}>c}$
 		\end{tcenter}
 La principale differenza con i limiti di funzioni in una variabile sta nel fatto che in $\R$ esistono solo due possibili "direzioni" per cui una funzione può tendere ad un punto, mentre in $\R^2$ le direzioni sono infinite.
 		\begin{descr}{0}
-\item [\underline{DEF:} (Per Intorni)] $\rightarrow$ Data $f:D\to\R,D\subset\R^2$ e dato $(x_0,y_0)$ punto di accumulazione per $D$ dico che $\Lim{(x,y)\to(x_0,y_0)}f(x,y)=l$ se $\forall\epsilon >0 \; \exists\delta>0 \;$ t.c. se $(x,y)\in D, \; (x,y)\neq(x_0,y_0)$:
-			\begin{tcenter}
-$\mathbf{\norma{(x,y)-(x_0,y_0)}<\delta \implies \module{f(x,y)-l}<\epsilon}$
-			\end{tcenter}
-\item [\underline{DEF:} (Per Successioni)] $\rightarrow$ Data $f:D\to\R,D\subset\R^2$ e dato $(x_0,y_0)$ punto di accumulazione per $D$ dico che $\Lim{(x,y)\to(x_0,y_0)}f(x,y)=l$ se $\forall (x_n,y_n)\in D\setminus{(x_0,y_0)}, n\in \N$ t.c. se:
-			\begin{tcenter}
-$\mathbf{(x_n,y_n)\to (x_0,y_0) \text{ allora } f(x_n,y_n)\to l}$
-			\end{tcenter}
+\item[Non Esistenza:] Dato un limite del tipo $\Lim{(x,y)\to(x_0,y_0)}$ è sufficiente trovare due successioni di intervalli tali che $(a_n,b_n)\to (x_0,y_0)$ e per cui il limite abbia valore diverso. Le successioni più comuni sono:
+			\begin{descr}{0}
+				\item[per]$\bm{(x,y)\to(0,0)}$:
+					$(\frac{1}{n},\frac{1}{n}),(\frac{1}{n},0),(0,\frac{1}{n})$ con $n\in\N\to\infty$;
+				\item[per]$\bm{(x,y)\to(\infty,\infty)}$:
+					$(n,n)$ con $n\in\N\to\infty$.
+			\end{descr}
+\item[Esistenza:] Dato un limite del tipo $\Lim{(x,y)\to(x_0,y_0)}$ è necessario effettuare un cambio di variabile da $(x,y)$ a $(\rho,\theta)$. Il cambio di variabile sarà allora $(x,y)=(\rho\;\cos\theta+x_0,\rho\;\sin\theta+y_0)$ e il limite diventerà quindi $\Lim{\rho\to \rho_0}$, dove $\rho_0=0$ se il limite è finito, mentre $\rho_0=\infty$ se il limite è infinito. 
+%\item [\underline{DEF:} (Per Intorni)] $\rightarrow$ Data $f:D\to\R,D\subset\R^2$ e dato $(x_0,y_0)$ punto di accumulazione per $D$ dico che $\Lim{(x,y)\to(x_0,y_0)}f(x,y)=l$ se $\forall\epsilon >0 \; \exists\delta>0 \;$ t.c. se $(x,y)\in D, \; (x,y)\neq(x_0,y_0)$:
+%			\begin{tcenter}
+%$\mathbf{\norma{(x,y)-(x_0,y_0)}<\delta \implies \module{f(x,y)-l}<\epsilon}$
+%			\end{tcenter}
+%\item [\underline{DEF:} (Per Successioni)] $\rightarrow$ Data $f:D\to\R,D\subset\R^2$ e dato $(x_0,y_0)$ punto di accumulazione per $D$ dico che $\Lim{(x,y)\to(x_0,y_0)}f(x,y)=l$ se $\forall (x_n,y_n)\in D\setminus{(x_0,y_0)}, n\in \N$ t.c. se:
+%			\begin{tcenter}
+%$\mathbf{(x_n,y_n)\to (x_0,y_0) \text{ allora } f(x_n,y_n)\to l}$
+%			\end{tcenter}
 		\end{descr}
-È anche possibile approcciare il problema sotto il punto di vista delle coordinate polari $(\rho,\Theta)$, questo riduce il problema ad un limite ad una variabile in quanto il parametro $\Theta$ è libero è dobbiamo verificare solo la tendenza di $\rho$.
+%È anche possibile approcciare il problema sotto il punto di vista delle coordinate polari $(\rho,\Theta)$, questo riduce il problema ad un limite ad una variabile in quanto il parametro $\Theta$ è libero è dobbiamo verificare solo la tendenza di $\rho$.
 \myRule
 
 %PARAGRAFO 4
 		\begin{tcenter}
 \textbf{CONTINUITÀ DI FUNZIONI A DUE VARIABILI}
 		\end{tcenter}
+%		\begin{descr}{0}
+%\item[\underline{DEF:}] $\rightarrow$ Data $f:D\to\R, D\subset\R$ e dato $(x_0,y_0)\in D$ punto di accumulazione per D, si dice che $f$ è continua in $(x_0,y_0)$ se:
+%			\begin{tcenter}
+%$\mathbf{\exists\Lim{(x,y)\to(x_0,y_0)}f(x,y) \text{ \textbf{ed è pari a} } f(x_0,y_0)}$.
+%			\end{tcenter}
+%		\end{descr}
+%Se la funzione è definita "a tratti" allora la continuità è da verificare nei punti di frontiera comune.
 		\begin{descr}{0}
-\item[\underline{DEF:}] $\rightarrow$ Data $f:D\to\R, D\subset\R$ e dato $(x_0,y_0)\in D$ punto di accumulazione per D, si dice che $f$ è continua in $(x_0,y_0)$ se:
-			\begin{tcenter}
-$\mathbf{\exists\Lim{(x,y)\to(x_0,y_0)}f(x,y) \text{ \textbf{ed è pari a} } f(x_0,y_0)}$.
-			\end{tcenter}
-		\end{descr}
-Se la funzione è definita "a tratti" allora la continuità è da verificare nei punti di frontiera comune.
-		\begin{descr}{0}
+\item[Estensione a tutto $\bm{\R^2}$] $\rightarrow$ Assumendo che la funzione $f(x,y)$ sia continua in tutto $\R$ eccetto che in uno o più punti $P_i$, la sua continuità è estendibile a tutto $\R$ se il limite (in $(\rho,\theta)$) che tende a $P_i$ esiste e ha valore finito.
 \item[Teorema di Weierstrass] $\rightarrow$ Data $f:K\to\R$ con $K$ compatto e $f$ continua in $\R$ allora:
 			\begin{tcenter}
 $\mathbf{f}$ \textbf{ha massimo e minimo assoluti in} $\mathbf{K}$
@@ -210,29 +227,36 @@ $\mathbf{f}$ \textbf{ha massimo e minimo assoluti in} $\mathbf{K}$
 \textbf{RAPPRESENTAZIONE GRAFICA DI FUNZIONI A DUE VARIABILI}
 		\end{tcenter}
 		\begin{descr}{0}
-\item[Superficie Associata] $\rightarrow$ Data $f:D\to\R,\; D\subset\R^2$ definisco la superficie associata ad $f$ come:
- 			\begin{tcenter}
-$\mathbf{S_f=\left\{ (x,y,z)\in\R^3 \bigg\vert 
-\begin{array}{l}
-	\mathbf{(x,y)\in D }\\
-	\mathbf{z=f(x,y)}
-\end{array}
-\right\}} \mathbf{\subset\R^3}$
-			\end{tcenter}
-\item[Insiemi di Livello] $\rightarrow$ Data $f:D\to\R,\; D\subset\R^2$ e dato $c\in\R$, chiamo "insieme di livello di $f$ a livello $c$" l'insieme:
-			\begin{tcenter}
-$\mathbf{U_c:= \left\{ (x,y)\in D \big\vert f(x,y)=c \right\}\subset D}$
-			\end{tcenter}
-\underline{OSS:} 
-			\begin{tcenter}
-$U_c$ può essere: 
-	$\begin{cases}
-\emptyset \\
-\text{insieme di punti isolati} \\
-\text{curva} \\
-\text{regione bidimensionale}
-	\end{cases}$
-			\end{tcenter}
+%\item[Superficie Associata] $\rightarrow$ Data $f:D\to\R,\; D\subset\R^2$ definisco la superficie associata ad $f$ come:
+% 			\begin{tcenter}
+%$\mathbf{S_f=\left\{ (x,y,z)\in\R^3 \bigg\vert 
+%\begin{array}{l}
+%	\mathbf{(x,y)\in D }\\
+%	\mathbf{z=f(x,y)}
+%\end{array}
+%\right\}} \mathbf{\subset\R^3}$
+%			\end{tcenter}
+%\item[Insiemi di Livello] $\rightarrow$ Data $f:D\to\R,\; D\subset\R^2$ e dato $c\in\R$, chiamo "insieme di livello di $f$ a livello $c$" l'insieme:
+%			\begin{tcenter}
+%$\mathbf{U_c:= \left\{ (x,y)\in D \big\vert f(x,y)=c \right\}\subset D}$
+%			\end{tcenter}
+%\underline{OSS:} 
+%			\begin{tcenter}
+%$U_c$ può essere: 
+%	$\begin{cases}
+%\emptyset \\
+%\text{insieme di punti isolati} \\
+%\text{curva} \\
+%\text{regione bidimensionale}
+%	\end{cases}$
+%			\end{tcenter}
+			\item[Insiemi di Livello] $\rightarrow$ Data una funzione $f(x,y)$ per determinarne gli insiemi di livello si deve uguagliare la funzione alla costante $c$ (possibilmente isolando x e y) e vedendo come varia la funzione al variare di $c$. Per disegnarli è sufficiente assegnare a $c$ un valore.
+			\item[Crescita della Funzione] $\rightarrow$ Data una funzione $f(x,y)$ per determinarne la crescita è sufficiente porre $=0$ una variabile alla volta, proiettando così la funzione sul piano perpendicolare all'asse della variabile annullata. 
+			\begin{descr}{0}
+				\item[\underline{PER ES:}] $f(x,y)=\log(x^2+y^2)\implies$ \\
+				piano yz: \quad $x=0\longrightarrow f(0,y)=\log(y^2)$;\\
+				piano xz: \quad $y=0\longrightarrow f(x,0)=\log(x^2)$.			
+			\end{descr}
 		\end{descr}
 \myRule
 
@@ -249,44 +273,40 @@ e si indica con $\frac{\partial f}{\partial x}(x_0,y_0)$. Ricordando la definizi
 			\begin{tcenter}
 $\mathbf{\frac{\partial f}{\partial x}(x_0,y_0)=\Lim{h\to 0} \frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}}$
 			\end{tcenter}
-\underline{\textbf{OSS:}} Si possono usare le stesse regole di derivazione classiche considerando l'altra variabile come una costante. 
-		\end{descr}
-Le derivate parziali si mettono in un vettore chiamato gradiente. Questo, come funzione di $x,y$ è un campo vettoriale:
-		\begin{tcenter}
-$\nabla f(x,y)=(\frac{\partial f}{\partial x}(x,y)\; ,\; \frac{\partial f}{\partial y}(x,y))$
-		\end{tcenter} 
-		\begin{descr}{0}
+%\underline{\textbf{OSS:}} Si possono usare le stesse regole di derivazione classiche considerando l'altra variabile come una costante. 
+%		\end{descr}
+%Le derivate parziali si mettono in un vettore chiamato gradiente. Questo, come funzione di $x,y$ è un campo vettoriale:
+%		\begin{tcenter}
+%$\nabla f(x,y)=(\frac{\partial f}{\partial x}(x,y)\; ,\; \frac{\partial f}{\partial y}(x,y))$
+%		\end{tcenter} 
+%		\begin{descr}{0}
 \item[Derivate Parziali di Ordine Superiore] $\rightarrow$ Per una funzione a due variabili esistono 4 derivate di secondo ordine, infatti ogni derivata prima può essere derivata rispetto ad $x$ o rispetto ad $y$:
 			\begin{tcenter}
 $D^2\, f(x,y)= 
 \begin{pmatrix}
-\frac{\partial^2 f}{\partial^2 x} & \frac{\partial^2 f}{\partial x\partial y} \\
-\frac{\partial^2 f}{\partial y\partial x} & \frac{\partial^2 f}{\partial^2 y}
+\frac{\partial^2 f}{\partial^2 x} & \frac{\partial^2 f}{\partial y\partial x} \\
+\frac{\partial^2 f}{\partial x\partial y} & \frac{\partial^2 f}{\partial^2 y}
 \end{pmatrix}$
 			\end{tcenter}
-Tale matrice viene detta Matrice Essiana.
-			\begin{descr}{0}
+Tale matrice viene detta Matrice Hessiana.
+			
 \item[Teorema di Schwarz] $\rightarrow$ Se f è di classe $C^2$, cioè le derivate seconde esistono e sono continue allora:
 				\begin{tcenter}
 $\frac{\partial^2 f}{\partial x\partial y}(x,y)=\frac{\partial^2 f}{\partial y\partial x}(x,y)$
 				\end{tcenter}
 cioè la matrice essiana è simmetrica.
-			\end{descr}
+			
 		\end{descr}
 		\begin{descr}{0}
 \item[Differenziabilità] $\rightarrow$ Data $f:A\to\R$ con $A$ aperto di $\R^2$, $\nu\in\R^2$ ($\nu\to0$ significa $\norma{\nu}\to0$), allora $f$ si dice differenziabile  se:
 			\begin{tcenter}
 $\Lim{\nu \to \underline{0}} \frac{f((x,y)+\nu)-f(x,y)-\nabla f(x,y)\cdot\nu}{\norma{\nu}}=0$ 
 			\end{tcenter}
-			\begin{descr}{0}
-\item[Teorema del Differenziale] $\rightarrow$ Data $f:A\to\R$ con $A$ aperto di $\R^2$ se:
-				\begin{tcenter}
-$f$ è di classe $C^1 \implies f$ è differenziabile. 
-				\end{tcenter}
-				\begin{descr}{0}
-\item[\underline{OSS:}] Se $f$ è di classe $C^1 \implies f$ differenziabile $\implies$ $f$ è di classe $C^0 \implies f$ continua.  
-				\end{descr}
-			\end{descr}
+			
+\item[Teorema del Differenziale] $\rightarrow$ se $f$ è di classe $C^1 $ (ovvero se le sue derivate prime sono continue e compatte) $ \implies f$ è differenziabile. 
+				
+ 
+
 		\end{descr}
 \myRule
 
@@ -294,9 +314,13 @@ $f$ è di classe $C^1 \implies f$ è differenziabile.
 		\begin{myParagraph}{PIANO TANGENTE}
 Se una funzione è differenziabile, si può approssimare "bene" con un piano. Si chiama Piano Tangente il piano in $\R^3$ di equazione:
 			\begin{tcenter}
-$z:=f(x_0,y_0)+\nabla f(x_o,y_0)\scalare (x-x_0,y-y_0)$
+$z:=f(x_0,y_0)+\nabla f(x_0,y_0)\scalare (x-x_0,y-y_0)$
 			\end{tcenter}
 è della forma $z=ax+by+c$ e il punto $(x_0,y_0,f(x_0,y_0))$ è il punto di contatto tra il piano e la funzione.
+			\begin{descr}{0}
+				\item[Piano Tangente Orizzontale] $\rightarrow$ Data $f(x,y)$ il piano tangente è orizzontale solo nei punti in cui $\nabla f(x,y)=(0,0)$. Inserendo i punti in cui il gradiente si annulla nell'equazione del piano si ottiene la quota.
+				\item[Piano Parallelo ad una Retta] $\rightarrow$ Data l'equazione di un piano tangente $z$ e l'equazione di una retta in $\R^3$ nella forma $ax=by=cz$ per ottenere i piani paralleli alla retta si deve ricavare il vettore direzione della retta cioè $[\frac{1}{a},\frac{1}{b},\frac{1}{c}]$ e sostituirla al posto di $[x,y,z]$ (non al posto di $[x_0,y_0]$) nel vettore in modo da poter ricavare una possibile variabile $\alpha$ dall'equazione del piano. 
+			\end{descr}
 		\end{myParagraph}
 
 %PARAGRAFO 8
@@ -320,7 +344,7 @@ $\frac{\partial f}{\partial\nu}(x,y)=\nabla f(x,y)\scalare\nu$
 			\end{tcenter}
 		\end{descr}
 		\begin{descr}{1}
-			\item[\underline{ESEMPIO}:] Data $f(x,y)$ e $(x_0,y_0)$ trovare $\nu$ t.c. $\frac{\partial f}{\partial \nu}(x_0,y_0)$ sia massima/minima. \\ 
+			\item[\underline{PER ES}:] Data $f(x,y)$ e $(x_0,y_0)$ trovare $\nu$ t.c. $\frac{\partial f}{\partial \nu}(x_0,y_0)$ sia massima/minima. \\ 
 				Il modo migliore per svolgerlo è trovare il versore del gradiente e e il suo opposto. Quelli saranno i due $\nu$ che minimizzeranno/massimizzeranno la derivata direzionale in $(x_0,y_0)$. 
 			\begin{tcenter}
 				$\nu_{MAX}=\frac{\nabla f(x_0,y_0)}{\norma{f(x_0,y_0)}}$ \\
@@ -331,36 +355,32 @@ $\frac{\partial f}{\partial\nu}(x,y)=\nabla f(x,y)\scalare\nu$
 
 %PARAGRAFO 9
 		\begin{myParagraph}{MASSIMI E MINIMI (ESTREMI)}
-\bo{Estremi Assoluti}\\
-Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Assoluto (o Globale)" se $f(x,y)\leq f(x_0,y_0) \quad \forall(x,y)\in D$, mentre si chiama "Punto di Minimo Assoluto (o Globale)" se $f(x,y)\geq f(x_0,y_0) \quad \forall(x,y)\in D$.\\
-\bo{Estremi Relativi}\\
-Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Relativo (o Locale)" se $f(x,y)\leq f(x_0,y_0) \quad \forall(x,y)\in \mathit{U}(x_0,y_0)$ intorno di $(x_0,y_0)$, mentre si chiama "Punto di Minimo Relativo (o Locale)" se $f(x,y)\geq f(x_0,y_0) \quad \forall(x,y)\in \mathit{U}(x_0,y_0)$ intorno di $(x_0,y_0)$.
 			\begin{descr}{0}
 				\item[Individuazione dei Punti Critici] $\rightarrow$ Come nel caso 1D non è sufficiente che $\nabla f(x_0,y_0)=(0,0)$ affinché $(x_0,y_0)$ sia un massimo/minimo. Devo quindi caratterizzare maggiormente la natura di questi punti.
 				\begin{descr}{0}
 					\item[Condizione Necessaria] $\rightarrow$ se $(x_0,y_0)\in D_f$ (dominio della funzione) è un estremo locale/globale $\implies 		
 					\begin{cases}
-						\nabla f(x_0,y_0)=(0,0)\implies \text{PUNTO CRITICO}\\
 						\nexists \nabla f(x_0,y_0)\implies \text{PUNTO SINGOLARE}\\
+						\nabla f(x_0,y_0)=(0,0)\implies \text{PUNTO CRITICO}\\
 						(x_0,y_0)\in \partial D_f\implies \text{PUNTO DI BORDO}
 					\end{cases}$
-					\item[\underline{DIM:}] Dato $(x_0,y_0)\in D°_f$ (parte interna di $D_f$)  estremo locale/globale, supponiamo che $\exists\nabla f(x_0,y_0)$. Per assurdo supponiamo che sia $\neq(0,0)$:\\
-					\begin{tcenter}
-					$\implies$ \underline{wlog} $\frac{\partial f}{\partial x}(x_0,y_0)\neq0 \implies$\\
-					$\implies \Lim{h\to0}\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}=l\neq0, $ \underline{wlog} $ l>0 \implies$\\
-					$\implies$ per $h$ piccolo si ha $\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}>0\implies$\\
-					\end{tcenter}
-					$\begin{cases}
-					\text{se prendo }h>0 \implies f(x_0+h,y_0)>f(x_0,y_0)\implies\\
-					\text{se prendo }h<0 \implies f(x_0+h,y_0)<f(x_0,y_0)\implies\\
-					\end{cases}$ 
-					$\begin{array}{l}
-						\implies \text{NO MAX LOCALE}\\
-						\implies \text{NO MIN LOCALE}
-					\end{array} \implies$ \underline{Contraddizione}.
+%					\item[\underline{DIM:}] Dato $(x_0,y_0)\in D°_f$ (parte interna di $D_f$)  estremo locale/globale, supponiamo che $\exists\nabla f(x_0,y_0)$. Per assurdo supponiamo che sia $\neq(0,0)$:\\
+%					\begin{tcenter}
+%					$\implies$ \underline{wlog} $\frac{\partial f}{\partial x}(x_0,y_0)\neq0 \implies$\\
+%					$\implies \Lim{h\to0}\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}=l\neq0, $ \underline{wlog} $ l>0 \implies$\\
+%					$\implies$ per $h$ piccolo si ha $\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}>0\implies$\\
+%					\end{tcenter}
+%					$\begin{cases}
+%					\text{se prendo }h>0 \implies f(x_0+h,y_0)>f(x_0,y_0)\implies\\
+%					\text{se prendo }h<0 \implies f(x_0+h,y_0)<f(x_0,y_0)\implies\\
+%					\end{cases}$ 
+%					$\begin{array}{l}
+%						\implies \text{NO MAX LOCALE}\\
+%						\implies \text{NO MIN LOCALE}
+%					\end{array} \implies$ \underline{Contraddizione}.
 					\item[N.B.] $\rightarrow$ se $f:D\to\R$ continua su $D$ compatto allora trovo sicuramente max/min assoluti confrontando punti critici/singolari/bordo.
 				\end{descr}
-				\item[Caratterizzazione dei Punti Critici] Nel caso 1D si osserva la derivata seconda per capire la natura dei punti critici. Poiché la derivata seconda in 2D corrisponde alla matrice essiana abbiamo bisogno di ulteriori osservazioni:
+				\item[Caratterizzazione dei Punti Critici] Nel caso 1D si osserva la derivata seconda per capire la natura dei punti critici. Poiché la derivata seconda in 2D corrisponde alla matrice hessiana abbiamo bisogno di ulteriori osservazioni:
 				\begin{descr}{0}
 					\item[\underline{DEF}:(Preliminare)] $\rightarrow$ Data $M$ matrice $2\times2$ diagonalizzabile (ha 2 autovalori reali $\lambda_1,\lambda_2$) si dice:
 					$\begin{array}{l}
@@ -368,11 +388,17 @@ Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Relativo (o Locale)" se $f
 					\text{(SEMI) DEF. NEG. se } \lambda_1<0,\lambda_2<0 \; (\lambda_1\leq0,\lambda_2\leq0)\\
 					\text{INDEFINITA se} \lambda_1>0,\lambda_2<0 \text{ (o viceversa) }.
 					\end{array}$
+					\item[\underline{PER ES}:] Per caratterizzare la matrice hessiana è anche possibile usare traccia e determinante: 
+					$\begin{array}{l}
+					\text{(SEMI) DEF. POS. se } Tr(D^2)>0, Det(D^2)>0; \\
+					\text{(SEMI) DEF. NEG. se } Tr(D^2)<0, Det(D^2)<0; \\
+					\text{INDEFINITA se } Tr(D^2) \text{ e } Det(D^2)\text{ sono discordi}.
+					\end{array}$
 					\item[Teorema] $\rightarrow$ sia $f\in C^2$ definita su un aperto $A\subseteq \R^2$ si ha:
 					\begin{descr}{0}
-						\item[Condizione Necessaria] $\rightarrow$ $(x_0,y_0)$ è un max (min) locale $\implies D^2f(x_0,y_0)$ è Semi Definita Negativa (Positiva).
+%						\item[Condizione Necessaria] $\rightarrow$ $(x_0,y_0)$ è un max (min) locale $\implies D^2f(x_0,y_0)$ è Semi Definita Negativa (Positiva).
 						\item[Condizione Sufficiente] $\rightarrow$ $(x_0,y_0)$ t.c. $\nabla f(x_0,y_0)=(0,0)$ se $D^2f(x_0,y_0)$ DEF. NEG. (POS.) $\implies (x_0,y_0)$ è max (min locale);  se invece è INDEFINITA $\implies (x_0,y_0)$ è un PUNTO DI SELLA. \\
-						\underline{N.B.}: Negli altri casi devo analizzare le derivate di ordine superiore.
+						\item[\underline{N.B.}:] Negli altri casi devo analizzare le derivate di ordine superiore.
 						\item[\underline{OSS:}] $\rightarrow$ $D^2f$ è simmetrica perché $f\in C^2 \implies D^2f$ è diagonalizzabile.
 					\end{descr}
 					\item[Teorema di Weierstrass] $\rightarrow$ Data $f$ continua definita su $A$ compatto $\implies$ \\
@@ -397,16 +423,16 @@ Data $f:D\to\R,(x_0,y_0)$ si chiama "Punto di Massimo Relativo (o Locale)" se $f
 
 %PARAGRAFO 10
 		\begin{myParagraph}{SVILUPPI DI TAYLOR}
-Data una funzione $f$ differenziabile in $(x_0,y_0)\in D$ aperto di $\R^2$ allora lo sviluppo di Taylor sono:\\
+Data una funzione $f$ differenziabile in $(x_0,y_0)\in D$ aperto di $\R^2$ allora gli sviluppi di Taylor sono:\\
 			\begin{descr}{0}
 				\item[Grado 1]:\\
 				\begin{descr}{0}
-					\item[$f(x,y)=$]$f(x_0,y_0)+\nabla f(x_0,y_0)\cdot(x-x_0,y-y_0)+$ $+\underbrace{(\norma{(x-x_0,y-y_0)})}_\text{Resto}$;
-					\item[$f(x+h,y+k)=$]$=f(x_0,y_0)+\nabla f(x_0,y_0)\cdot (h,k)+\underbrace{o(\sqrt{h^2+k^2})}_\text{Resto}$
+					\item[$f(x,y)=$]$f(x_0,y_0)+\nabla f(x_0,y_0)\scalare(x-x_0,y-y_0)+$ $+\underbrace{(\norma{(x-x_0,y-y_0)})}_\text{Resto}$;
+					\item[$f(x+h,y+k)=$]$=f(x_0,y_0)+\nabla f(x_0,y_0)\scalare (h,k)+\underbrace{o(\sqrt{h^2+k^2})}_\text{Resto}$
 				\end{descr}
 					\item[Grado 2]:\\
 				\begin{descr}{0}
-					\item[$f(x,y)=$]$f(x_0,y_0)+\nabla f(x_0,y_0)\cdot(x-x_0,y-y_0)+$ $+\frac{1}{2}\left[D^2f(x_0,y_0)
+					\item[$f(x,y)=$]$f(x_0,y_0)+\nabla f(x_0,y_0)\scalare(x-x_0,y-y_0)+$ $+\frac{1}{2}\left[D^2f(x_0,y_0)\scalare
 					\left(	\begin{array}{c}
 						x-x_0\\
 						y-y_0
@@ -424,11 +450,11 @@ Data una funzione $f$ differenziabile in $(x_0,y_0)\in D$ aperto di $\R^2$ allor
 					 	\lambda_1 & 0 \\
 					 	0 & \lambda_2
 					\end{pmatrix}$
-					diagonale, allora, poiché il vettore delle derivate parziali è $(0,0)$(dalla definizione di punto critico):
+					diagonale, allora, poiché il vettore delle derivate parziali è $(0,0)$ (dalla definizione di punto critico):
 				$\begin{cases}
-					se \lambda_1,\lambda_2>0 \implies (x_0,y_0)\text{ è un MIN. LOC.}\\
-					se \lambda_1,\lambda_2<0 \implies (x_0,y_0)\text{ è un MAX. LOC.}\\
-					se \lambda_1<(>)0,\lambda_2>(<)0 \implies (x_0,y_0)\text{ è un punto di SELLA}
+					\text{se } \lambda_1,\lambda_2>0 \implies (x_0,y_0)\text{ è un MIN. LOC.}\\
+					\text{se } \lambda_1,\lambda_2<0 \implies (x_0,y_0)\text{ è un MAX. LOC.}\\
+					\text{se } \lambda_1 \text{ e }\lambda_2 \text{ sono discordi} \implies (x_0,y_0)\text{ è un punto di SELLA}
 				\end{cases}$
 			\end{descr}
 
@@ -480,46 +506,98 @@ Date due funzioni del tipo $f:\R^n\to\R^m$ e $g:\R^m\to\R$, allora il gradiente 
 					\begin{tcenter}
 						$\frac{\partial}{\partial x_i}(g \circ f)=\sum_j=1^n \frac{\partial g}{\partial y_j}(f(x))\cdot\frac{\partial f_j}{\partial x_i}(x)$;
 					\end{tcenter}
-				\item[Def. Matriciale:] $\underbrace{\nabla(g\circ f)}_{1\times n}=\underbrace{\nabla g}_{1\times m} \cdot \underbrace{Df}_{m \times n}$.
+				\item[Def. Matriciale:] $\underbrace{\nabla(g\circ f)}_{1\times n}=\underbrace{\nabla g}_{1\times m} \scalare \underbrace{Df}_{m \times n}$.
 				\begin{descr}{0}
-					\item[\underline{OSS:}] $\nabla(g\circ f)(\underline{x})=\nabla g(f(\underline{x}))\cdot Df(\underline{x})$ (come la derivata classica).
+					\item[\underline{OSS:}] $\nabla(g\circ f)(\underline{x})=\nabla g(f(\underline{x}))\scalare Df(\underline{x})$ (come la derivata classica).
 				\end{descr}
 			\end{descr}
 \bo{Generalizzazione Matrice Jacobiana:}\\
 Date due funzioni vettoriali del tipo $f:\R^n\to\R^m$ e $g:\R^m\to\R^k$ la loro composizione sarà $g\circ f:R^n\to\R^k$. Allora la matrice Jacobiana delle derivate parziali è data da:
 			\begin{tcenter}
-				$\underbrace{D(g\circ f)(\underline{x})}_{k\times n}=\underbrace{\nabla g(f(\underline{x}))}_{k\times m}\cdot \underbrace{Df(\underline{x})}_{m\times n}$
+				$\underbrace{D(g\circ f)(\underline{x})}_{k\times n}=\underbrace{\nabla g(f(\underline{x}))}_{k\times m}\scalare \underbrace{Df(\underline{x})}_{m\times n}$
 			\end{tcenter}
 		\end{myParagraph}
 
-%PARAGRAFO 14
-		\begin{myParagraph}{CURVE NELLO SPAZIO}
-Una curva è una funzione $\gamma:I\subset\R\to\R^n$. Uso $t\in I$ come variabile (tempo). Allora:
+		\begin{myParagraph}{EQUAZIONI DELLE CURVE}
 			\begin{descr}{0}
-				\item[Vettore Posizione] $\rightarrow$ $\gamma(t)=(\gamma_1(t),...,\gamma_n(t))$ con $\gamma_i\in \R$;
-				\item[Vettore Velocità] $\rightarrow$ se $\exists \dot{\gamma_i}, \dot{\gamma_i}:I\to\R^n$ allora: 
-				\begin{tcenter}
-					$\dot{\gamma}(t)=(\dot{\gamma_1}(t),...,\dot{\gamma_n}(t))$;
-				\end{tcenter}
-				\item[Vettore Accelerazione] $\rightarrow$ se $\exists \ddot{\gamma_i}, \ddot{\gamma_i}:I\to\R^n$ allora:
-				\begin{tcenter}
-					$\ddot{\gamma}(t)=(\ddot{\gamma_1}(t),...,\ddot{\gamma_n}(t))$;
-				\end{tcenter}
-				\item[Sostegno] $\rightarrow$ $\Gamma=\gamma(I)$ (è un' "immagine" della curva). Curve diverse possono avere lo stesso sostegno.
-				\item[Curva Semplice] $\rightarrow$ Data $\gamma:[a,b]\to\R^n$, questa si dice Semplice se $\gamma(t_1)\neq \gamma(t_2)\quad \forall t_1\neq t_2$ con almeno uno dei $t_i\in(a,b)$.
-				\begin{descr}{0}
-					\item[\underline{OSS:}] $\gamma$ è semplice $\SSE\gamma_{|(a,b)}$
-è iniettiva.
-				\end{descr}
-				\item[Curva Chiusa] $\rightarrow$ Una curva $\gamma$ si dice chiusa se $\gamma(a)=\gamma(b)$.
-				\item[Curva Regolare] $\rightarrow$ Una curva $\gamma$ si dice regolare se $\in C^1((a,b);\R)$ (cioè ogni componente è di classe $C^1$) e se $\dot{\gamma}\neq\underline{0}\quad \forall t\in (a,b)$.
-				\begin{descr}{0}
-					\item[\underline{OSS:}] $\exists$ sempre il vettore velocità ed è $\neq 0 \implies \exists \;\tau(t)=\frac{\dot{\gamma}(t)}{\norma{\dot{\gamma}(t)}}$ (viene detto Versore Tangente).
-				\end{descr}
+				\item[Parabola] $\rightarrow$ $p:=ax^2+bx+c=0$ con $a$ concavità con centro in $(-\frac{b}{2a},-\frac{\Delta}{4a})$.
+				\item[Circonferenza] $\rightarrow$ $c:=(x-\alpha)^2+(y-\beta)^2=r^2$ con $\alpha,\beta$ la distanza dall'origine del centro, $r$ il raggio.
+				\item[Ellisse] $\rightarrow$ $e:=\frac{(x-\alpha)^2}{a^2}+\frac{(y-\beta)^2}{b^2}=1$ con $\alpha,\beta$ la distanza dall'origine del centro, $a$ è il semiasse su $x$ e $b$ è il semiasse su $y$.
+				\item[Iperbole] $\rightarrow$ $i:=\frac{(x-\alpha)^2}{a^2}-\frac{(y-\beta)^2}{b^2}=1$ con asintoti di equazione $y=-\frac{bx}{a}$ e $y=\frac{bx}{a}$ (in caso $\alpha,\beta\neq0$ si aggiungono nella relativa variabile cioè si pone $x=x-\alpha$ e $y=y-\beta$).1
+			\end{descr}
+		\end{myParagraph}
+
+%PARAGRAFO 15
+		\begin{myParagraph}{PARAMETRIZZAZIONE DELLE CURVE}
+%Una curva è una funzione $\gamma:I\subset\R\to\R^n$. Uso $t\in I$ come variabile (tempo). Allora:
+%			\begin{descr}{0}
+%				\item[Vettore Posizione] $\rightarrow$ $\gamma(t)=(\gamma_1(t),...,\gamma_n(t))$ con $\gamma_i\in \R$;
+%				\item[Vettore Velocità] $\rightarrow$ se $\exists \dot{\gamma_i}, \dot{\gamma_i}:I\to\R^n$ allora: 
+%				\begin{tcenter}
+%					$\dot{\gamma}(t)=(\dot{\gamma_1}(t),...,\dot{\gamma_n}(t))$;
+%				\end{tcenter}
+%				\item[Vettore Accelerazione] $\rightarrow$ se $\exists \ddot{\gamma_i}, \ddot{\gamma_i}:I\to\R^n$ allora:
+%				\begin{tcenter}
+%					$\ddot{\gamma}(t)=(\ddot{\gamma_1}(t),...,\ddot{\gamma_n}(t))$;
+%				\end{tcenter}
+%				\item[Sostegno] $\rightarrow$ $\Gamma=\gamma(I)$ (è un' "immagine" della curva). Curve diverse possono avere lo stesso sostegno.
+%				\item[Curva Semplice] $\rightarrow$ Data $\gamma:[a,b]\to\R^n$, questa si dice Semplice se $\gamma(t_1)\neq \gamma(t_2)\quad \forall t_1\neq t_2$ con almeno uno dei $t_i\in(a,b)$.
+%				\begin{descr}{0}
+%					\item[\underline{OSS:}] $\gamma$ è semplice $\SSE\gamma_{|(a,b)}$
+%è iniettiva.
+%				\end{descr}
+%				\item[Curva Chiusa] $\rightarrow$ Una curva $\gamma$ si dice chiusa se $\gamma(a)=\gamma(b)$.
+%				\item[Curva Regolare] $\rightarrow$ Una curva $\gamma$ si dice regolare se $\in C^1((a,b);\R)$ (cioè ogni componente è di classe $C^1$) e se $\dot{\gamma}\neq\underline{0}\quad \forall t\in (a,b)$.
+%				\begin{descr}{0}
+%					\item[\underline{OSS:}] $\exists$ sempre il vettore velocità ed è $\neq 0 \implies \exists \;\tau(t)=\frac{\dot{\gamma}(t)}{\norma{\dot{\gamma}(t)}}$ (viene detto Versore Tangente).
+%				\end{descr}
+%			\end{descr}
+			\begin{descr}{0}
+				\item[Segmenti] $\rightarrow$ $s:=[t, mt+q]$ con $t\in[t_1,t_2]$\;(se il segmento è verticale diventa $[mt+q, t]$).
+				\item[Parabola] $\rightarrow$ $p:=[t, at^2+bt+c]$ con $t\in[t_1,t_2]$
+ 				\item[Circonferenza] $\rightarrow$ $c:=[\alpha+r \cos(t), \beta+r \sin(t)]$ con $\alpha,\beta$ la distanza dall'origine del centro, $r$ il raggio e $t\in[0,2\pi]$.
+				\item[Ellisse] $\rightarrow$ $e:=[\alpha+ a \cos(t),\beta + b \sin(t)]$ con $\alpha,\beta$ la distanza dall'origine del centro, $a$ è il semiasse su $x$ e $b$ è il semiasse su $y$ e $t\in[0,2\pi]$.
+				\item[Iperbole] $\rightarrow$ $i:=[\cosh(t),\sinh(t)]$ dove $\cosh(t)=\frac{e^t+e^{-t}}{2}$ e $\sinh(t)=\frac{e^t-e^{-t}}{2}$.
 			\end{descr}
  		\end{myParagraph}
-		
 
+%PARAGRAFO 16
+		\begin{myParagraph}{FORMULE TRIGONOMETRICHE}
+			\begin{descr}{0}
+				\item[Relazione Fondamentale]:\\
+					$\cos^2(\alpha)+\sin^2(\alpha)=1$.
+				\item[Formule di Duplicazione]:\\
+					$\sin(2\alpha)=2\sin(\alpha)\cos(\alpha)$;\\
+					$\cos(2\alpha)=\cos^2(\alpha)-\sin^2(\alpha)$;\\
+					$\tan(2\alpha)=\frac{2\tan(\alpha)}{1-\tan^2(\alpha)}$.
+				\item[Formule di Bisezione]:\\
+					$\sin(\frac{\alpha}{2})=\pm\sqrt{\frac{1-\cos(\alpha)}{2}}$;\\
+					$\cos(\frac{\alpha}{2})=\pm\sqrt{\frac{1+\cos(\alpha)}{2}}$;\\
+					$\tan(\frac{\alpha}{2})=\pm\sqrt{\frac{1-\cos(\alpha)}{1+\cos(\alpha)}}$;\\
+			\end{descr}
+		\end{myParagraph}
+
+%PARAGRAFO 17
+		\begin{myParagraph}{DERIVATE DI FUNZIONI}
+			\begin{center}
+				\begin{tabular}{ |c|c| } 
+\hline
+\bo{Funzione} & \bo{Derivata}  \\ 
+\hline
+
+$\tan(x)$ & $\frac{1}{\cos^2(x)}$ \\ 
+\hline
+$\cot(x)$ & $-\frac{1}{\sin^2(x)}$  \\ 
+\hline
+$\arcsin(x)$ & $\frac{1}{\sqrt{1-x^2}}$ \\
+\hline
+$\arccos(x)$ & $-\frac{1}{\sqrt{1-x^2}}$ \\
+\hline
+$\arctan(x)$ & $\frac{1}{1-x^2}$ \\
+\hline
+				\end{tabular}
+			\end{center}
+		\end{myParagraph}
 	
 	
 	
