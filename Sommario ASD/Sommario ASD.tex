@@ -99,9 +99,16 @@
 \newcommand{\ra}{\rightarrow}
 \newcommand{\sse}{\leftrightarrow}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
 \newcommand{\FOR}[1]{\For $#1$ \Do}
 \newcommand{\WHILE}[1]{\While $#1$ \Do}
 \newcommand{\IF}[1]{\If $#1$ \Then}
+\newcommand{\ELSEIF}[1]{\ElseIf $#1$\Then}
+\newcommand{\ELSE}{\Else}
+\newcommand{\COMMENT}{\qquad\Comment}
+\newcommand{\RETURN}{\Return}
+\newcommand{\END}{\End}
+
 
 
 
@@ -733,15 +740,119 @@ Supponendo di compiere solo inserimenti avrò che costo della $i$-esima operazio
 				\item[Proprietà] $\rightarrow$
 					se $y$ è nel sottoalbero sinistro di $x$ allora $y.key\leq x.key$,
 					se $y$ è nel sottoalbero destro di $x$ allora $y.key\geq x.key$,
-			\end{descr} 
+			\end{descr}
+			\begin{code}{TreeInsert(T,z)}
+\li $y\la\const{nil}$ \COMMENT Tiene traccia del padre
+\li $x\la\attrib{T}{root}$
+\li \WHILE{x\neq\const{nil}}
+	\li $y\la x$
+	\li \IF{\attrib{z}{key} < \attrib{x}{key}}
+		\li $x\la\attrib{x}{left}$
+	\li \ELSE $x\la\attrib{x}{right}$
+	\End
+\End
+\li $\attrib{z}{p}\la y$
+\li \IF{y=\const{nil}}
+	\li $\attrib{T}{root}\la z$ \COMMENT L'albero T era vuoto
+\li \ELSEIF{\attrib{z}{key} < \attrib{y}{key}}
+	\li $\attrib{y}{left}\la z$
+\li \ELSE $\attrib{y}{right}\la z$
+			\end{code}
+\bo{Costo}\\
+Il costo dipende esclusivamente dall'altezza $h$ dell'albero, quindi il costo è $O(h)$. Nel caso migliore $h=\log_2 n$ mentre nel caso peggiore $h=n$. L'altezza dipende soltanto dall'ordine di inserimento delle chiavi.
 
+			\begin{code}{TreeSearch(\attrib{T}{root},k) \COMMENT Versione Ricorsiva} 
+\li \IF{x=\const{nil} \const{ OR } k=\attrib{x}{key}}
+	\li \RETURN $x$
+\END
+\li \IF{k < \attrib{x}{key}}
+	\li \RETURN \proc{TreeSearch(\attrib{x}{left},$k$)}
+	\li \ELSE \RETURN \proc{TreeSearch(\attrib{x}{right},$k$)}
+\END
+			\end{code}
+\bo{Costo}\\
+Anche in questo caso il costo dell'algoritmo dipende esclusivamente dall'altezza dell'albero, infatti il costo è $O(h)$.
+			
+			\begin{code}{TreeSearch(x,k) \COMMENT Versione Iterativa}
+\li \WHILE{x\neq\const{nil} \const{ AND } k\neq\attrib{x}{key}}
+	\li \IF{k < \attrib{x}{key}}
+		\li $x\la\attrib{x}{left}$
+	\li \ELSE $x\la\attrib{x}{right}$
+	\END
+\END
+\li \RETURN $x$
+			\end{code}
+			
+			\begin{code}{TreeMinimum(x)}
+\li \WHILE{\attrib{x}{left}\neq\const{nil}}
+	\li $x\la\attrib{x}{left}$
+\END
+\li \RETURN $x$
+			\end{code}
+La chiave minima si trova sempre nel nodo più a sinistra.
+\bo{Costo }$\ra O(h)$
+			\begin{code}{TreeMaximum(x)}
+\li \WHILE{\attrib{x}{right}\neq\const{nil}}
+	\li $x\la\attrib{x}{right}$
+\END
+\li \RETURN $x$
+			\end{code}
+La chiave massima si trova sempre nel nodo più a destra.
+\bo{Costo }$\ra O(h)$
+\break
 
+\bo{Attraversamento di un Albero Binario} $\ra$ Per gli alberi binari è possibile effettuare un'esplorazione per stampare direttamente i valori ordinati (grazie alle sue proprietà). Esistono 3 modalità di "attraversamento" possibili, cioè:
+			\begin{code}{InorderTreeWalk(x)}
+\li \IF{x\neq\const{nil}}
+	\li \proc{InorderTreeWalk(\attrib{x}{left})}
+	\li	 \proc{Stampa} \attrib{x}{key}
+	\li \proc{InorderTreeWalk(\attrib{x}{left})}
+\END
+			\end{code}
+Per le altre due versioni, Preorder e Postorder, lo pseudocodice è lo stesso con l'unica differenza che la stampa del valore avviene rispettivamente prima o dopo le due chiamate ricorsive a "TreeWalk". \\
+\bo{Costo}\\
+Intuitivamente il costo è $\Theta(n)$ in quanto ogni nodo viene visitato una sola volta, ma è possibile dimostrare che il costo è $O(n)$.
+\break
 
-%TODO Continua da qui
+\bo{Successore/Predecessore di una Chiave} $\ra$ Il successore di $x$ è la più piccola chiave $>x.key$ mentre il predecessore di $x$ è la più grande chiave $<x.key$. E' anche possibile che $x.key$ sia il massimo/minimo dell'albero e che quindi non abbia successore/predecessore. Possiamo modellizzare il problema come:
+			\begin{descr}{1}
+				\item[$\bm{x}$ ha il sottoalbero destro non-vuoto] $\ra$ Il successore di $x$ è il minimo del sottoalbero destro di $x$;
+				\item[$\bm{x}$ ha il sottoalbero destro vuoto] $\ra$ Il successore di $x$ è l'antenato più prossimo di $x$ che ha come figlio sinistro è anch'esso antenato di $x$.
+			\end{descr}
+Lo pseudocodice è:
+			\begin{code}{TreeSuccessor(x)}
+\li \IF{\attrib{x}{right}\neq\const{nil}}
+	\li \RETURN \proc{TreeMinimum(\attrib{x}{right})}
+\END
+\li $y\la\attrib{x}{p}$
+\li \WHILE{y\neq\const{nil} \const{ AND } x=\attrib{y}{right}}
+	\li $x\la y$
+	\li $y=\attrib{y}{p}$
+\END
+\li \RETURN $y$
+			\end{code}
+Per "TreePredecessor" l'algoritmo è lo stesso, basta cambiare "x.right" con "x.left".\\
+\bo{Costo}\\
+Il costo dipende anche in questo caso esclusivamente dell'altezza infatti è $O(n)$.
+\break
 
-
-
+\bo{Trapianto di Sottoalberi} $\ra$ Un trapianto sostituisce il sottoalbero con radice $u$ con quello di radice $v$ (\underline{N.B.} Non fa uno scambio). Lo pseudocodice è:
+			\begin{code}{Transplant(T,u,v)}
+\li \IF{\attrib{u}{p}=\const{nil}}
+	\li $\attrib{T}{root}\la v$ \COMMENT $u$ era la radice di T
+\li \ELSEIF{u=\attribb{u}{p}{left}}
+	\li $\attribb{u}{p}{left}\la v$
+\li \ELSE $\attribb{u}{p}{right}\la v$
+\END
+\li \IF{v\neq\const{nil}}
+	\li $\attrib{v}{p}\la \attrib{u}{p}$
+\END
+			\end{code}
 		\end{myParagraph}
+
+
+
+
 
 
 
