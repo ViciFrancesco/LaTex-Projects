@@ -1,0 +1,129 @@
+\documentclass[8pt]{extarticle}
+\usepackage[a4paper,headsep=10pt, top=30pt, bottom=30pt, left=30pt, right=30pt, footskip=10pt]{geometry}
+\usepackage{listings}	
+\usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
+\usepackage{amsfonts} 			%used for \mathbb{} -> numerical sets
+\usepackage{amsmath}			%used for \text{} inside math equations
+\usepackage{enumitem}
+\usepackage{bm}					%used for bold math expressions
+\usepackage{calc}				%used for algebric operations inside \newenvironment
+\usepackage{fancyhdr}			%used for head and foot settings
+%\usepackage{draftwatermark}		%used for watermark
+\usepackage{graphics}
+
+
+
+%%watermark settings
+%\SetWatermarkText{Vici Francesco}
+%\SetWatermarkScale{2}
+%\SetWatermarkAngle{60}
+%%end watermark settings
+
+
+
+\fancypagestyle{plain}
+{
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{\vspace{0pt}   Sommario Calcolatori}
+\fancyfoot[R]{Vici Francesco}
+\fancyfoot[C]{\thepage}
+}
+\pagestyle{plain}
+
+
+
+\newenvironment{formulario}
+{
+\setlength{\columnsep}{3em}
+\twocolumn
+\lstset{tabsize=3}
+\begin{spacing}{1}
+\begin{flushleft}
+}{
+\end{flushleft}
+\end{spacing}
+}
+
+
+
+\newenvironment{tcenter}{
+  \par
+  \centering
+  \setlength{\parskip}{0pt} % Rimuovi spaziatura verticale
+  \noindent
+}{
+  \par
+}
+
+
+
+\newenvironment{Descr}
+{
+	\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+	\end{description}
+}
+
+
+
+\newenvironment{descr}[1]
+{
+\setlist[description,1]{leftmargin=2em + (2em * #1),labelindent=0em + (2em * #1)}
+\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+\end{description}
+}
+
+
+
+
+\newenvironment{myParagraph}[1]
+{
+\begin{tcenter}
+\textbf{#1}
+\end{tcenter}
+}{
+\myRule
+}
+
+
+
+\newcommand{\myRule}{\rule{250pt}{0.1pt}}
+\newcommand{\bo}[1]{\textbf{#1}}
+\newcommand{\co}[1]{\textit{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\la}{\leftarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sse}{\leftrightarrow}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+
+
+
+
+\begin{document}\begin{formulario}
+
+
+	\begin{myParagraph}{Introduzione}
+		\begin{Descr}
+			\item[Modello Von Neumann] $\ra$ è un modello al alto livello che suddivide il sistema di elaborazione (calcolatore) in tre componenti:
+			\begin{Descr}
+				\item[Memoria]  $\ra$ ospita dati e programmi (istruzioni) i quali possono essere visti come la stessa cosa (in alcuni modelli, come Harvard, queste due parti della memoria vengono divise);
+				 \item[CPU]  $\ra$ i dati presenti nella memoria vengono eseguiti dalla CPU (in seguito ad una compilazione) che legge la memoria e vi scrive i risultati delle operazioni effettuate. Si divide in due parti:
+				\begin{Descr}
+					\item[Unità Operativa (UO)]  $\ra$ esegue praticamente le operazioni sui dati;
+					\item[Unità di Controllo (UC)]  $\ra$ riceve istruzioni che legge dalla memoria e comanda le funzioni che l'unità operativa deve svolgere. Inoltre legge le condizioni poste dall'unità operativa durante le operazioni.
+				\end{Descr}
+				Ci sono due modi di effettuare le operazioni:
+		\begin{Descr}
+			\item[Asincrono] $\ra$ difficile da gestire perché si rischia di cadere nell'instabilità. Infatti la scrittura/lettura delle operazioni tra UC e UO non ha un'organizzazione;
+			\item[Sincrono] $\ra$ il funzionamento della CPU è gestito da un CLOCK (con onda quadra) che consente di scrivere/leggere istruzioni solo quando c'è altra tensione nel segnale dato dal clock. Ad ogni ciclo di controllo l'Uc passa delle operazioni alla UO e legge le condizioni emesse dalla stessa. Il periodo è $T_c=\frac{1}{f_c}$ (oggi le frequenze sono nell'ordine dei $\text{GHz}=10^9 \text{ Hz}$). 
+		\end{Descr}	
+				\item[Sistema I/O]  $\ra$ serve per trasportare dati dall'interno all'esterno e viceversa.
+			\end{Descr}
+		\end{Descr}
+	\end{myParagraph}
+	
+	
+\end{formulario}\end{document}
