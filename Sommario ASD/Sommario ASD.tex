@@ -1,4 +1,4 @@
-\documentclass[9pt]{extarticle}
+\documentclass[8pt]{extarticle}
 \usepackage[a4paper,headsep=10pt, top=30pt, bottom=30pt, left=30pt, right=30pt, footskip=10pt]{geometry}
 \usepackage{listings}	
 \usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
@@ -282,7 +282,7 @@ Se $n\leq c$ con $c$ una costante, si ha il caso base; altrimenti si divide in $
 \item[Metodo di Sostituzione] $\rightarrow$ Ipotizzo una soluzione e la dimostro con un'induzione matematica:\\
 			\begin{descr}{0}
 \item[1.] indovino una soluzione e formulo un'ipotesi induttiva;
-\item[2.] sostituisco nell'equazione di ricorrenza le epressioni $T(\cdot)$ ;
+\item[2.] sostituisco nell'equazione di ricorrenza le epressioni $T(\cdot)$;
 \item[3.] dimostro che è valida anche per il caso base.
 			\end{descr}
 La soluzione per una ricorrenza può essere:
@@ -303,7 +303,7 @@ $\mathbf{T(n)=\Theta(n^{\log_b a}\cdot \log_2 n)}$
 				\end{tcenter}
 \item[caso 3]$\rightarrow$ se $f(n)=\Omega(n^{log_b a+\epsilon})$ per qualche costante $\epsilon>0$ e $f(n)$ t.c. $a\;f(\frac{n}{b})\leq c\;f(n)$ per qualche costante $c<1$ e $\forall n\geq n_0$, allora:
 				\begin{tcenter}
-$\mathbf{T(n)=\Theta(f(n)}$
+$\mathbf{T(n)=\Theta(f(n))}$
 				\end{tcenter}
 \item[Condizione di Regolarità:]
 Devo assicurarmi che quando scendo nell'albero $f(\cdot)$ diventa più piccola.
@@ -352,11 +352,11 @@ Divide ricorsivamente l'array da ordinare in due sottoarray di uguale lunghezza.
 \li $R[n_2+1]\la \infty$
 \li $i \la 1$
 \li $j \la 1$
-\li \FOR{k \la \To r}
+\li \FOR{k \la p\To r}
 	\li \IF{L[i]\leq R[j]}
 		\li $A[k]\la L[i]$
 		\li $i \la i+1$
-	\Else
+	\li \Else
 		\li $A[k]\la R[j]$
 		\li $j \la j+1$
 	\End
@@ -848,6 +848,41 @@ Il costo dipende anche in questo caso esclusivamente dell'altezza infatti è $O(
 	\li $\attrib{v}{p}\la \attrib{u}{p}$
 \END
 			\end{code}
+\bo{Cancellazione} $\ra$ Per effettuare la cancellazione di una chiave $z$ da un albero, possiamo trovarci un due casi, cioè:
+			\begin{descr}{1}
+				\item[$\bm{z}$ non ha un figlio] $\ra$ cancello $z$ e aggiusto il puntatore del padre di $z$.
+				\item[$\bm{z}$ ha un figlio] $\ra$ cancello $z$ e faccio in modo che il padre di $z$ punti al figlio di $z$.
+				\item[$\bm{z}$ ha due figli] $\ra$ devo trovare il successore di $z$ che chiamo $y$ che sarà il minimo del sottoalbero destro di $z$ e riordinare il sottoalbero, aggiustando i collegamenti con il padre di $z$.
+			\end{descr}
+			\begin{code}{TreeDelete(T,z)}
+\li \IF{\attrib{z}{left}=\const{nil}}
+	\li \proc{Transplant(T,z,\attrib{z}{right})}
+\li \ELSEIF{\attrib{z}{right}=\const{nil}}
+	\li \proc{Transplant(T,z,\attrib{z}{right})}
+\li \ELSE 
+	\li $y\la\proc{TreeMinimum(\attrib{z}{right})}$
+	\li \IF{\attrib{y}{p}\neq z}
+		\li \proc{Transplant(T,y,\attrib{y}{right})}
+		\li $\attrib{y}{right}\la\attrib{z}{right}$
+		\li $\attribb{y}{right}{p}\la y$
+	\END
+	\li \proc{Transplant(T,z,y)}
+	\li $\attrib{y}{left}\la\attrib{z}{left}$ 
+	\li $\attribb{y}{left}{p}\la y$
+\END
+			\end{code}
+\bo{Chiavi duplicate} $\ra$ Se si hanno delle chiavi duplicate da inserire in un ABR nell'algoritmo "TreeInsert" è necessario aggiungere dei controlli, cioè: \\
+\qquad $\bullet$ aggiungere $if(z.key=x.key) ...$ prima della riga 5; \\
+\qquad $\bullet$ aggiungere $if(z.key=y.key) ...$ prima della riga 11. \\
+Ci sono dunque diversi modi di assegnare chiavi duplicate come: fare un lista concatenata con valori uguali, aggiungere un flag booleano nel nodo $x$ e assegnare la chiave duplicata a $x.left$ o $x.right$ a seconda del valore del flag (che cambia ad ogni vista al nodo $x$) oppure assegnare casualmente la chiave duplicata ad $x.left$ o $x.right$.\\
+\bo{Notazione Parentesizzata} $\ra$ È possibile rappresentare un ABR tramite una notazione alternativa. Ad esempio, avendo un albero composto da $x$, $x.left$ e $x.right$ posso scriverlo come:\\
+			\begin{tcenter}
+$x(x.left,x.right)$
+			\end{tcenter}
+Ponendo $x.left=y$ e $x.right=z$ e supponendo che entrambi abbiano solo un figlio sinistro posso scrivere:
+			\begin{tcenter}
+$x(y(y.left,\;),z(z.left,\;))$
+			\end{tcenter}
 		\end{myParagraph}
 
 

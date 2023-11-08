@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.8)  31 OCT 2023 12:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.8)  2 NOV 2023 16:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
 (c:/texlive/2023/texmf-dist/tex/latex/extsizes/extarticle.cls
 Document Class: extarticle 1996/10/08 v1.0 Non Standard LaTeX document class
-(c:/texlive/2023/texmf-dist/tex/latex/extsizes/size9.clo
-File: size9.clo 1999/11/11 v1.4a NON-Standard LaTeX file (size option)
+(c:/texlive/2023/texmf-dist/tex/latex/extsizes/size8.clo
+File: size8.clo 1999/11/11 v1.4a NON-Standard LaTeX file (size option)
 )
 (c:/texlive/2023/texmf-dist/tex/latex/base/exscale.sty
 Package: exscale 2018/09/24 v2.1i Standard LaTeX package exscale
@@ -279,7 +279,7 @@ LaTeX Font Info:    ... okay on input line 116.
 * \marginparwidth=74.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=8.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=7.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -325,92 +325,58 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 130
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Warning: Indentation ends at level 1 in codebox on page 1.
-
-Package fancyhdr Warning: \footskip is too small (10.0pt): 
-(fancyhdr)                Make it at least 10.94998pt, for example:
-(fancyhdr)                \setlength{\footskip}{10.94998pt}.
-
 [1{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-
-Package fancyhdr Warning: \footskip is too small (10.0pt): 
-(fancyhdr)                Make it at least 10.94998pt, for example:
-(fancyhdr)                \setlength{\footskip}{10.94998pt}.
-
-[2]
-Overfull \hbox (28.64055pt too wide) in paragraph at lines 591--591
+] [2]
+Overfull \hbox (4.41907pt too wide) in paragraph at lines 591--591
 []| []  
  []
 
-
-Package fancyhdr Warning: \footskip is too small (10.0pt): 
-(fancyhdr)                Make it at least 10.94998pt, for example:
-(fancyhdr)                \setlength{\footskip}{10.94998pt}.
-
 [3]
-
-Package fancyhdr Warning: \footskip is too small (10.0pt): 
-(fancyhdr)                Make it at least 10.94998pt, for example:
-(fancyhdr)                \setlength{\footskip}{10.94998pt}.
-
-[4]
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 745.
 
-Warning: Indentation ends at level 1 in codebox on page 5.
-
-Package fancyhdr Warning: \footskip is too small (10.0pt): 
-(fancyhdr)                Make it at least 10.94998pt, for example:
-(fancyhdr)                \setlength{\footskip}{10.94998pt}.
-
-[5{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-
-Package fancyhdr Warning: \footskip is too small (10.0pt): 
-(fancyhdr)                Make it at least 10.94998pt, for example:
-(fancyhdr)                \setlength{\footskip}{10.94998pt}.
-
-[6
-
-] (./Sommario ASD.aux)
+Warning: Indentation ends at level 1 in codebox on page 4.
+[4{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+[5] (./Sommario ASD.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4925 strings out of 474934
- 75053 string characters out of 5763815
- 1954801 words of memory out of 5000000
+ 4924 strings out of 474934
+ 75048 string characters out of 5763815
+ 1961801 words of memory out of 5000000
  26419 multiletter control sequences out of 15000+600000
- 567705 words of font info for 71 fonts, out of 8000000 for 9000
+ 567714 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,12n,65p,518b,942s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy6.pfb><c
-:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy9.pfb><c:/te
+:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><c:/texlive/2023
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><c:/texlive/2023/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2023/texmf-dist/fonts/ty
+t/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2023/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publ
-ic/amsfonts/cmextra/cmex9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/am
+ic/amsfonts/cmextra/cmex8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmmi5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb>
+cmmi6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb><c:/
-texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb><c:/texl
+texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><c:/texl
 ive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2023/texmf-dist/fo
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2023/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mti9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><
+fonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mti8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb><
 c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/t
-exlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb><c:/texlive/202
-3/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
-Output written on "Sommario ASD.pdf" (6 pages, 268057 bytes).
+exlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx0800.pfb><c:/texlive/202
+3/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb>
+Output written on "Sommario ASD.pdf" (5 pages, 265407 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
+ 131 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
