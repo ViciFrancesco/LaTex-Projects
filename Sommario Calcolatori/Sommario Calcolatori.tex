@@ -104,7 +104,7 @@
 
 \begin{document}\begin{formulario}
 
-
+%PARGRAFO 1
 	\begin{myParagraph}{Introduzione}
 		\begin{Descr}
 			\item[Modello Von Neumann] $\ra$ è un modello al alto livello che suddivide il sistema di elaborazione (calcolatore) in tre componenti:
@@ -116,14 +116,43 @@
 					\item[Unità di Controllo (UC)]  $\ra$ riceve istruzioni che legge dalla memoria e comanda le funzioni che l'unità operativa deve svolgere. Inoltre legge le condizioni poste dall'unità operativa durante le operazioni.
 				\end{Descr}
 				Ci sono due modi di effettuare le operazioni:
-		\begin{Descr}
-			\item[Asincrono] $\ra$ difficile da gestire perché si rischia di cadere nell'instabilità. Infatti la scrittura/lettura delle operazioni tra UC e UO non ha un'organizzazione;
-			\item[Sincrono] $\ra$ il funzionamento della CPU è gestito da un CLOCK (con onda quadra) che consente di scrivere/leggere istruzioni solo quando c'è altra tensione nel segnale dato dal clock. Ad ogni ciclo di controllo l'Uc passa delle operazioni alla UO e legge le condizioni emesse dalla stessa. Il periodo è $T_c=\frac{1}{f_c}$ (oggi le frequenze sono nell'ordine dei $\text{GHz}=10^9 \text{ Hz}$). 
-		\end{Descr}	
+				\begin{Descr}
+					\item[Asincrono] $\ra$ difficile da gestire perché si rischia di cadere nell'instabilità. Infatti la scrittura/lettura delle operazioni tra UC e UO non ha un'organizzazione;
+					\item[Sincrono] $\ra$ il funzionamento della CPU è gestito da un CLOCK (con onda quadra) che consente di scrivere/leggere istruzioni solo quando c'è altra tensione nel segnale dato dal clock. Ad ogni ciclo di controllo l'Uc passa delle operazioni alla UO e legge le condizioni emesse dalla stessa. Il periodo è $T_c=\frac{1}{f_c}$ (oggi le frequenze sono nell'ordine dei $\text{GHz}=10^9 \text{ Hz}$). 
+				\end{Descr}	
 				\item[Sistema I/O]  $\ra$ serve per trasportare dati dall'interno all'esterno e viceversa.
 			\end{Descr}
 		\end{Descr}
 	\end{myParagraph}
 	
+%PARAGRAFO 2
+	\begin{myParagraph}{ARCHITETTURA E ORGANIZZAZIONE}
+		\begin{Descr}
+			\item[Architettura] $\ra$ è un modello di programmazione. Una singola architettura può avere più organizzazioni al suo interno. All'interno di un'architettura si individuano di solito 3 livelli di astrazione, di cui i componenti elettronici (hardware) fanno parte del livello di astrazione più basso e vengono controllati dai livelli più alti (software). Ciascuna operazione effettuata su queste componenti hardware (in particolare le porte logiche) ha un tempo di esecuzione, che va a determinare la lunghezza del clock. 
+			\begin{Descr}
+				\item[Modello RTL] (Register Transfer Logic) $\ra$ si mettono insieme le componenti del livello più basso (quelle che eseguono le istruzioni) per formare il processore, che legge i dati e scrive i risultati delle operazioni in memoria. 
+			\end{Descr}
+			\item[Organizzazione] $\ra$ esplicita come le componenti funzionali realizzano un'architettura. Tale organizzazione deve essere portabile su tutti i sistemi su cui lavora. 
+			\begin{Descr}
+				\item[Micro-Architettura] $\ra$ sono le varie composizioni hardware che può assumere un'architettura più grande. I processori sono in un livello ancora più inferiore perché si basano su una delle micro-architetture che compongono le architetture generali. 
+			\end{Descr}
+		\end{Descr}
+	\end{myParagraph}
+	
+%PARAGRAFO 3
+	\begin{myParagraph}{BUS (INTERCONNESSIONE)}
+È una organizzazione tradizionale dei sistemi a microprocessore che è però ormai superata. Il bus è formato da tanti fili quanti solo il numero di bit che quel bus dovrà trasmettere, che connettono i vari hardware permettendo di trasferire i dati. Esistono 3 gruppi di bus, suddivisi in base alla funzione, che sono:
+		\begin{Descr}
+			\item[Bus dei Controlli] $\ra$ trasferiscono i segnali di controllo che gestiscono i dati;
+			\item[Bus degli Indirizzi] $\ra$ trasferiscono codici che specificano le destinazioni dai dati in lettura/scrittura all'interno della memoria;
+			\item[Bus dei Dati] $\ra$ trasferiscono i dati sui quali si eseguono poi le operazioni.
+		\end{Descr}
+La memoria non trasferisce mai indirizzi in uscita in quanto li usa solo internamente per trovare una specifica posizione, mentre la CPU non trasferisce mai indirizzi in entrata, in quanto può solo trasferirli in uscita verso la memoria.
+	\end{myParagraph}
+
+%PARAGRAFO 4
+	\begin{myParagraph}{MEMORIA}
+È composta da celle (o locazioni) ad ognuna delle quali è assegnato un indirizzo. Il numero totale degli indirizzi 
+	\end{myParagraph}
 	
 \end{formulario}\end{document}

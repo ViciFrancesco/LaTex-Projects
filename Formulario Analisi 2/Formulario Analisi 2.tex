@@ -57,6 +57,15 @@
 
 
 
+\newenvironment{Descr}
+{
+	\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+	\end{description}
+}
+
+
+
 \newenvironment{descr}[1]
 {
 \setlist[description,1]{leftmargin=2em + (2em * #1),labelindent=0em + (2em * #1)}
@@ -517,6 +526,34 @@ Una curva è una funzione $\gamma:I\subset\R\to\R^n$. Uso $t\in I$ come variabil
 					\item[\underline{OSS:}] $\exists$ sempre il vettore velocità ed è $\neq 0 \implies \exists \;\tau(t)=\frac{\dot{\gamma}(t)}{\norma{\dot{\gamma}(t)}}$ (viene detto Versore Tangente).
 				\end{descr}
 			\end{descr}
+		\end{myParagraph}
+
+		\begin{myParagraph}{LUNGHEZZA DI UNA CURVA}
+Partiziono la curva definita su un intervallo $[a,b]$ come $\text{\textit{P}}=\{(t_0,...,t_n) \;|\; a=t_0 \leq ... \leq t_n=b$ $\quad n\in\N\}$ e chiamo $\gamma_{\text{\underline{P}}}$ con $\text{\underline{P}} \in \text{\textit{P}}$ la spezzata che congiunge i punti $\gamma(t_i)$, allora la lunghezza della curva $\gamma_{\text{\underline{P}}}$ sarà:\\
+			\begin{tcenter}
+					$L(\gamma_{\text{\underline{P}}})=\sum_{i=0}^{n-1} \norma{\gamma(t_i+1)-\gamma(t_i)}$
+			\end{tcenter}
+				Posso dunque definire la lunghezza di una curva come:
+			\begin{tcenter}
+					$L(\gamma):=\sup L(\gamma_{\text{\underline{P}}})\quad\text{\underline{P}}\in P$
+			\end{tcenter}
+				inoltre se $L(\gamma)<\infty$ allora $\gamma$ di dice Rettificabile.
+			\begin{Descr}
+				\item[Teorema] $\ra$ se $\gamma\in C^1 :[a,b]\to\R^n$ allora:
+				\begin{tcenter}
+					$\gamma$ è rettificabile e $L(\gamma)=\int_a^b \; \norma{\gamma'(t)} \; dt$
+				\end{tcenter}
+				\item[Lemma] $\ra$ Data $v\in C^0:[a,b]\to\R^n$ avrò che $\int_a^b \; v(t)\; dt:=\left(\int_a^b \; v_1(t)\; dt,...,\int_a^b \; v_n(t)\; dt\right)$ allora:
+				\begin{tcenter}
+					$\norma{\int_a^b \; v(t)\; dt}\leq \int_a^b \; \norma{v(t)}\; dt$
+				\end{tcenter}
+				%TODO CONTINUA DA QUI
+				\item[CASI PARTICOLARI] $\ra$
+				\begin{Descr}
+					\item[Teorema] $\ra$
+					\item[Lemma] $\ra$
+				\end{Descr}
+			\end{Descr}
  		\end{myParagraph}
 		
 
