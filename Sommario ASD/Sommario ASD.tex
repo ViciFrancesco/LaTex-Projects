@@ -58,6 +58,14 @@
 
 
 
+\newenvironment{Descr}
+{
+	\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+	\end{description}
+}
+
+
 
 \newenvironment{descr}[1]
 {
@@ -99,6 +107,7 @@
 \newcommand{\ra}{\rightarrow}
 \newcommand{\sse}{\leftrightarrow}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\modulo}[1]{\left\vert #1 \right\vert}
 
 \newcommand{\FOR}[1]{\For $#1$ \Do}
 \newcommand{\WHILE}[1]{\While $#1$ \Do}
@@ -885,16 +894,49 @@ $x(y(y.left,\;),z(z.left,\;))$
 			\end{tcenter}
 		\end{myParagraph}
 
+	\begin{myParagraph}{ALBERI AVL}
+Gli alberi AVL sono alberi quasi bilanciati", infatti ,per qualsiasi nodo, le altezze dei due sottoalberi differiscono al più di 1. Questi alberi aggiungono anche un fattore di bilanciamento ad ogni nodo. Le sue proprietà principali sono:
+		\begin{Descr}
+			\item[Proprietà ereditate dagli ABR] $\ra$ gli alberi AVL ereditano tutte le proprietà degli ABR;
+			\item[Altezza dei Nodi] $\ra$ ad ogni nodo si aggiunge un parametro "altezza" che indica appunto il \underline{massimo} numero di archi dal nodo considerato ad una foglia;
+			\item[Fattore di Bilanciamento] $\ra$ ad ogni nodo $x$ si aggiunge un fattore di bilanciamento $\modulo{BF(x)}\leq 1$ e si calcola facendo $BF(x)=x.left.h-x.right.h$, è cioè la differenza tra l'altezza sottoalbero sinistro e l'altezza del sottoalbero destro.
+			\item[Sentinella T.NIL] $\ra$ le foglie, ovvero i nodi ad altezza 0, non hanno una chiave e vengono rappresentate come un unico nodo, collegato a tutti i nodi ad altezza 1.
+			\item[Altezza Massima] $\ra$ l'altezza massima di un AVL con $n$ nodi interni è $\bm{2\log_2 (n+1)}$;
+			\begin{Descr}
+				\item[Teorema]: Chiamo $n(h)$ il numero minimo di nodi che un albero di altezza $h$ deve avere. Per definizione avrò che: $n(h)\geq 2^{h/2}-1$ per ogni $h>1$.
+				\item[Dimostrazione]:
+				\begin{Descr}
+					\item[h=1] $\ra$ $n(1)=1 > 2^{1/2}-1=\sqrt{2}-1$
+					\item[h=2] $\ra$ $n(2)=2 > 2^{1/1}-1=1$
+					\item[h$\bm{\geq}$2] $\ra$ (per induzione) suppongo che i due sottoalberi differiscano di un nodo, quindi uno avrà altezza $h-1$ e l'altro $h-2$. Applicando i la formula dei nodi minimi data dal teorema visto sopra avrò che:
+					\begin{tcenter}
+					$n(h)\geq \underbrace{1}_\text{nodo esaminato} + \underbrace{n(h-1)+n(h-2)}_\text{numero nodi sottoalberi}$ =\\
+					=$\underbrace{1}_\text{nodo esaminato} + \underbrace{2^{h-1/2}-1+2^{h-2/2}-1)}_\text{numero nodi sottoalberi}$=\\
+					=$(2^{-1/2}+2^{-1})2^{h/2}-1$=\\=$\frac{1}{2\sqrt{2}}2^{h/2}-1>2^{h/2}-1$.
+					\end{tcenter}
+					Ora ricavando $h$ rispetto ad $n$ ottengo: 
+					\begin{tcenter}
+						$n+1\geq2^{h/2}\implies\log_2(n+1)=h/2\implies h=2\log_2(n+1)$ \qquad C.V.D.
+					\end{tcenter}
+				\end{Descr}
+			\end{Descr}
+		\end{Descr} 
+Gli AVL ereditano anche tutte le operazioni tipiche degli ABR, cioè MIN, MAX, SUCCESSOR, PREDECESSOR e SEARCH, ma il costo diventa dipendente dal numero di nodi infatti si eseguono in $O(log_2 \;n)$. Ci sono invece altre operazioni, come inserimento e cancellazione, che rischiano di violare le proprietà dell'AVL. A questo scopo si introducono le ROTAZIONI che permettono di ripristinare, se usate in modo corretto, il bilanciamento dei nodi.
+		
+%		\begin{figure}
+%			\centering
+%			\includegraphics[width=1cm \linewidth]{C:/Users/franc/OneDrive/Desktop/LaTex/Sommario ASD/Immagini/SmartSelect_20231205_160709_Samsung Notes}
+%		\end{figure}
+%TODO SISTEMA
 
 
-
-
-
-
-
-
-
-
-
-	\end{formulario}
+Lo pseudocodice è:
+		\begin{code}{LeftRotate(T,x)}
+\li $y \gets \attrib{x}{right}$ \COMMENT{assegna y, nodo che verrà ruotato insieme ad x}
+\li $\attrib{x}{h}\gets \proc{MAX(\attribb{x}{left}{h},\attribb{x}{right}{h})}+1$
+\li \IF{y.left \neq \attrib{T}{\const{nil}}}
+	\li $\attribb{y}{left}{p}\gets x$ \COMMENT{collega} %TODO CONTINUA
+		\end{code}
+	\end{myParagraph}
+\end{formulario}
 \end{document}
