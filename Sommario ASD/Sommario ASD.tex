@@ -11,6 +11,7 @@
 %\usepackage{draftwatermark}		%used for watermark
 \usepackage{clrscode3e}		%pseudocde 
 \usepackage{graphics}
+\usepackage{xcolor}
 
 
 
@@ -98,6 +99,12 @@
 
 
 
+
+
+
+
+
+
 \newcommand{\myRule}{\rule{250pt}{0.1pt}}
 \newcommand{\bo}[1]{\textbf{#1}}
 \newcommand{\co}[1]{\textit{#1}}
@@ -114,9 +121,10 @@
 \newcommand{\IF}[1]{\If $#1$ \Then}
 \newcommand{\ELSEIF}[1]{\ElseIf $#1$\Then}
 \newcommand{\ELSE}{\Else}
-\newcommand{\COMMENT}{\qquad\Comment}
+\newcommand{\COMMENT}[1]{\begin{minipage}{0.5\textwidth}\color{gray}\qquad\footnotesize\textit{/#1}\end{minipage}}
 \newcommand{\RETURN}{\Return}
 \newcommand{\END}{\End}
+\newcommand{\get}{\la}
 
 
 
@@ -751,7 +759,7 @@ Supponendo di compiere solo inserimenti avrò che costo della $i$-esima operazio
 					se $y$ è nel sottoalbero destro di $x$ allora $y.key\geq x.key$,
 			\end{descr}
 			\begin{code}{TreeInsert(T,z)}
-\li $y\la\const{nil}$ \COMMENT Tiene traccia del padre
+\li $y\la\const{nil}$ \COMMENT{Tiene traccia del padre}
 \li $x\la\attrib{T}{root}$
 \li \WHILE{x\neq\const{nil}}
 	\li $y\la x$
@@ -762,7 +770,7 @@ Supponendo di compiere solo inserimenti avrò che costo della $i$-esima operazio
 \End
 \li $\attrib{z}{p}\la y$
 \li \IF{y=\const{nil}}
-	\li $\attrib{T}{root}\la z$ \COMMENT L'albero T era vuoto
+	\li $\attrib{T}{root}\la z$ \COMMENT{L'albero T era vuoto}
 \li \ELSEIF{\attrib{z}{key} < \attrib{y}{key}}
 	\li $\attrib{y}{left}\la z$
 \li \ELSE $\attrib{y}{right}\la z$
@@ -770,7 +778,7 @@ Supponendo di compiere solo inserimenti avrò che costo della $i$-esima operazio
 \bo{Costo}\\
 Il costo dipende esclusivamente dall'altezza $h$ dell'albero, quindi il costo è $O(h)$. Nel caso migliore $h=\log_2 n$ mentre nel caso peggiore $h=n$. L'altezza dipende soltanto dall'ordine di inserimento delle chiavi.
 
-			\begin{code}{TreeSearch(\attrib{T}{root},k) \COMMENT Versione Ricorsiva} 
+			\begin{code}{TreeSearch(\attrib{T}{root},k) \qquad Versione Ricorsiva}
 \li \IF{x=\const{nil} \const{ OR } k=\attrib{x}{key}}
 	\li \RETURN $x$
 \END
@@ -782,7 +790,7 @@ Il costo dipende esclusivamente dall'altezza $h$ dell'albero, quindi il costo è
 \bo{Costo}\\
 Anche in questo caso il costo dell'algoritmo dipende esclusivamente dall'altezza dell'albero, infatti il costo è $O(h)$.
 			
-			\begin{code}{TreeSearch(x,k) \COMMENT Versione Iterativa}
+			\begin{code}{TreeSearch(x,k) \qquad Versione Iterativa}
 \li \WHILE{x\neq\const{nil} \const{ AND } k\neq\attrib{x}{key}}
 	\li \IF{k < \attrib{x}{key}}
 		\li $x\la\attrib{x}{left}$
@@ -848,7 +856,7 @@ Il costo dipende anche in questo caso esclusivamente dell'altezza infatti è $O(
 \bo{Trapianto di Sottoalberi} $\ra$ Un trapianto sostituisce il sottoalbero con radice $u$ con quello di radice $v$ (\underline{N.B.} Non fa uno scambio). Lo pseudocodice è:
 			\begin{code}{Transplant(T,u,v)}
 \li \IF{\attrib{u}{p}=\const{nil}}
-	\li $\attrib{T}{root}\la v$ \COMMENT $u$ era la radice di T
+	\li $\attrib{T}{root}\la v$ \COMMENT{$u$ era la radice di T}
 \li \ELSEIF{u=\attribb{u}{p}{left}}
 	\li $\attribb{u}{p}{left}\la v$
 \li \ELSE $\attribb{u}{p}{right}\la v$
@@ -921,21 +929,24 @@ Gli alberi AVL sono alberi quasi bilanciati", infatti ,per qualsiasi nodo, le al
 				\end{Descr}
 			\end{Descr}
 		\end{Descr} 
-Gli AVL ereditano anche tutte le operazioni tipiche degli ABR, cioè MIN, MAX, SUCCESSOR, PREDECESSOR e SEARCH, ma il costo diventa dipendente dal numero di nodi infatti si eseguono in $O(log_2 \;n)$. Ci sono invece altre operazioni, come inserimento e cancellazione, che rischiano di violare le proprietà dell'AVL. A questo scopo si introducono le ROTAZIONI che permettono di ripristinare, se usate in modo corretto, il bilanciamento dei nodi.
-		
-%		\begin{figure}
-%			\centering
-%			\includegraphics[width=1cm \linewidth]{C:/Users/franc/OneDrive/Desktop/LaTex/Sommario ASD/Immagini/SmartSelect_20231205_160709_Samsung Notes}
-%		\end{figure}
-%TODO SISTEMA
-
-
-Lo pseudocodice è:
+Gli AVL ereditano anche tutte le operazioni tipiche degli ABR, cioè MIN, MAX, SUCCESSOR, PREDECESSOR e SEARCH, ma il costo diventa dipendente dal numero di nodi infatti si eseguono in $O(log_2 \;n)$. Ci sono invece altre operazioni, come inserimento e cancellazione, che rischiano di violare le proprietà dell'AVL. A questo scopo si introducono le ROTAZIONI che permettono di ripristinare, se usate in modo corretto, il bilanciamento dei nodi. Lo pseudocodice è:
 		\begin{code}{LeftRotate(T,x)}
-\li $y \gets \attrib{x}{right}$ \COMMENT{assegna y, nodo che verrà ruotato insieme ad x}
-\li $\attrib{x}{h}\gets \proc{MAX(\attribb{x}{left}{h},\attribb{x}{right}{h})}+1$
+\li $y \get \attrib{x}{right}$ \COMMENT{assegna y, che verrà ruotato insieme ad x}
+\li $\attrib{x}{h}\get \proc{max(\attribb{x}{left}{h},\attribb{x}{right}{h})}+1$
 \li \IF{y.left \neq \attrib{T}{\const{nil}}}
-	\li $\attribb{y}{left}{p}\gets x$ \COMMENT{collega} %TODO CONTINUA
+	\li $\attribb{y}{left}{p}\get x$ \COMMENT{collega x e il sottoalbero sinistro di y}
+\END
+\li $\attrib{y}{p}\get\attrib{x}{p}$
+\li \IF{\attrib{x}{p}=\attrib{T}{\const{nil}}} 
+	\li $\attrib{T}{root}\get y$
+\li \ELSEIF{x\gets\attribb{x}{p}{left}} 
+	\li $\attribb{x}{p}{left}\get y$
+\li \ELSE
+	\li $\attribb{x}{p}{right}\get y$
+\END
+\li $\attrib{y}{left}\get x$
+\li $\attrib{y}{h}\get\proc{max(\attribb{y}{left}{h},\attribb{y}{right}{h})}+1$
+\li $\attrib{x}{p}\get y$
 		\end{code}
 	\end{myParagraph}
 \end{formulario}
