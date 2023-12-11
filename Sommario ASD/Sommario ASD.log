@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.4)  7 DEC 2023 18:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.4)  11 DEC 2023 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -259,20 +259,20 @@ File: l3backend-pdftex.def 2023-11-09 L3 backend support: PDF output (pdfTeX)
 (./Sommario ASD.aux)
 \openout1 = `"Sommario ASD.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 134.
+LaTeX Font Info:    ... okay on input line 134.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -331,13 +331,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 147
+LaTeX Font Info:    Trying to load font information for U+msa on input line 148
 .
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 147
+LaTeX Font Info:    Trying to load font information for U+msb on input line 148
 .
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -348,16 +348,19 @@ Warning: Indentation ends at level 1 in codebox on page 1.
 
 
 ] [2]
-Overfull \hbox (4.41907pt too wide) in paragraph at lines 608--608
+Overfull \hbox (4.41907pt too wide) in paragraph at lines 609--609
 []| []  
  []
 
 [3]
 Warning: Indentation ends at level 1 in codebox on page 4.
 [4{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-[5] [6
+[5]
+Overfull \hbox (9.65695pt too wide) in paragraph at lines 975--975
+[]| []  
+ []
 
-] (./Sommario ASD.aux)
+[6] (./Sommario ASD.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-11-09>
@@ -366,7 +369,7 @@ L3 programming layer <2023-11-09>
 Here is how much of TeX's memory you used:
  5421 strings out of 474267
  82056 string characters out of 5751465
- 1970558 words of memory out of 5000000
+ 1971558 words of memory out of 5000000
  27570 multiletter control sequences out of 15000+600000
  567210 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -391,7 +394,7 @@ mti7.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb><
 c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/t
 exlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx0800.pfb><c:/texlive/202
 3/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb>
-Output written on "Sommario ASD.pdf" (6 pages, 282728 bytes).
+Output written on "Sommario ASD.pdf" (6 pages, 288047 bytes).
 PDF statistics:
  134 PDF objects out of 1000 (max. 8388607)
  81 compressed objects within 1 object stream

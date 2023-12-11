@@ -15,6 +15,7 @@
 
 
 
+
 %%watermark settings
 %\SetWatermarkText{Vici Francesco}
 %\SetWatermarkScale{2}
@@ -936,18 +937,93 @@ Gli AVL ereditano anche tutte le operazioni tipiche degli ABR, cioè MIN, MAX, S
 \li \IF{y.left \neq \attrib{T}{\const{nil}}}
 	\li $\attribb{y}{left}{p}\get x$ \COMMENT{collega x e il sottoalbero sinistro di y}
 \END
-\li $\attrib{y}{p}\get\attrib{x}{p}$
-\li \IF{\attrib{x}{p}=\attrib{T}{\const{nil}}} 
+\li $\attrib{y}{p}\get\attrib{x}{p}$ \COMMENT{collega il padre di x come padre di y}
+\li \IF{\attrib{x}{p}=\attrib{T}{\const{nil}}} \qquad\qquad \COMMENT{collega il padre di x a y come padre}
 	\li $\attrib{T}{root}\get y$
 \li \ELSEIF{x\gets\attribb{x}{p}{left}} 
 	\li $\attribb{x}{p}{left}\get y$
 \li \ELSE
 	\li $\attribb{x}{p}{right}\get y$
 \END
-\li $\attrib{y}{left}\get x$
+\li $\attrib{y}{left}\get x$ \COMMENT{collega x come figlio di y}
 \li $\attrib{y}{h}\get\proc{max(\attribb{y}{left}{h},\attribb{y}{right}{h})}+1$
-\li $\attrib{x}{p}\get y$
+\li $\attrib{x}{p}\get y$ \COMMENT{collega y come padre di x}
 		\end{code}
+		\begin{code}{\const{avl}Insert(T,z)}
+\li $y\get\attrib{T}{\const{nil}}$ \COMMENT{tiene traccia del padre}
+\li $x\get\attrib{T}{root}$
+\li \WHILE{x\neq\attrib{T}{\const{nil}}} \qquad\qquad\quad\COMMENT{scorre fino a trovare la foglia dove inserire x}
+	\li $y\get x$
+	\li \IF{\attrib{z}{key}<\attrib{x}{key}}
+		\li $x\get\attrib{x}{left}$
+	\li \ELSE
+		\li $x\get \attrib{x}{right}$
+	\END
+\END
+\li $\attrib{z}{p}\get y$ \COMMENT{assegna il padre alla chiave da inserire}
+\li \IF{y\gets\attrib{T}{\const{nil}}} \qquad\qquad\quad\COMMENT{Assegna z come il giusto figlio di y}
+	\li $\attrib{T}{root}\get z$
+\li \ELSEIF{\attrib{z}{key}<\attrib{y}{key}}
+	\li $\attrib{y}{left}\get z$
+\li \ELSE
+	\li $\attrib{y}{right}\get z$
+\END
+\li $\attrib{z}{left}\get\attrib{T}{\const{nil}}$\COMMENT{Crea le due foglie \const{nil} di z}
+\li $\attrib{z}{right}\get\attrib{T}{\const{nil}}$
+\li $\attrib{z}{h}\get 1$
+\li \proc{AVLInsertFixup(T,z)}\COMMENT{chiamata alg. che aggiusta il bilanciamento}
+		\end{code}
+Quando si inserisce/cancella una nuova foglia $z$ bisogna aggiustare il bilanciamento di qualche $x$ antenato di $z$. Infatti esisterà almeno un nodo $x$ per cui $-2\leq BF(x)\leq2$, violando cioè le regole degli AVL. Esistono quindi due possibilità:
+Posso dividere il problema in 4 sottocasi:
+		\begin{descr}{1}
+			\item[se $\bm{BF(x)=2}$] $\ra$ il sottoalb. sinistro è due livelli più alto di quello destro;
+			\begin{Descr} 
+				\item[$\bm{z}$ inserito nel sottoalb. x.left.left] $\ra$ allora avrò che $BF(x.right)=1$ $\implies$ \underline{RightRotate su $x$};
+				\item[$\bm{z}$ inserito nel sottoalb. x.left.right] $\ra$ allora avrò che $BF(x.left)=-1$ $\implies$ \underline{LeftRotate su $y$} poi \underline{RightRotate su $x$}.
+			\end{Descr}
+			\item[se $\bm{BF(x)=2}$] $\ra$ il sottoalb. destro è due livelli più alto di quello sinistro;
+			\begin{Descr} 
+				\item[$\bm{z}$ inserito nel sottoalb. x.right.left] $\ra$ allora avrò che $BF(x.right)=1$ $\implies$\underline{LeftRotate su $x$};
+				\item[$\bm{z}$ inserito nel sottoalb. x.right.right] $\ra$ allora avrò che $BF(x.left)=-1$ $\implies$\underline{RightRotate su $y$} poi \underline{LeftRotate su $x$};
+			\end{Descr}
+		\end{descr}
+Lo pseudocodice è:
+		\begin{code}{\const{AVL}InsertFixup(T,x)}
+\li $x\get\attrib{x}{p}$
+\li \WHILE{x\neq\attrib{T}{\const{nil}}}
+	\li $\attrib{x}{h}\get\proc{max(\attribb{x}{left}{h},\attribb{x}{right}{h})}+1$
+	\li \IF{(\attribb{x}{left}{h}-\attribb{x}{right}{h})=2}
+		\li \IF{(\attribbb{x}{left}{left}{h}-\attribbb{x}{left}{right}{h})=-1}
+			\li \proc{LeftRotate(T,x.left)}
+		\END
+		\li \proc{RightRotate(T,x)}
+		\li $x\get\attrib{x}{p}$
+	\li \ELSEIF{(\attribb{x}{left}{h}-\attribb{x}{right}{h})=-2}
+		\li \IF{(\attribbb{x}{right}{left}{h}-\attribbb{x}{right}{right}{h})=1}
+			\li \proc{RightRotate(T,x.right)}
+		\END
+		\li \proc{LeftRotate(T,x)}
+		\li $x\get\attrib{x}{p}$
+	\END
+	\li $x\get\attrib{x}{p}$
+\END
+		\end{code}
+\bo{Costo} \\
+Il costo di \proc{AVLInsertFixup} è $O(1)$ per ogni iterazione, essendo $O(\log_2 n)$ iterazioni (corrispondenti al numero di livelli dell'albero) il costo totale di \proc{AVLInsertFixup} è $O(\log_2 n)$. Il costo di \proc{AVLInsert} è $O(\log_2 n)$ fino all'esecuzione di \proc{AVLInsertFixup}. Il costo complessivo è comunque $O(\log_2 n)$.\\
+\bo{Correttezza con I.C.}\\
+"All'inizio di ogni iterazione, in AVL c'è al massimo una violazione del bilanciamento di AVL" (non è necessario dimostrarla).
+	\end{myParagraph}
+	\begin{myParagraph}{STRUTTURE DATI AUMENTATE}
+	\end{myParagraph}
+	
+	
+	
+	
+	\begin{myParagraph}{PROGRAMMAZIONE DINAMICA}
+	\end{myParagraph}
+	\begin{myParagraph}{ALGORITMI ELEMENTARI PER DATI}
+	\end{myParagraph}
+	\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
 	\end{myParagraph}
 \end{formulario}
 \end{document}
