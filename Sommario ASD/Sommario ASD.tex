@@ -16,6 +16,7 @@
 
 
 
+
 %%watermark settings
 %\SetWatermarkText{Vici Francesco}
 %\SetWatermarkScale{2}
@@ -100,6 +101,13 @@
 
 
 
+\newenvironment{subParagraph}[1]
+{
+\dashrule
+\bo{#1}\\
+}{
+\dashrule
+}
 
 
 
@@ -116,6 +124,8 @@
 \newcommand{\sse}{\leftrightarrow}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\modulo}[1]{\left\vert #1 \right\vert}
+\newcommand{\dashrule}{\begin{tcenter}- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \; \end{tcenter}}
+\newcommand{\scalare}{\mathbin{\vcenter{\hbox{\scalebox{.6}{\;$\bullet$\;}}}}}
 
 \newcommand{\FOR}[1]{\For $#1$ \Do}
 \newcommand{\WHILE}[1]{\While $#1$ \Do}
@@ -1014,9 +1024,72 @@ Il costo di \proc{AVLInsertFixup} è $O(1)$ per ogni iterazione, essendo $O(\log
 "All'inizio di ogni iterazione, in AVL c'è al massimo una violazione del bilanciamento di AVL" (non è necessario dimostrarla).
 	\end{myParagraph}
 	\begin{myParagraph}{STRUTTURE DATI AUMENTATE}
+Raramente progetto una struttura dati da zero, ma spesso ho bisogno di aggiungere informazioni e quindi anche nuove operazioni ad una struttura dati esistente. L'aspetto fondamentale delle strutture dati aumentate è quello di aggiungere nuove operazioni senza perdere di efficienza.
+		\begin{subParagraph}{Statistiche d'Ordine Dinamiche}
+Voglio aggiungere le funzioni:
+			\begin{descr}{1}
+				\item[\proc{\bo{OS-Select}}(x,i)] $\ra$ ritorna il puntatore al nodo che contiene la $i$-esima chiave più piccola del sottoalb. con radice $x$;
+				\item[\proc{\bo{OS-Rank}}(T,x)] $\ra$ ritorna la posizione (rango) di $x$ nell'ordine determinato da un attraversamento Inorder di $T$.
+			\end{descr}
+Posso usare l'attraversamento Inorder, ma questo comporta un aumento del costo (che diventa $O(n)$) oppure posso aumentare la struttura aggiungendo $\bm{x.size}$ cioè il numero di nodi nel sottoalb. con radice $x$ (includo $x$ ma escludo le foglie \const{nil}). Avrò dunque che:
+			\begin{tcenter}
+			$\attrib{x}{size}\get\attribb{x}{left}{size}+\attribb{x}{right}{size}+1$
+			\end{tcenter}
+Gli psuedocodici sono:
+			\begin{code}{OS-Select(x,i)}
+\li $r\get \attribb{x}{left}{size}$
+\li \IF{i\gets r}
+	\li \RETURN $x$
+\li \ELSEIF{i<r}
+	\li \RETURN \proc{OS-Select($\attrib{x}{left},i$)}
+\li \ELSE
+\li \RETURN \proc{OS-Select($\attrib{x}{right},i-r$)}
+\END
+			\end{code}	
+\bo{Costo}\\
+Ad ogni chiamata ricorsiva scende di un livello nell'albero, che ha $O(\log_2 n)$ livelli, quindi il costo complessivo è $O(\log_2 n)$.\\
+\bo{Correttezza}\\
+Poiché è ricorsivo in coda posso considerarlo come un alg. iterativo e usare l'I.C. per dimostrarne la correttezza:\\
+"Prima di ogni iterazione l'$i$-esimo valore si trova nel sottoalb. con radice in $x$".\\
+Dato $r$ rango di $x$ avrò che:
+			\begin{descr}{1}
+				\item[$\scalare$] se $i=r \ra$ ritorna $x\ra$ OK;
+				\item[$\scalare$] se $i<r \ra i$-esimo elemento più piccolo è nel sottoalb. sinistro;  
+				\item[$\scalare$] se $i>r \ra i$-esimo elemento più piccolo è nel sottoalb. destro $\ra$ sottraggo gli $r$ elementi che precedono quelli nel sottoalb. destro di $x$.
+			\end{descr}
+			\begin{code}{OS-Rank(T,x)}
+\li $r\get\attribb{x}{left}{size}+1$
+\li $y\get x$
+\li \WHILE{y\neq\attrib{T}{root}}
+	\li \IF{y=\attribb{x}{p}{right}}
+		\li $r\get\attribbb{x}{p}{left}{size}+1$
+	\END
+	\li $y\get\attrib{x}{p}$
+\END
+\li \RETURN $r$
+			\end{code}
+\bo{Costo}\\
+$y$ sale di un livello ad ogni iterazione quindi anche in questo caso il costo è $O(\log_2 n)$.\\
+\bo{Correttezza con I.C.}\\
+"All'inizio di ogni iterazione del ciclo ho che $r=\proc{}$ "
+
+		\end{subParagraph} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	\end{myParagraph}
-	
-	
+
 	
 	
 	\begin{myParagraph}{PROGRAMMAZIONE DINAMICA}
