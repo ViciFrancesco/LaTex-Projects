@@ -104,10 +104,10 @@
 \newenvironment{subParagraph}[1]
 {
 \dashrule
-\bo{#1}\\
-}{
-\dashrule
-}
+\begin{tcenter}
+\bo{\underline{#1}}\\
+\end{tcenter}
+}{}
 
 
 
@@ -1071,23 +1071,64 @@ Dato $r$ rango di $x$ avrò che:
 \bo{Costo}\\
 $y$ sale di un livello ad ogni iterazione quindi anche in questo caso il costo è $O(\log_2 n)$.\\
 \bo{Correttezza con I.C.}\\
-"All'inizio di ogni iterazione del ciclo ho che $r=\proc{}$ "
+"All'inizio di ogni iterazione del ciclo ho che $r=\proc{Rank}(x.key,y)$ "
+		\end{subParagraph}
+		\begin{subParagraph}{Attributo Size}
+Suppongo di aggiungere alla struttura degli AVL un attributo "$size$". L'obbiettivo è quello di mantenere il costo della struttura, cioè $O(\log_2(n))$. Per farlo, senza aggiungere una funzione per aggiustare la "$size$" dei sottoalberi posso direttamente farlo dopo Inserimento e Cancellazione. Inoltre anche le rotazioni modificano "$size$".
+			\begin{descr}{1}
+				\item[Inserimento]:\\
+				\begin{itemize} 
+					\item incrementa "$size$" di ogni nodo visitato;
+					\item nel fixup modifica "$size$" dopo le rotazioni.
+				\end{itemize}
+Dopo $\proc{leftRotate}$\\
+...\\
+$\attrib{y}{size} \get \attrib{x}{size}$\\
+$\attrib{x}{size} \get \attribb{x}{left}{size}+\attribb{x}{right}{size}+1$
+	
+Dopo $\proc{rightRotate}$\\
+...\\
+$\attrib{x}{size} \get \attrib{y}{size}$\\
+$\attrib{y}{size} \get \attribb{y}{left}{size}+\attribb{y}{right}{size}+1$			
+				\item[Cancellazione] :\\
+				\begin{itemize} 
+					\item decrementa "$size$" dal nodo cancellato a $T.root$;
+					\item nel fixup modifica "$size$" dopo le rotazioni (senza entrare nel dettaglio).
+				\end{itemize}
+			\end{descr}
+		\end{subParagraph}
+		\begin{subParagraph}{Come Aumentare una Struttura Dati}
+\bo{Teorema}\\
+Se si aumenta un albero AVL con un campo $f$, dove $x.f$ dipende solo da informazioni in $x$, $x.left$, $x.right$ allora si possono mantenere i valori di $f$ in tutti i nodi in $O(\log_2(n))$.\\
+\bo{Dimostrazione}\\
+La modifica di $x.f$ si propaga solo agli antenati di $x$, che vengono aggiornati al costo di $O(1)$ ciascuno, in totale $O(\log_2(n))$.\\
+\bo{Applicazione}\\
+			\begin{descr}{1}
+				\item[Inserimento]:\\
+				\begin{itemize} 
+					\item aggiusto la statistica $f$ in tutti i nodi visitati (non sempre posso farlo in scendendo ma posso sempre farlo salendo);
+					\item aggiusto la statistica $f$ dopo tutte le rotazioni sui nodi x,y,padre (costo O(1)) e se necessario la aggiusto anche su tutti i predecessori (costo complessivo $O(log_2(n))$).
+				\end{itemize}
+				\item[Cancellazione]:\\
+				\begin{itemize} 
+					\item aggiusto la statistica $f$ in tutti gli antenati del nodo rimosso;
+					\item aggiusto la statistica dopo tutte le rotazioni (al massimo 3) sui nodi x,y,padre (costo O(1)) e se necessario la aggiusto anche su tutti i predecessori (costo complessivo $O(log_2(n))$).
+				\end{itemize}
+			\end{descr}
 
-		\end{subParagraph} 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		\end{subParagraph}
+		\begin{subParagraph}{Alberi di Intervalli}
+		\end{subParagraph}
 	\end{myParagraph}
 
 	
