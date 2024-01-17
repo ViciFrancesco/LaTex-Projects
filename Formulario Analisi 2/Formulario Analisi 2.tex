@@ -549,10 +549,45 @@ Partiziono la curva definita su un intervallo $[a,b]$ come $\text{\textit{P}}=\{
 				\end{tcenter}
 				\item[CASI PARTICOLARI] $\ra$ Analizzo come caso particolare quello di una curva $\gamma$ che è $C^1$ a tratti, ovvero $\gamma\in C^0:[a,b]\to\R^n$ e $\exists (t_0,...,t_n)$ t.c. $t_0=a<...<b=t_n \; , \; \gamma\in C^1:[t_i,t_{i+1}]\to\R^n$
 				\begin{Descr}
-					\item[Teorema] $\ra$
-					\item[Lemma] $\ra$
+					\item[Teorema]: Data $\eta$, anch'essa curva $C^1$, allora se: 
+					\begin{tcenter}
+						$\gamma\sim\eta \implies L(\gamma)= L(\eta)$.
+					\end{tcenter}
+					\item[Dimostrazione]: (uso cambio di variabile)\\
+					$\gamma:[a,b]\to\R^n$ e $\eta:[c,d]\to\R^n$ allora $\exists\; \dot{g}\neq 0$ cambio di variabile tale che:\\
+					\begin{tcenter}
+						$\gamma(t)=\eta(g(t))$, ovvero $\gamma=\eta\circ g$
+					\end{tcenter}
+					Supponendo, senza perdita di generalità che $\dot{g}>0$ ovunque, posso calcolare la lunghezza di $\gamma$:\\
+					\begin{tcenter}
+						$L(\gamma)=\int_a^b \norma{\dot{\gamma}(t)}\; dt = \int_a^b \norma{\dot{\eta}(g(t))\cdot \dot{g}(t)}\; dt$
+					\end{tcenter}
+					per le proprietà delle funzioni composte. Inoltre, essendo $\dot{g}(t)$ uno scalare ho che:
+					\begin{tcenter}
+						$=\int_a^b \norma{\dot{\eta}(g(t))}\cdot\modulo{\dot{g}(t)} \; dt$
+					\end{tcenter}
+					e poiché $\dot{g}>0$:
+					\begin{tcenter}
+						$=\int_a^b \norma{\dot{\eta}(g(t))}\cdot\dot{g}(t) \; dt$
+					\end{tcenter}
+					cambio variabile di integrazione $s=g(t) \to ds=\dot{g}(t)\; dt$:
+					\begin{tcenter}
+						$=\int_{g(a)}^{g(b)} \norma{\dot{\eta}(s)}\; ds$
+					\end{tcenter}
+					Infine poiché $\dot{g}>0 \implies g$ crescente 
+					$\begin{cases}
+						g(a)=c\\
+						g(b)=d
+					\end{cases}$
+					allora:
+					\begin{tcenter}
+						$=\int_c^d \norma{\eta}(s)\; ds=L(\eta)$
+					\end{tcenter}
+					\begin{Descr} 
+						\item[N.B.] Lo stesso vale per $\dot{g}<0$. 
+					\end{Descr}
 				\end{Descr}
-			\end{Descr}
+			\end{Descr}	
  		\end{myParagraph}
 		
 

@@ -1115,19 +1115,21 @@ La modifica di $x.f$ si propaga solo agli antenati di $x$, che vengono aggiornat
 					\item aggiusto la statistica dopo tutte le rotazioni (al massimo 3) sui nodi x,y,padre (costo O(1)) e se necessario la aggiusto anche su tutti i predecessori (costo complessivo $O(log_2(n))$).
 				\end{itemize}
 			\end{descr}
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		\end{subParagraph}
 		\begin{subParagraph}{Alberi di Intervalli}
+Servono a gestire un insieme di intervalli. Si aumenta quindi una struttura dati aggiungendo l'attributo $x.int$ che a sua volta ha attributi $int.low$ e $int.high$.\\
+Uso per comodità gli alberi AVL e impongo $x.key$ come l'estremo inferiore dell'intervallo (affinché un InorderTreeWalk stampi gli intervalli in ordine rispetto all estremo inferiore), dunque $x.int$ conterrà solo l'estremo superiore dell'intervallo. Inoltre aggiungo anche un attributo $x.max=\max(x.int,\; x.left.max,\; x.right.max)$ che rappresenta il massimo estremo superiore presente nel sottoalbero con radice $x$. Come fatto anche per l'attributo $size$, posso aggiornare $x.max$ durante la discesa per l'inserimento in tempo $O(1)$ per ogni rotazione che effettuo.
+			\begin{Descr} 
+				\item[Sovrapposizione di intervalli]: Si dice che due intervalli $i,j$ si sovrappongono sse $i.low\leq j.high$ AND $j.low\leq i.high$ mentre non si sovrappongono sse $i.low>j.high$ OR $j.low> i.high$.
+			\end{Descr}
+Per lo sviluppo di nuove operazioni
+		
+		
+		
+		
+		
+		
+		
 		\end{subParagraph}
 	\end{myParagraph}
 
