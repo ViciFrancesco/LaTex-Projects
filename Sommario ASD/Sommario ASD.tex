@@ -1121,22 +1121,60 @@ Servono a gestire un insieme di intervalli. Si aumenta quindi una struttura dati
 Uso per comodità gli alberi AVL e impongo $x.key$ come l'estremo inferiore dell'intervallo (affinché un InorderTreeWalk stampi gli intervalli in ordine rispetto all estremo inferiore), dunque $x.int$ conterrà solo l'estremo superiore dell'intervallo. Inoltre aggiungo anche un attributo $x.max=\max(x.int,\; x.left.max,\; x.right.max)$ che rappresenta il massimo estremo superiore presente nel sottoalbero con radice $x$. Come fatto anche per l'attributo $size$, posso aggiornare $x.max$ durante la discesa per l'inserimento in tempo $O(1)$ per ogni rotazione che effettuo.
 			\begin{Descr} 
 				\item[Sovrapposizione di intervalli]: Si dice che due intervalli $i,j$ si sovrappongono sse $i.low\leq j.high$ AND $j.low\leq i.high$ mentre non si sovrappongono sse $i.low>j.high$ OR $j.low> i.high$.
+				\item[Sviluppo di nuove operazioni]: Utilizzando gli attributi dei nodi appena visti è possibile sviluppare nuove operazioni come ad esempio la ricerca. Lo pseudocodice è:
+				\begin{code}{IntervalSearch(T,i)}
+\li $x \get \attrib{T}{root}$
+\li \WHILE{x\neq\attrib{T}{\const{nil}} \text{ AND } i \text{ non si sovrappone a }\attrib{x}{int}}
+	\li \IF{\attrib{x}{left} \neq \attrib{T}{\const{nil}} \text{ AND } \attribb{x}{left}{max} \geq \attrib{i}{low}}
+		\li $x \get \attrib{x}{left}$
+	\li \ELSE
+		\li $x \get \attrib{x}{right}$
+	\END
+\END
+\li \RETURN $x$
+				\end{code}
+\bo{Costo}\\
+Ho costruito la struttura dati affinché il costo sia $O(\log_2 n)$
+\bo{Correttezza}\\
+L'algoritmo restituisce un nodo il cui intervallo si sovrapponga con $i$ oppure restituisce $\attrib{T}{\const{nil}}$ se non ci sono nodi il cui intervallo si sovrapponga con $i$. In altre parole se la ricerca va a destra (sinistra) allora c'è un intervallo che si sovrappone con $i$ nel sottoalb. destro (sinistro) oppure non esiste un intervallo che si sovrapponga con $i$.\\
+(Vedi dimostrazione ...)
 			\end{Descr}
-Per lo sviluppo di nuove operazioni
-		
-		
-		
-		
-		
-		
-		
 		\end{subParagraph}
 	\end{myParagraph}
-
-	
 	
 	\begin{myParagraph}{PROGRAMMAZIONE DINAMICA}
+Fino a questo momento ho usato la logica "Divide et Impera" poiché scomponendo un problema ottenevo sottoproblemi indipendenti. La programmazione dinamica invece si occupa di problemi che hanno sottoproblemi non indipendenti, comuni a più parti del problema. Questi sottoproblemi vengono salvati in una tabella per essere riutilizzati più volte. Spesso viene usata nell'ambito dell' ottimizzazione. La procedura per la risoluzione di questo tipo di sottoproblemi è:
+			\begin{itemize} 
+				\item individuo la struttura della soluzione ottima;
+				\item definire ricorsivamente la soluzione soluzione ottima;
+				\item calcolare la soluzione ottima in modo bottom-up (dai sottoproblemi più semplici a quelli più complessi);
+				\item costruire una soluzione ottima del problema richiesto.
+			\end{itemize}
+		\begin{subParagraph}{Taglio delle Aste}
+Supponiamo che il prezzo di un'asta dipenda dalla sua lunghezza, un'asta lunga $n$ può essere tagliata in pezzi più corti che hanno valore diverso. L'obbiettivo è trovare i tagli che permettano di massimizzare il ricavato. Esitono due possibili approcci 
+		\end{subParagraph}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	\end{myParagraph}
+	
 	\begin{myParagraph}{ALGORITMI ELEMENTARI PER DATI}
 	\end{myParagraph}
 	\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
