@@ -136,6 +136,7 @@
 \newcommand{\RETURN}{\Return}
 \newcommand{\END}{\End}
 \newcommand{\get}{\la}
+\newcommand{\TO}{\To}
 
 
 
@@ -1145,15 +1146,109 @@ L'algoritmo restituisce un nodo il cui intervallo si sovrapponga con $i$ oppure 
 	\begin{myParagraph}{PROGRAMMAZIONE DINAMICA}
 Fino a questo momento ho usato la logica "Divide et Impera" poiché scomponendo un problema ottenevo sottoproblemi indipendenti. La programmazione dinamica invece si occupa di problemi che hanno sottoproblemi non indipendenti, comuni a più parti del problema. Questi sottoproblemi vengono salvati in una tabella per essere riutilizzati più volte. Spesso viene usata nell'ambito dell' ottimizzazione. La procedura per la risoluzione di questo tipo di sottoproblemi è:
 			\begin{itemize} 
-				\item individuo la struttura della soluzione ottima;
-				\item definire ricorsivamente la soluzione soluzione ottima;
+				\item individuare la struttura della soluzione ottima;
+				\item definire ricorsivamente la soluzione ottima;
 				\item calcolare la soluzione ottima in modo bottom-up (dai sottoproblemi più semplici a quelli più complessi);
 				\item costruire una soluzione ottima del problema richiesto.
 			\end{itemize}
 		\begin{subParagraph}{Taglio delle Aste}
-Supponiamo che il prezzo di un'asta dipenda dalla sua lunghezza, un'asta lunga $n$ può essere tagliata in pezzi più corti che hanno valore diverso. L'obbiettivo è trovare i tagli che permettano di massimizzare il ricavato. Esitono due possibili approcci 
+Supponiamo che il prezzo di un'asta dipenda dalla sua lunghezza, un'asta lunga $n$ può essere tagliata in pezzi più corti che hanno valore diverso. L'obbiettivo è trovare i tagli che permettano di massimizzare il ricavato. \\
+Per risolvere questo problema utilizzando la programmazione dinamica devo:
+			\begin{itemize}
+				\item Individuare la struttura della soluzione ottima:\\
+				\begin{Descr}
+					\item[\bm{$r_n=r_i+r_{n-i}$}] $\get$ suddivido il problema in due sottoproblemi dove $r_n$ è il ricavo ottimo che voglio ottenere, e $r_i,r_{n-i}$ sono i due ricavi parziali ottimi ottenuti da un taglio in posizione $i$. La soluzione si ottiene quindi calcolando \bm{$\max\;(p_n, r_1+r_{n-1}, ... , r_{n-1}+r_1)$};
+					\item[\bm{$r_n=p_i+r_{n-i}$}] $\get$ scompongo il problema in una costante $p_i$, ovvero il prezzo di un primo pezzo di asta tagliata in $i$ e il ricavato ottimo della restante parte dell'asse. La soluzione si ottiene calcolando \bm{$\max\limits_{1\leq i\leq n}(p_i+r_{n-i})$}.
+				\end{Descr}
+				\item definire ricorsivamente la soluzione ottima:\\
+				\begin{Descr}
+					\item[Usando la 2° formulazione] Posso definire un algoritmo ricorsivo che risolva il problema. Lo pseudocodice è: 
+					\begin{code}{CutRod(p,n)}
+\li \IF{n=0}
+	\li \RETURN $0$
+\END
+\li $q \get -\infty$
+\li \FOR{i \get 1 \TO n}
+	\li $q \get \max\;(q, p[i]+\proc{CutRod}(p, n-i))$
+\END
+\li \RETURN $q$
+					\end{code}
+				\end{Descr}
+				\bo{Costo}\\
+				Considerando tutti i possibili tagli dell'asta, ovvero $2^{n-1}$, il costo del problema è esattamente $T(n)=\Theta(2^n)$ poiché si risolvono tutti i sottoproblemi, anche quelli che si presentano più volte. 
+				\item calcolare la soluzione ottima (2 possibili metodi):\\
+Memorizzo i problemi risolti in una tabella affinché possano essere riutilizzati nel caso si presentassero più di una volta.
+				\begin{Descr}
+					\item[Top-Down]: Risolvo il problema di dimensione $n$ e ricorsivamente risolvo i sottoproblemi più piccoli. Prima di effettuare la ricorsione verifico se nella tabella è già presente la soluzione del problema che voglio risolvere. Lo pseudocodice è:
+				\end{Descr}
+				\begin{code}{MemoizedCutRod(p,n)}
+\li Sia $r[0,...,n]$ un nuovo array
+\li \FOR{i \get 0 \TO n}
+	\li $r[i] \get -\infty$
+\END
+\li \RETURN \proc{MemoizedCutRodAux} (p,n,r)
+				\end{code}
+				\begin{code}{MemoizedCutRodAux(p,n,r)}
+\li \IF{r[n] \geq 0}
+	\li \RETURN r[n]
+\END
+\li \IF{n=0}
+	\li $q=0$
+\li \ELSE
+	\li $q \get -infty$
+	\li \FOR{i \get 1 \TO n}
+		\li $q \get \max\;(q, p[i]+\proc{MemoizedCutRodAux}(p, n-i, r))$
+	\END
+\END
+\li $r[n] \get q$
+\li \RETURN $q$
+				\end{code}
+\bo{Costo}\\
+Ogni sottoproblema è risolto una sola volta, avrò in totale $n+(n-1)+(n-2)+\cdots+1=\frac{n(n+1)}{2}$ iterazioni. Il costo asintotico è quindi $\Theta(n^2)$.
+				\begin{Descr}
+					\item[Bottom-Up]: Risolvo i sottoproblemi partendo dai più piccoli, in modo che arrivando alla dimensione $n$ tutti i problemi di dimensione $<n$ sono già stati risolti e memorizzati. Lo pseudocodice è: 
+				\end{Descr}
+				\begin{code}{BottomUpCutRod(p,n)}
+\li Sia $r[0,...,n]$ un nuovo array
+\li $r[0] \get 0$
+\li \FOR{j \get 1 \TO n}
+	\li $q \get -infty$
+	\li \FOR{i \get 1 \TO j}
+		\li $q \get \max\;(q, p[i]+r[j-i])$
+	\END
+	\li $r[j] \get q$
+\END
+\li \RETURN $r[n]$
+				\end{code}
+				\bo{Costo}\\
+Svolgo due cicli annidati, avrò in totale $n+(n-1)+(n-2)+\cdots+1=\frac{n(n+1)}{2}$ iterazioni. Il costo asintotico è quindi $\Theta(n^2)$.
+			\end{itemize}
+Gli algoritmi appena visti tengono traccia solo del massimo ricavo ma non dei tagli da effettuare per ottenerlo. Aggiungo un'array $s$ che memorizzi i tagli ottimi. Lo pseudocodice è:
+			\begin{code}{ExtendedBottomUpCutRod(p,n)}
+\li Siano $r[0,...,n]$ ed $s[0,...,n]$ due nuovi array
+\li $r[0] \get 0$
+\li \FOR{j \get 1 \TO n}
+	\li $q \get -infty$
+	\li \FOR{i \get 1 \TO j}
+		\li \IF{q<p[i]+r[j-i]}
+			\li $q \get p[i]+r[j-i]$
+			\li $s[j] \get i$
+		\END
+	\END
+	\li $r[j] \get q$
+\END
+\li \RETURN $(r,s)$
+			\end{code}
+			\begin{code}{PrintCutRodSolution(p,n)}
+\li $(r,s) \get \proc{ExtendedBottomUpCutRod(p,n)}$
+\li \WHILE{n>0}
+	\li print $s[n]$
+	\li $n \get n-s[n]$
+\END
+			\end{code}
 		\end{subParagraph}
 	
+			
 	
 	
 	
@@ -1170,9 +1265,7 @@ Supponiamo che il prezzo di un'asta dipenda dalla sua lunghezza, un'asta lunga $
 	
 	
 	
-	
-	
-	
+
 	\end{myParagraph}
 	
 	\begin{myParagraph}{ALGORITMI ELEMENTARI PER DATI}
