@@ -1160,7 +1160,7 @@ Per risolvere questo problema utilizzando la programmazione dinamica devo:
 					\item[\bm{$r_n=r_i+r_{n-i}$}] $\get$ suddivido il problema in due sottoproblemi dove $r_n$ è il ricavo ottimo che voglio ottenere, e $r_i,r_{n-i}$ sono i due ricavi parziali ottimi ottenuti da un taglio in posizione $i$. La soluzione si ottiene quindi calcolando \bm{$\max\;(p_n, r_1+r_{n-1}, ... , r_{n-1}+r_1)$};
 					\item[\bm{$r_n=p_i+r_{n-i}$}] $\get$ scompongo il problema in una costante $p_i$, ovvero il prezzo di un primo pezzo di asta tagliata in $i$ e il ricavato ottimo della restante parte dell'asse. La soluzione si ottiene calcolando \bm{$\max\limits_{1\leq i\leq n}(p_i+r_{n-i})$}.
 				\end{Descr}
-				\item definire ricorsivamente la soluzione ottima:\\
+				\item Definire ricorsivamente la soluzione ottima:\\
 				\begin{Descr}
 					\item[Usando la 2° formulazione] Posso definire un algoritmo ricorsivo che risolva il problema. Lo pseudocodice è: 
 					\begin{code}{CutRod(p,n)}
@@ -1176,7 +1176,7 @@ Per risolvere questo problema utilizzando la programmazione dinamica devo:
 				\end{Descr}
 				\bo{Costo}\\
 				Considerando tutti i possibili tagli dell'asta, ovvero $2^{n-1}$, il costo del problema è esattamente $T(n)=\Theta(2^n)$ poiché si risolvono tutti i sottoproblemi, anche quelli che si presentano più volte. 
-				\item calcolare la soluzione ottima (2 possibili metodi):\\
+				\item Calcolare la soluzione ottima (2 possibili metodi):\\
 Memorizzo i problemi risolti in una tabella affinché possano essere riutilizzati nel caso si presentassero più di una volta.
 				\begin{Descr}
 					\item[Top-Down]: Risolvo il problema di dimensione $n$ e ricorsivamente risolvo i sottoproblemi più piccoli. Prima di effettuare la ricorsione verifico se nella tabella è già presente la soluzione del problema che voglio risolvere. Lo pseudocodice è:
@@ -1248,10 +1248,34 @@ Gli algoritmi appena visti tengono traccia solo del massimo ricavo ma non dei ta
 			\end{code}
 		\end{subParagraph}
 	
+		\begin{subParagraph}{LCS - Longest Common Sequence}
+Date 2 sequenze $X=<x_1,...,x_m>$ e $Y=<y_1,...,y_n>$ trovare una sottosequenza comune ad $X,Y$ di lunghezza massima. Una sottosequenza è una sequenza a cui tolgo $0$ o più elementi, infatti $Z=<1,...,z_k>$ è una sottosequenza di $X$ se $\exists$ una sequenza di indici $I=<1,...,k>$ tali che $i_j>i_h$ se $j>h\;\forall j,h=1,...,k$ e $x_{i_j}=z_j \; \forall j=1,...,k$.\\
+Per trovare la LCS tra $X$ e $Y$ potrei usare l'algoritmo "forza-bruta" analizzando tutte le possibili sottosequenze ma il costo sarebbe $\Theta(n\cdot 2^m)$ (molto costoso). Posso in alternativa ricorrere alla programmazione dinamica:
+	\begin{itemize}
+		\item Individuare la struttura della soluzione ottima:\\
+		\begin{Descr}
+			\item[Notazione] $\ra$ Definisco il prefisso di una sequenza $X$, detto $X_i$, ovvero i primi $i$ elementi della sequenza $X$.
+			\item[Teorema:] Date $X,Y$ due sequenze e $Z$ una loro qualunque LCS, avrò che:
+			\begin{Descr}
+				\item[1)] se $x_m=y_n \implies z_k=x_m=y_n$ e $Z_{k-1}$ è una LCS di $X_{m-1}$ e $Y_{n-1}$;
+				\item[2)] se $x_m \neq y_n \implies$ se $z_k \neq x_m$, $Z$ è una LCS di $X_{m-1}$ e $Y$;
+				\item[3)] se $x_m \neq y_n \implies$ se $z_k \neq y_n$, $Z$ è una LCS di $X$ e $Y_{n-1}$.
+			\end{Descr}
+		\end{Descr}
+		\item Definire ricorsivamente la soluzione ottima:\\
+Posso distinguere due casi:
+		\begin{Descr}
+			\item[\bm{$x_m = y_n$}] $\ra$ devo risolvere un solo sottoproblema, ovvero trovare una LCS di $X_{m-1}$ e $Y_{n-1}$;
+			\item[\bm{$x_m \neq y_n$}] $\ra$ devo risolvere due sottoproblemi, ovvero trovare una LCS di $X_{m-1}$ e $Y$ e una LCS di $X$ e $Y_{n-1}$-. La più lunga delle due sarà la LCS di $X$ e $Y$.
+ 		\end{Descr}
+		\item Calcolare la lunghezza della soluzione ottima:\\
+		\item Costruire una soluzione ottima:\\
+	\end{itemize}
+		
+		
+		
+		\end{subParagraph}
 			
-	
-	
-	
 	
 	
 	
