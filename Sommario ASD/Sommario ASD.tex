@@ -1323,7 +1323,7 @@ Usando le 2 tabelle $b$ e $c$ posso scrivere un algoritmo che individui e stampi
 		\end{subParagraph}
 
 		\begin{subParagraph}{Edit Distance}
-L'obbiettivo è quello di trasformare la stringa $X$ nella stringa $Y$ usando solo operazioni elementari, come Inserimento, Cancellazione e Sostituzione di un carattere. Definisco $X=<x_1,...,x_i>$ e $Y=<y_1,...,y_j>$. Voglio minimizzare il numero delle operazioni per trasformare una stringa nell'altra, il loro numero minimo è la distanza tra le 2 stringhe. L'idea generale è quella di usare una tabella $c$ per memorizzare i costi di tutte le successive operazioni, infatti ,supponendo di conoscere il costo dell'ultima operazione basterà aggiungere il costo della successiva. Esistono 6 casi distinti:
+L'obbiettivo è quello di trasformare la stringa $X$ nella stringa $Y$ usando solo operazioni elementari, come Inserimento, Cancellazione e Sostituzione di un carattere. Definisco $X=<x_1,...,x_i>$ e $Y=<y_1,...,y_j>$. Voglio minimizzare il numero delle operazioni per trasformare una stringa nell'altra, il loro numero minimo è la distanza tra le 2 stringhe. L'idea generale è quella di usare una tabella $c$ per memorizzare i costi di tutte le successive operazioni, infatti,supponendo di conoscere il costo dell'ultima operazione, basterà aggiungere il costo della successiva. Esistono 6 casi distinti:
 			\begin{descr}{1}
 				\item[Copia] $\ra$ allora era $x_i=y_j$ e il sottoproblema rimanente è $X_{i-1}\to Y_{j-1}$ quindi il costo sarà $c[i,j]=c[i-1,j-1]+\text{ "costo copia"}$;
 				\item[Sostituzione] $\ra$ allora era $x_i \neq y_j$ e il sottoproblema rimanente è $X_{i-1}\to Y_{j-1}$ quindi il costo sarà $c[i,j]=c[i-1,j-1]+\text{ "costo sostituzione"}$;
@@ -1334,10 +1334,85 @@ L'obbiettivo è quello di trasformare la stringa $X$ nella stringa $Y$ usando so
 $c[0,j]=j\cdot$ "costo inserimento"\\
 $c[i,0]=i\cdot$ "costo cancellazione"\\
 			\end{descr}		
-		
-		
-		
-		
+Quindi usando le formule precedenti:\\
+			\begin{tcenter}
+\small{$c[i,j]=\min		
+\begin{cases}
+c[i-1,j-1]+\text{cost}\proc{(copy)}\qquad\text{se }x[i]=y[j]\\
+c[i-1,j-1]+\text{cost}\proc{(replace)}\qquad\text{se }x[i]\neq y[j]\\
+c[i-2,j-2]+\text{cost}\proc{(twiddle)}\qquad\text{se }x,y\geq 2\text{ AND } x[i-1]=y[j]\\
+c[i-1,j]+\text{cost}\proc{(delete)}\qquad\text{sempre}\\
+c[i-1,j]+\text{cost}\proc{(insert)}\qquad\text{sempre}\\
+\end{cases}$}
+			\end{tcenter}
+Scrivo quindi un algoritmo che usa le due tabelle $c$, dei costi, e $op$ delle operazioni. Lo pseudocodice è:
+			\begin{code}{EditDistance(x,y)}
+\li $m \get X.length$
+\li $n \get Y.length$
+\li Siano $c[0,...,m\; ; \;0,...,n]$ e $op[0,...,m\; ; \;0,...,n]$ due nuove tabelle
+\li \FOR{i \get 0 \TO m}
+	\li $c[i,0] \get i\cdot \text{cost}(\proc{Delete})$
+	\li $op[i,0] \get$ "DELETE"
+\END
+\li \FOR{i \get 0 \TO m}
+	\li $c[0,j] \get j\cdot \text{cost}(\proc{Insert})$
+	\li $op[0,j] \get$ "INSERT"
+\END
+\li \FOR{i \get 1 \TO m}
+	\li \FOR{j \get 1 \TO n}
+		\li $c[i,j] \get \infty$
+		\li \IF{x_i=y_j}
+			\li $c[i,j] \get c[i-1,j-1]+\text{cost}(\proc{copy})$
+			\li $op[i,j] \get$ "COPY"
+		\END
+		\li \IF{x_i \neq y_j \text{ AND } c[i-1,j-1]+\text{cost}(\proc{replace})<c[i,j]}
+			\li $c[i,j] \get c[i-1,j-1]+\text{cost}(\proc{replace})$
+			\li $op[i,j] \get$ "REPLACE"
+		\END
+		\li \IF{i,j \geq 2 \text{ AND } x_i=y_{j-1} \text{ AND }y_j=x_{i-1} \text{ AND }...}
+			\li$...\text{ AND }c[i-2,j-2]+\text{cost}(\proc{twiddle})<c[i,j]$
+			\li $c[i,j] \get c[i-2,j-2]+\text{cost}(\proc{twiddle})$
+			\li $op[i,j] \get$ "TWIDDLE"
+		\END
+		\li \IF{c[i-1,j]+\text{cost}(\proc{delete})<c[i,j]}
+			\li $c[i,j] \get c[i-1,j]+\text{cost}(\proc{delte})$
+			\li $op[i,j] \get$ "DELETE"
+		\END
+		\li \IF{c[i,j-1]+\text{cost}(\proc{insert})<c[i,j]}
+			\li $c[i,j] \get c[i,j-1]+\text{cost}(\proc{insert})$
+			\li $op[i,j] \get$ "INSERT"
+		\END
+	\END
+\END
+\li \RETURN $c,op$
+			\end{code}
+\bo{Costo}\\
+Il costo dell'$\proc{EditDistance}$ in termini di tempo è $\Theta(n\cdot m)$, dovuto ai due cicli annidati, lo stesso è il costo di spazio di memoria che infatti è $\Theta(n\cdot m)$.\\
+Usando la tabella $op$ restituita da $\proc{EditDistance}$ posso creare un algoritmo che restituisca la serie di operazioni. Lo pseudocodice è:
+			\begin{code}{OpSequence(op,i,j)}
+\li \IF{i=0 \text{ AND }j=0}
+	\li \RETURN
+\END
+\li \IF{op[i,j]=\text{"COPY" OR }op[i,j]=\text{"REPLACE"}}
+	\li $i' \get i-1$
+	\li $j' \get j-1$
+\li \ELSEIF{op[i,j]=\text{"TWIDDLE"}}
+	\li $i' \get i-2$
+	\li $j' \get j-2$
+\li \ELSEIF{op[i,j]=\text{"DELETE"}}
+	\li $i' \get i-1$
+	\li $j' \get j$
+\li \ELSE \COMMENT{Ovvero op[i,j]=\text{"INSERT"}}
+	\li $i' \get i$
+	\li $j' \get j-1$
+\END
+\li $\proc{OpSequence}(op,i',j')$
+\li $\proc{print}(op[i,j])$
+			\end{code}
+Gli utilizzi della $\proc{EditDistance}$ sono molti, ad esempio: correzione automatica di parole errate (individuate grazie al contesto), suggerimenti di ricerca o correzione ortografica. Al questo scopo è spesso necessario confrontare una stringa con un insieme molto grande di stringhe, come ad esempio un dizionario o tutte le parole sul web, ma questo implicherebbe un costo proibitivo. Esiste modo per ridurre l'insieme dei candidati che esamino e si chiama "Intersezione di n-gram". Consiste nell'associare alla parola di partenza numerose sequenze di caratteri che abbiano una $\proc{EditDistance}$ minore di una certa soglia. Dal dizionario si estraggono solo parole che contengano abbastanza di quegli "n-gram". Per avere una sovrapposizione di n-gram normalizzata (utile per confronti molto grandi) posso usare il coefficente di Jaccard:\\
+			\begin{tcenter}
+$JC=\frac{\modulo{X\bigcap Y}}{\modulo{X\bigcup Y}}$ con $X,Y$ insiemi di dimensione diversa. 
+			\end{tcenter}
 		
 		
 		
