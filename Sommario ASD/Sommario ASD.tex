@@ -1251,31 +1251,79 @@ Gli algoritmi appena visti tengono traccia solo del massimo ricavo ma non dei ta
 		\begin{subParagraph}{LCS - Longest Common Sequence}
 Date 2 sequenze $X=<x_1,...,x_m>$ e $Y=<y_1,...,y_n>$ trovare una sottosequenza comune ad $X,Y$ di lunghezza massima. Una sottosequenza è una sequenza a cui tolgo $0$ o più elementi, infatti $Z=<1,...,z_k>$ è una sottosequenza di $X$ se $\exists$ una sequenza di indici $I=<1,...,k>$ tali che $i_j>i_h$ se $j>h\;\forall j,h=1,...,k$ e $x_{i_j}=z_j \; \forall j=1,...,k$.\\
 Per trovare la LCS tra $X$ e $Y$ potrei usare l'algoritmo "forza-bruta" analizzando tutte le possibili sottosequenze ma il costo sarebbe $\Theta(n\cdot 2^m)$ (molto costoso). Posso in alternativa ricorrere alla programmazione dinamica:
-	\begin{itemize}
+			\begin{itemize}
 		\item Individuare la struttura della soluzione ottima:\\
-		\begin{Descr}
+				\begin{Descr}
 			\item[Notazione] $\ra$ Definisco il prefisso di una sequenza $X$, detto $X_i$, ovvero i primi $i$ elementi della sequenza $X$.
 			\item[Teorema:] Date $X,Y$ due sequenze e $Z$ una loro qualunque LCS, avrò che:
-			\begin{Descr}
+					\begin{Descr}
 				\item[1)] se $x_m=y_n \implies z_k=x_m=y_n$ e $Z_{k-1}$ è una LCS di $X_{m-1}$ e $Y_{n-1}$;
 				\item[2)] se $x_m \neq y_n \implies$ se $z_k \neq x_m$, $Z$ è una LCS di $X_{m-1}$ e $Y$;
 				\item[3)] se $x_m \neq y_n \implies$ se $z_k \neq y_n$, $Z$ è una LCS di $X$ e $Y_{n-1}$.
-			\end{Descr}
-		\end{Descr}
+					\end{Descr}
+				\end{Descr}
 		\item Definire ricorsivamente la soluzione ottima:\\
 Posso distinguere due casi:
-		\begin{Descr}
+				\begin{Descr}
 			\item[\bm{$x_m = y_n$}] $\ra$ devo risolvere un solo sottoproblema, ovvero trovare una LCS di $X_{m-1}$ e $Y_{n-1}$;
 			\item[\bm{$x_m \neq y_n$}] $\ra$ devo risolvere due sottoproblemi, ovvero trovare una LCS di $X_{m-1}$ e $Y$ e una LCS di $X$ e $Y_{n-1}$-. La più lunga delle due sarà la LCS di $X$ e $Y$.
- 		\end{Descr}
+ 				\end{Descr}
+Utilizzo una matrice $c$ per memorizzare la LCS, $c[i,j]$ sarà la lunghezza della LCS di $X_i$ e $Y_j$. L'obbiettivo è trovare $c[m,n]$ ovvero la lunghezza della LCS di $X$ e $Y$. \\
+\small{$c[i,j]=		
+\begin{cases}
+		0 \qquad \text{se } i=0 \text{ o } j=0 \\
+		c[i-1,j-1]+1 \qquad \text{se } i,j>0 \text{ e } x_i=y_j \\
+		\max (c[i,j-1]\;,\;c[i-1,j]) \qquad \text{se } i,j>0 \text{ e } x_i \neq y_j \\
+\end{cases}$}
+Il vantaggio di questa formulazione è che al massimo devo risolvere due sottoproblemi mentre per il taglio delle aste li consideravo tutti. Inoltre, anche in questo caso, memorizzo i sottoproblemi comuni per evitare di calcolarli più di una volta.
 		\item Calcolare la lunghezza della soluzione ottima:\\
+Creo un algoritmo che compila le tabelle $b$, che indica la direzione che ho seguito per risolvere i sottoproblemi (se $b[i,j]=\nwarrow$ ho esteso la LCS di un carattere), e $c$, che indica passo passo la lunghezza della LCS. Lo psudocodice è:
+				\begin{code}{LCS-Length(X,Y)}
+\li $m \get X.length$
+\li $n \get Y.length$
+\li Siano $b[1,...,m\; ; \;1,...,n] \text{ e } c[0,...,m\; ; \;0,...,n]$ due nuove tabelle
+\li \FOR{i \get 1 \TO  m}
+	\li $c[i,0] \get 0$
+\END
+\li \FOR{j \get 0 \TO  n}
+	\li $c[0,j] \get 0$
+\END
+\li \FOR{i \get 1 \TO m}
+	\li \FOR{j \get 1 \TO n}
+		\li \IF{x_i = y_j}
+			\li $c[i,j] \get c[i-1,j-1]+1$
+			\li $b[i,j] \get "\nwarrow"$
+		\li \ELSEIF{c[i-1,j] \geq c[i,j-1]}
+			\li $c[i,j] \get c[i-1,j]$
+			\li $b[i,j] \get "\uparrow"$
+		\li \ELSE
+			\li $c[i,j] \get c[i,j-1]$
+			\li $b[i,j] \get "\la"$
+		\END
+	\END
+\END
+\li \RETURN $b,c$
+				\end{code}
 		\item Costruire una soluzione ottima:\\
-	\end{itemize}
-		
-		
-		
+Usando le 2 tabelle $b$ e $c$ posso scrivere un algoritmo che individui e stampi la LCS. Lo pseudocodice è:
+				\begin{code}{Print-LCS(b,X,i,j)}
+\li \IF{i=0 \text{OR} j=0}
+	\li \RETURN
+\END
+\li \IF{b[i,j]="\nwarrow"}
+	\li $\proc{Print-LCS(b,X,i-1,j-1)}$
+	\li print $x_i$
+\li \ELSEIF{b[i,j]="\uparrow"}
+	\li $\proc{Print-LCS(b,X,i-1,j)}$
+\li \ELSE
+	\li $\proc{Print-LCS(b,X,i,j-1)}$
+\END
+				\end{code}
+			\end{itemize}
 		\end{subParagraph}
-			
+
+		\begin{subParagraph}{Edit Distance}
+		\end{subParagraph}
 	
 	
 	
@@ -1292,7 +1340,7 @@ Posso distinguere due casi:
 
 	\end{myParagraph}
 	
-	\begin{myParagraph}{ALGORITMI ELEMENTARI PER DATI}
+	\begin{myParagraph}{ALGORITMI ELEMENTARI PER GRAFI}
 	\end{myParagraph}
 	\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
 	\end{myParagraph}
