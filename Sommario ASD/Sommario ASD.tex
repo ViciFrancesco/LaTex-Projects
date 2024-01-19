@@ -1307,7 +1307,7 @@ Creo un algoritmo che compila le tabelle $b$, che indica la direzione che ho seg
 		\item Costruire una soluzione ottima:\\
 Usando le 2 tabelle $b$ e $c$ posso scrivere un algoritmo che individui e stampi la LCS. Lo pseudocodice è:
 				\begin{code}{Print-LCS(b,X,i,j)}
-\li \IF{i=0 \text{OR} j=0}
+\li \IF{i=0 \text{ OR } j=0}
 	\li \RETURN
 \END
 \li \IF{b[i,j]="\nwarrow"}
@@ -1323,17 +1323,30 @@ Usando le 2 tabelle $b$ e $c$ posso scrivere un algoritmo che individui e stampi
 		\end{subParagraph}
 
 		\begin{subParagraph}{Edit Distance}
+L'obbiettivo è quello di trasformare la stringa $X$ nella stringa $Y$ usando solo operazioni elementari, come Inserimento, Cancellazione e Sostituzione di un carattere. Definisco $X=<x_1,...,x_i>$ e $Y=<y_1,...,y_j>$. Voglio minimizzare il numero delle operazioni per trasformare una stringa nell'altra, il loro numero minimo è la distanza tra le 2 stringhe. L'idea generale è quella di usare una tabella $c$ per memorizzare i costi di tutte le successive operazioni, infatti ,supponendo di conoscere il costo dell'ultima operazione basterà aggiungere il costo della successiva. Esistono 6 casi distinti:
+			\begin{descr}{1}
+				\item[Copia] $\ra$ allora era $x_i=y_j$ e il sottoproblema rimanente è $X_{i-1}\to Y_{j-1}$ quindi il costo sarà $c[i,j]=c[i-1,j-1]+\text{ "costo copia"}$;
+				\item[Sostituzione] $\ra$ allora era $x_i \neq y_j$ e il sottoproblema rimanente è $X_{i-1}\to Y_{j-1}$ quindi il costo sarà $c[i,j]=c[i-1,j-1]+\text{ "costo sostituzione"}$;
+				\item[Scambio] $\ra$ allora era $x_i=y_{j-1}$ e $y_j=x_{i-1}$ e il sottoproblema rimanente è $X_{i-2}\to Y_{j-2}$ quindi il costo sarà $c[i,j]=c[i-2,j-2]+\text{ "costo scambio"}$;
+				\item[Cancellazione] $\ra$ allora non ho restrizioni su $X,Y$ e il sottoproblema rimanente è $X_{i-1}\to Y_j$ quindi il costo sarà $c[i,j]=c[i-1,j]+\text{ "costo cancellazione"}$;
+				\item[Inserimento] $\ra$ allora non ho restrizioni su $X,Y$ e il sottoproblema rimanente è $X_i\to Y_{j-1}$ quindi il costo sarà $c[i,j]=c[i,j-1]+\text{ "costo inserimento"}$;
+				\item[Casi Base] $\ra$ se $i=0$ o $j=0$ allora $X_0$ o $Y_0$ è una stringa vuota, quindi posso trasformare $X\to Y$ con $j$ inserimenti o $i$ cancellazioni. I rispettivi costi saranno:\\
+$c[0,j]=j\cdot$ "costo inserimento"\\
+$c[i,0]=i\cdot$ "costo cancellazione"\\
+			\end{descr}		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		\end{subParagraph}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
