@@ -122,6 +122,7 @@
 \newcommand{\la}{\leftarrow}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\sse}{\leftrightarrow}
+\newcommand{\SSE}{$\Leftrightarrow$}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\modulo}[1]{\left\vert #1 \right\vert}
 \newcommand{\dashrule}{\begin{tcenter}- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \; \end{tcenter}}
@@ -1417,22 +1418,129 @@ $JC=\frac{\modulo{X\bigcap Y}}{\modulo{X\bigcup Y}}$ con $X,Y$ insiemi di dimens
 	\end{myParagraph}
 	
 	\begin{myParagraph}{ALGORITMI ELEMENTARI PER GRAFI}
+Dato un grafo $G=(V,E)$, dove $V$ è l'insieme dei vertici ed $E$ è l'insieme degli archi, posso definire il \bo{Grado} $u.degree$ di un vertice come il numero di archi che convergono in esso.
 		\begin{Descr}
 			\item[Grafo Diretto] $\ra$
+E' un grafo i cui archi sono coppie di vertici ordinati;
 			\item[Grafo Indiretto] $\ra$
-			\item[Cammino] $\ra$
+E' un grafo i cui archi sono coppie di vertici \underline{non} ordinati;
+			\item[Cammino] $\ra$ Un cammino di lunghezza $k$ è una sequenza di vertici $<v_0,v_1,...,v_k>$ tale che $(v_{i-1},v_i)\in E$ per $i=0,...,k$. 
 			\begin{Descr}
-				\item[Ciclico] $\ra$
-				\item[Aciclico] $\ra$
+				\item[Ciclo] $\ra$ in un grafo orientato, un cammino $<v_0,v_1,...,v_k>$ forma un ciclo se $v_0=v_k$ e il cammino contiene almeno un arco;
+				\item[Grafo Aciclico] $\ra$ un grafo che non contiene nessun ciclo è detto aciclico.
 			\end{Descr}
-			\item[Componenti Connesse] $\ra$
-			\item[Grafo Fortemente Connesso] $\ra$
+			\item[Componenti Connesse] $\ra$ è una classe di equivalenza dei vertici che verifica la relazione "è raggiungibile da";
+			\item[Grafo Fortemente Connesso] $\ra$ un grafo viene detto fortemente connesso se due vertici qualsiasi sono raggiungibili l'uno dall'altro.
 		\end{Descr}
 		\begin{subParagraph}{Rappresentazione di Grafi}
+Un grafo $G=(V,E)$ questo può essere rappresentato in due modi:
+			\begin{Descr} 
+				\item[Liste di Adiacenza] $\ra$ uso un vettore $adj$ di $\modulo{V}$ liste, una per nodo. Ogni lista $adj[u]$ contiene i nodi raggiungibili dall'$u$-esimo nodo (per i grafi indiretti considero gli archi in entrambe le direzioni). Il peso dell'arco o qualsiasi attributo aggiuntivo viene memorizzato nella lista.
+				\begin{Descr} 
+					\item[Spazio] $\ra \Theta(V+E)$
+					\item[Tempo] $\ra$ elencare tutti i nodi adiacenti ad $u$ costa $\Theta(u.degree)$ mentre determinare se $(u,v)\in E$ costa $O(u.degree)$.
+				\end{Descr}
+				\item[Matrice di Adiacenza] $\ra$ uso una matrice $\modulo{V}\times\modulo{V}$ dove l'elemento $a_{ij}=\begin{cases}1\qquad\text{se } (i,j)\in E\\ 0\qquad\text{se } (i,j)\notin E\\ \end{cases}$ 
+				\begin{Descr} 
+					\item[Spazio] $\ra \Theta(V^2)$
+					\item[Tempo] $\ra$ elencare tutti i nodi adiacenti ad $u$ costa $\Theta(V)$ mentre determinare se $(u,v)\in E$ costa $O(1)$.
+				\end{Descr}
+			\end{Descr}
 		\end{subParagraph}
 		\begin{subParagraph}{Visita in Ampiezza}
+Scopre tutti i vertici raggiungibili da un nodo sorgente $s\in V$. Come input ho il grafo $G$ e il nodo sorgente $s$ mentre come output avrò $\forall v\in V$ la distanza $v.d$ da $s$ a $v$ e il predecessore $v.\pi=u$ di $v$ ovvero il penultimo nodo nel cammino da $s$ a $v$. L'insieme degli archi $\{v.\pi,v\} tale che v\neq s$ forma un albero. Per la Visita in Ampiezza uso una coda "FIFO" $Q$ con $\proc{Enqueue}$ e $\proc{Dequeue}$. Si può mostrare che i valori di $d$ presenti in $Q$ sono al massimo 2 e se sono due, quelli più piccoli sono stati inseriti prima, quindi saranno i primi ad uscire. Lo pseudocodice è:
+			\begin{code}{BFS(G,s)}
+\li \FOR{\text{ogni vertice }u\in \attrib{G}{V}-\{s\}} \COMMENT{imposto i nodi bianchi}
+	\li $\attrib{u}{color}\get\text{WHITE}$
+	\li $\attrib{u}{d}\get\infty$
+	\li $\attrib{u}{\pi}get\const{nil}$
+\END
+\li $\attrib{s}{color}\get\text{GRAY}$ \COMMENT{Imposto la sorgente}
+\li $\attrib{s}{d}\get0$
+\li $\attrib{s}{\pi}\get\const{nil}$
+\li $Q\get\emptyset$ \COMMENT{inizializzo la coda FIFO}
+\li $\proc{Enqueue}(Q,s)$ 
+\li \WHILE{Q\neq\emptyset}
+	\li $u\get\proc{Dequeue}(Q)$ \COMMENT{estrae il nodo corrente e lo salva}
+	\li \FOR{\text{ogni }v\in \attrib{G}{adj}[u]\COMMENT{esplora i nodi adiacenti  a quello corrente}} 
+		\li \IF{\attrib{u}{color}=\text{WHITE}} 
+			\li $\attrib{u}{color}\get\text{GRAY}$
+			\li $\attrib{v}{d}\get u.d+1$
+			\li $\attrib{v}{\pi}\get u$
+			\li $\proc{Enqueue}(Q,v)$
+		\END
+	\END
+	\li $\attrib{u}{color}\get \text{BLACK}$ \COMMENT{imposta il nodo corrente come esplorato}
+\END
+			\end{code}
+\bo{Costo}\\
+Il tempo di esecuzione complessivo sarà $O(V+E)$ poiché $\proc{Enqueue}$ e $\proc{Dequeue}$ costano $O(1)$, ogni nodo è messo nella coda al massimo una volta e ogni arco viene esplorato al massimo una volta se il grafo è diretto (o al massimo due volte sei il grafo è indiretto). Inoltre si usa $O$ e \underline{non} $\Theta$ perché alcuni nodi potrebbero non essere esplorati.
 		\end{subParagraph}
 		\begin{subParagraph}{Visita in Profondità}
+Esplora sistematicamente ogni arco, anche ri-iniziando da nodi diversi. Come input ho il grafo $G$ mentre come output avrò $\forall v\in V$ il tempo di scoperta $v.d$, il tempo di fine $v.f$ e il predecessore $v.\pi$. I tempi di scoperta e di fine rispettano la relazione $1\leq v.d < v.f \leq 2\modulo{V}$. Lo pseudocodice è:
+			\begin{code}{DFS(G)}
+\li \FOR{\text{ogni vertice }u\in \attrib{G}{V}}
+	\li $\attrib{u}{color}\get \text{WHITE}$
+	\li $\attrib{u}{\pi}\get \const{nil}$
+\END
+\li $time\get0$
+\li \FOR{\text{ogni vertice }u\in \attrib{G}{V} \COMMENT{usa tutti i nodi come sorgente}}
+	\li \IF{\attrib{u}{color}=\text{WHITE}}
+		\li $\proc{DFS-Visit}(G,u)$
+	\END
+\END
+			\end{code} 
+			\begin{code}{DFS-Visit(G,u)}
+\li $time\get time+1$ \COMMENT{aggiorna il tempo corrente}
+\li $\attrib{u}{d}\get time$ \COMMENT{inizia l'esplorazione del nodo corrente}
+\li $\attrib{u}{color}\get \text{GRAY}$ 
+\li \FOR{\text{ogni }v\in G.adj[u] \COMMENT{esplora tutti i nodi raggiungibili dal corrente}}
+	\li \IF{\attrib{v}{color}=\text{WHITE}}
+		\li $\attrib{v}{\pi}\get u$
+		\li $\proc{DFS-Visit}(G,v)$ 
+	\END
+\END
+\li $\attrib{u}{color}\get \text{BLACK}$ \COMMENT{conclude l'esplorazione del nodo corrente}
+\li $time \get time+1$ \COMMENT{aggiorna il tempo corrente}
+\li $attrib{u}{f}\get time$
+			\end{code}
+\bo{Costo}\\
+Esplora ogni nodo e ramo quindi il costo totale sarà $\Theta(V+E)$.
+			\begin{Descr} 
+	\item[\underline{Teorema delle Parentesi}] (Successori e predecessori) $\ra$ durante una $\proc{DFS}$ di $G=(V,E)$, $\forall$ coppia di vertici $(u,v)$ è soddisfatta solo una delle seguenti condizioni:
+				\begin{itemize} 
+					\item Gli intervalli $[u.d,u.f]$ e $[v.d,v.f]$ sono completamente disgiunti (cioè non si sovrappongono) allora \bo{nessuno dei due è discendente/predecessore dell'altro} in un albero DF;
+					\item L'intervallo di $v$ è completamente contenuto in quello di $u$ allora $\bm{v}$ \bo{è un discendente di } $\bm{u}$ in un albero DF;
+					\item L'intervallo di $u$ è completamente contenuto in quello di $v$ allora $\bm{u}$ \bo{è un discendente di } $\bm{v}$ in un albero DF.
+				\end{itemize} 
+				\begin{Descr} 
+					\item[Corollario:] $v$ è un discendente di $u$ nella foresta DF \SSE \begin{tcenter}$u.d<v.d<v.f<u.f$.\end{tcenter}
+				\end{Descr}
+				\item[Foresta DF] $\ra$ Quando scopro un vertice $v$ durante l'ispezione di $adj[u]$ ho $v.\pi=u$. Il sottografo con radice $u$ forma una foresta  DF contenente almeno un albero DF. Quando esploro l'arco $(u,v)$ di un albero DF, il nodo $u$ è grigio e il nodo $v$ è bianco.
+				\item[\underline{Teorema del Cammino Bianco}] $\ra$ In una forsesta DF di un grafo $G=(V,E)$ il vertice $v$ è un discendente di $u$ \SSE al tempo $u.d$ esiste un cammino bianco da $u$ a $v$ in $G$ fatto solo di nodi bianchi (eccetto $u$ che è appena diventato grigio). 
+				\item[Classificazione degli Archi] $\ra$ Durante la $\proc{DFS}$ posso classificare gli archi del grafo:
+				\begin{Descr} 
+					\item[T] $\ra$ se il ramo $(u,v)$ è un ramo della foresta DF;
+					\item[F] $\ra$ se $v$ è un discendente di $u$ ma non fa parte della foresta DF;
+					\item[B] $\ra$ se $u$ è un discendente di $v$;
+					\item[C] $\ra$ qualsiasi altro arco tra i nodi dello stesso albero o di alberi diversi.
+				\end{Descr}
+Posso anche classificare gli archi durante la $\proc{DFS}$ utilizzando i colori dei vertici. Durante la visita del ramo $(u,v)$ se $v.color$ è:
+				\begin{Descr} 
+					\item[WHITE] $\ra$ il ramo è T;
+					\item[GRAY] $\ra$ il ramo è B;
+					\item[BLACK] $\ra$ il ramo è F o C:
+					\begin{Descr} 
+						\item[$u.d<v.d$]: il ramo è F ($v$ è un discendente di $u$);
+						\item[$u.d>v.d$]: il ramo è C.
+					\end{Descr}
+				\end{Descr}
+				\item[\underline{Teorema}] $\ra$ Se il grafo $G=(V,E)$ è indiretto $\implies$ la foresta DF ho solo archi T e B.
+				\begin{Descr} 
+					\item[LEMMA:] un grafo diretto è \bo{aciclico} \SSE una visita $\proc{DFS}$ di $G$ non genera archi B.
+					\item[DIM:] $\ra$
+				\end{Descr}
+			\end{Descr}
 		\end{subParagraph}
 		\begin{subParagraph}{Ordinamento Topologico}
 		\end{subParagraph}
