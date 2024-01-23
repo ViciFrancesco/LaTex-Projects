@@ -1511,8 +1511,11 @@ li \IF{massimo\neq i}
 	\li $\proc{Max-Heapify}(A,massimo)$
 \END
 				\end{code}
-			
-			
+\bo{Costo}\\
+L'heap è alto $O(\log_2 n)$ poiché è un albero quasi completo. Il costo ad ogni livello è costante (3 confronti e max 2 scambi)$\implies$ il costo complessivo è intuitivamente $O(\log_2 n)$. \\
+\bo{Correttezza}\\ 
+Si può ottenere con l'invariante di ciclo (perché è ricorsivo in coda).
+		
 			
 			
 			
