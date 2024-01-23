@@ -899,7 +899,7 @@ Posso usare l'attraversamento Inorder, ma questo comporta un aumento del costo (
 			\end{tcenter}
 Gli pseudocodici sono:
 			\begin{code}{OS-Select(x,i)}
-\li $r\get \attribb{x}{left}{size}$
+\li $r\get \attribb{x}{left}{size} +1$ 
 \li \IF{i\gets r}
 	\li \RETURN $x$
 \li \ELSEIF{i<r}
