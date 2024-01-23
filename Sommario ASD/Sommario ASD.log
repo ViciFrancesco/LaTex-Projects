@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.4)  23 JAN 2024 01:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.4)  23 JAN 2024 01:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -32,7 +32,11 @@ LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 \belowcaptionskip=\skip49
 \bibindent=\dimen141
 )
-(c:/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty
+
+LaTeX Warning: \include should only be used after \begin{document} on input lin
+e 2.
+
+(../style.tex (c:/texlive/2023/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
 (c:/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
@@ -250,7 +254,7 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
-)
+))
 (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-11-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count291
@@ -259,20 +263,20 @@ File: l3backend-pdftex.def 2023-11-09 L3 backend support: PDF output (pdfTeX)
 (./Sommario ASD.aux)
 \openout1 = `"Sommario ASD.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 146.
-LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -331,14 +335,14 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 160
-.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 20.
+
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 160
-.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
+
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -348,7 +352,7 @@ Warning: Indentation ends at level 1 in codebox on page 1.
 
 
 ] [2]
-Overfull \hbox (4.41907pt too wide) in paragraph at lines 621--621
+Overfull \hbox (4.41907pt too wide) in paragraph at lines 481--481
 []| []  
  []
 
@@ -356,36 +360,36 @@ Overfull \hbox (4.41907pt too wide) in paragraph at lines 621--621
 Warning: Indentation ends at level 1 in codebox on page 4.
 [4{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 [5]
-Overfull \hbox (9.65695pt too wide) in paragraph at lines 987--987
+Overfull \hbox (9.65695pt too wide) in paragraph at lines 847--847
 []| []  
  []
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
-(Font)              using `OT1/cmr/bx/n' instead on input line 1033.
+(Font)              using `OT1/cmr/bx/n' instead on input line 893.
 
 [6]
-Overfull \hbox (19.82927pt too wide) in paragraph at lines 1206--1206
+Overfull \hbox (19.82927pt too wide) in paragraph at lines 1066--1066
 []| []  
  []
 
 [7]
-Overfull \hbox (7.17194pt too wide) in paragraph at lines 1307--1307
+Overfull \hbox (7.17194pt too wide) in paragraph at lines 1167--1167
 []| []  
  []
 
 
-Overfull \hbox (4.05823pt too wide) in paragraph at lines 1339--1348
+Overfull \hbox (4.05823pt too wide) in paragraph at lines 1199--1208
  [] []$ 
  []
 
 [8]
-Overfull \hbox (0.76749pt too wide) in paragraph at lines 1389--1389
+Overfull \hbox (0.76749pt too wide) in paragraph at lines 1249--1249
 []| []  
  []
 
 
-Overfull \hbox (16.48015pt too wide) in paragraph at lines 1475--1475
+Overfull \hbox (16.48015pt too wide) in paragraph at lines 1335--1335
 []| []  
  []
 
@@ -402,13 +406,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5448 strings out of 474267
- 82438 string characters out of 5751465
+ 5457 strings out of 474267
+ 82572 string characters out of 5751465
  1973558 words of memory out of 5000000
- 27593 multiletter control sequences out of 15000+600000
+ 27598 multiletter control sequences out of 15000+600000
  569765 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,14n,65p,890b,943s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 64i,14n,70p,890b,943s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy6.pfb><c
 :/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><c:/texlive/2023
