@@ -1398,14 +1398,92 @@ Posso anche classificare gli archi durante la $\proc{DFS}$ utilizzando i colori 
 				\item[\underline{Teorema}] $\ra$ Se il grafo $G=(V,E)$ è indiretto $\implies$ la foresta DF ho solo archi T e B.
 				\begin{Descr} 
 					\item[LEMMA:] un grafo diretto è \bo{aciclico} \SSE una visita $\proc{DFS}$ di $G$ non genera archi B.
-					\item[DIM:] $\ra$
 				\end{Descr}
 			\end{Descr}
 		\end{subParagraph}
 		\begin{subParagraph}{Ordinamento Topologico}
+L'ordinamento topologico di un grafo aciclico (sia diretto che indiretto) $G=(V,E)$ è un ordinamento lineare di tutti i suoi vertici tale che se $(u,v)\in E$ allora da qualche parte nell'ordinamento $u$ appare prima di $v$ (è diverso dall'ordinamento di un insieme di numeri). Non è possibile effettuare un ordinamento lineare su un grafo ciclico. E' utile per gestire oggetti che hanno un ordine parziale, ad esempio:
+			\begin{tcenter}
+$a>b$ e $b>c \implies a>c$. 
+			\end{tcenter}
+Ma potrei anche non sapere con precisione l'ordinamento totale:
+			\begin{tcenter}
+$a>c$ e $b>c\implies a>b$ o $a<b$. 
+			\end{tcenter}
+E' comunque possibile trovare un ordinamento totale anche da un ordinamento parziale, usando la $\proc{DFS}$. Lo pseudocodice è:
+			\begin{code}{TopologicalSort(G)}
+\li Chiama $\proc{DFS(G)}$ per calcolare i tempi di completamento \\ $v.f$ per ogni vertice $v$
+\li Completata l'ispezione di ogni vertice, lo inserisce in testa \\ ad una lista concatenata
+\li \RETURN lista concatenata di vertici
+			\end{code}
+\bo{Costo}\\
+Il tempo complessivo è $\Theta(V+E)$.\\
+\bo{Correttezza}\\
+Mostriamo che se $(u,v)\in E$ allora $v.f<u.f$. Quando esploro $(u,v)$ di che colore è e $v$?
+			\begin{descr}{1}
+				\item[Grigio] $\ra$ impossibile altrimenti $(u,v)$ sarebbe un arco B(back) $\implies$ contraddizione con ipotesi (no grafi ciclici);
+				\item[Bianco] $\ra$ allora $v$ diventa discendente di $u$ $\implies u.d<v.d<v.f<u.f$ (per th. Parentesi) $\implies v.f<u.f$;
+				\item[Nero] $\ra$ allora $v$ è terminato ma $u$ ancora no $\implies v.f<u.f$
+ 			\end{descr} 
 		\end{subParagraph}
 		\begin{subParagraph}{Componenti Fortemente Connesse}
+Dato il grafo diretto \G una componente fortemente connessa (SCC) di $G$ è un insieme massimale di vertici $C\subseteq V$ tale che per ogni $u,v\in C$ esistono entrambi i cammini "$u\to v$" e "$v\to u$". Uso la matrice di adiacenza $G$ e la sua trasposta $G^\proc{t}$ per ottenere singolarmente le componenti connesse del grafo \G.
+			\begin{Descr} 
+				\item[Trasposta di $G$] $\ra$ $G^\proc{t}=(V,E^\proc{t})$, ovvero inverto la direzione di tutti gli archi del grafo. Se rappresento il grafo con la matrice di adiacenza il tempo è lineare altrimenti, se lo faccio con le liste di adiacenza il costo diventa $\Theta(V+E)$. Inoltre $G$ e $G^\proc{t}$ hanno le stesse SCC.\\
+Definisco anche il grafo delle componenti fortemente connesse $G^{SCC}=(V^{SCC},E^{SCC})$ che ha un vertice per ogni SCC di $G$ e un arco solo se c'è un arco che connette le SCC in $G$.  
+				\item [Lemma] $G^{SCC}$ è un DAG (grafo diretto aciclico).
+				%TODO aggiungere dimostrazione ...
+			\end{Descr}
+L'algoritmo che restituisce il $G^{SCC}$ è il seguente:
+			\begin{code}{Strongly-Connected-Components(G)}
+\li Chiama $\proc{DFS}(G)$ \COMMENT{per calcolare $v.f$ di ogni vertice $v$}
+\li Calcola $G^\proc{t}$ 
+\li Chiama $\proc{DFS}(G^\proc{t})$ \COMMENT{i tempi $u.f$ sono considerati in ord. decresc.}
+\li Genera come output le radici di ogni SCC generata da\\ $\proc{DFS}(G^\proc{t})$ come foresta DF. \COMMENT{In pratica crea un grafo $G^{SCC}$}
+			\end{code}
 		\end{subParagraph}
+\bo{Costo}
+Il tempo complessivo è $\Theta(V+E)$.
+%TODO Aggiungere Dimostrazione di Correttezza ...
+		\end{myParagraph}
+
+		\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
+Questa pratica è anche nota come UnionFind. Serve a gestire una collezione $S={S_1,...,S_k}$ di \bo{insiemi disgiunti dinamici}. Ogni insieme è rappresentato da un \bo{rappresentante}, non è rilevante quale sia, ma devo necessariamente essere sempre lo stesso. Le operazioni che implementano questa tecnica sono:
+			\begin{Descr} 
+		\item[$\bm{\proc{Make-Set}(x)}$] $\ra$ crea un nuovo insieme $S_i={x}$ e lo aggiunge ad $S$;
+		\item[$\bm{\proc{Union}(x,y)}$] $\ra$ elimina gli insiemi disgiunti di $x,y$ da $S$ e ci aggiunge la loro unione: $S\get S-S_x-S_y+(S_x\bigcup S_y)$;
+		\item[$\bm{\proc{Find-Set}(x)}$] $\ra$ ritorna il rappresentante dell'insieme che contiene $x$.
+			\end{Descr}
+			\begin{subParagraph}{Componenti Connesse}
+In un grafo \G i vertici $u$ e $v$ sono nella stessa componente connessa \SSE c'è un cammino tra di loro. La componente connessa è una classe di equivalenza che risponde alla domanda "E' raggiungibile da?". Un grafo \bo{indiretto} può essere connesso, mentre un grafo \bo{diretto} può essere fortemente connesso. L'algoritmo che trova le componenti connesse é:
+				\begin{code}{Connected-Components(G)}
+\li \FOR{\text{ogni vertice }v\in G.V}
+	\li $\proc{Make-Set}(v)$
+\END
+\li \FOR{\text{ogni arco }(u,v)\in G.E}
+	\li \IF{\proc{Find-Set}(u)\neq\proc{Find-Set}(v)}
+		\li $\proc{Union}(u,v)$
+	\END
+\END
+				\end{code}
+Gli insiemi sono implementati con le \textbf{liste concatenate}:\\
+ogni insieme è rappresentato come una lista concatenata diversa e ogni elemento della lista contiene elemento, puntatore al rappresentante e puntatore all'elemento successivo.
+\bo{Operazioni:}
+\begin{descr}{1}
+		\item[$\bm{\proc{Make-Set}(x)}$] $\ra$ crea una lista con un solo elemento;
+		\item[$\bm{\proc{Union}(x,y)}$] $\ra$ è la parte costosa dell'algoritmo (accodare una lista lunga ad una lista corta può richiedere molte operazioni)
+		\begin{Descr} 
+			\item[Soluzione:] \underline{Unione Pesata} $\ra$ tra la due liste da unire si accoda sempre la più corta alla più lunga.
+		\end{Descr}
+		\item[$\bm{\proc{Find-Set}(x)}$] $\ra$ ritorna il puntatore al rappresentante.
+\end{descr}
+\bo{Costo}\\
+Utilizzando l'Unione Pesata per una sequenza di $m$ operazioni su $n$ elementi il costo è $O(m+n\log_2 n)$
+			\end{subParagraph}
+			\begin{subParagraph}{Heap}
+			\end{subParagraph}
+			\begin{subParagraph}{Cammini minimi}
+			\end{subParagraph}
 	
 	
 	
@@ -1428,13 +1506,7 @@ Posso anche classificare gli archi durante la $\proc{DFS}$ utilizzando i colori 
 	
 	
 	
-	
-	
-	
-	
-	
-	\end{myParagraph}
-	\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
+
 	\end{myParagraph}
 \end{formulario}
 \end{document}
