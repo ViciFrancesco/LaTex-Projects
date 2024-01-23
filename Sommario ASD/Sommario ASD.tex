@@ -1481,9 +1481,36 @@ ogni insieme è rappresentato come una lista concatenata diversa e ogni elemento
 Utilizzando l'Unione Pesata per una sequenza di $m$ operazioni su $n$ elementi il costo è $O(m+n\log_2 n)$
 			\end{subParagraph}
 			\begin{subParagraph}{Heap}
-			
-			
-			
+Un heap è un'albero binario quasi completo. l'altezza di un nodo è il numero di archi nel cammino più semplice dal nodo ad una foglia. L'altezza dell'heap, che è uguale all'altezza della radice è $\Theta(\log_2 n)$. L'heap può essere implementato usando un'array:
+				\begin{descr}{1}
+					\item[Radice dell'albero]: è il primo elemento cioè $A[1]$;
+					\item[Padre dell'i-esimo elemento]: il padre di $A[i]$ è $A[i/2]$; 
+					\item[Figlio sx dell'i-esimo elemento]: il figlio sx di $A[i]$ è $A[2\cdot i]$
+					\item[Figlio sx dell'i-esimo elemento]: il figlio dx di $A[i]$ è $A[2\cdot i+1]$
+				\end{descr}		
+Esistono due tipi di heap:
+				\begin{descr}{0}
+					\item[max-heap] $\ra\forall$ nodo $i$, eccetto la radice $A[\proc{Parent}(i)]\geq A[i]$ 
+					\item[min-heap] $\ra\forall$ nodo $i$, eccetto la radice $A[\proc{Parent}(i)]\leq A[i]$ 
+				\end{descr}
+Da qui in poi useremo sempre il \bo{max-heap} per comodità, infatti il nodo con chiave massima è sempre la radice.\\
+Serve un algoritmo che conservi le proprietà del max-heap, ovvero che aggiusti l'heap dopo l'inserimento del nodo $i$. Lo pseudocodice è:
+				\begin{code}{Max-Heapify(A,i)}
+\li $l\get\proc{left}(i)$
+\li $r\get\proc{right}(i)$
+\li \IF{l\leq A.heap-size \text{ AND } A[l]>A[i]}
+	\li $massimo\get l$
+\li \ELSE
+	\li $massimo\get i$
+\END
+\li \IF{r\leq A.heap-size \text{ AND } A[r]>A[massimo]}
+	\li $massimo\get r$
+\END
+li \IF{massimo\neq i}
+	\li \bo{scambia} $A[i] \sse A[massimo]$
+	\li $\proc{Max-Heapify}(A,massimo)$
+\END
+				\end{code}
 			
 			
 			
