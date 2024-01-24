@@ -1564,32 +1564,63 @@ Il tempo totale è $O(\log_2 n)$\\
 \bo{Costo}\\
 Il tempo totale è $O(\log_2 n)$\\
 			\end{subParagraph}
-			\begin{subParagraph}{Alberi di Connessione Minimi}
-			
-			\end{subParagraph}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	\end{myParagraph}
+	
+	\begin{myParagraphEnd}{Alberi di Connessione Minimi}
+Dato un grafo non diretto \G con $V$ nodi ed $E$ archi ognuno avente il peso $w$. Quello che vogliamo è trovare un albero di connessione $T$ che connette tutti i vertici. Un albero di connessione minimo invece connette tutti i nodi con gli archi con il minimo peso (MST - Minimum Spanning Tree).
+		\begin{Descr} 
+			\item[Proprità MST] $\ra$ un MST ha $\modulo{V}-1$ archi ed è aciclico. Inoltre può esistere più di un MST per lo stesso albero.
+		\end{Descr}
+		\begin{subParagraph}{Generic MST}
+Per questo problema, è conveniente prima cercare un'invariante di ciclo e poi costruire un algoritmo. Prendiamo un insieme di archi $A$ che all'inizio vuoto ($A=\emptyset$). 
+			\begin{Descr} 
+				\item[I.C.] $\ra$ "ad ogni iterazione aggiungo un arco ad $A$ solo se $A$ rimane un sottoinsieme di qualche MST".
+			\end{Descr}
+Se $A\subseteq \text{MST}$ all'ultima iterazione abbiamo aggiunto un \bo{arco sicuro}, cioè che fa sicuramente parte di un qualche MST. Matematicamente: $(u,v) \text{ è sicuro per } A \sse (A\cup \{(u,v)\})\subseteq$ MST. Lo pseudocodice è:
+			\begin{code}{GenericMST(G,w)}
+\li $A\get\emptyset$
+\li \WHILE{A \text{non forma un albero di connessione}}
+	\li trova un arco $(u,v)$ sicuro per $A$
+	\li $A \get A\cup(u,v)$
+\END
+			\end{code}
+			\begin{Descr} 
+				\item[Trovare un arco sicuro]: $\ra$ Dato \G, l'arco con il peso minore $(c,f)$ è un arco sicuro per $G$ \SSE non c'è un altro cammino che connette $f$ e $f$, cioè:\\
+Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$. Ogni MST deve avere almeno un arco che connetta $S$ con $V-S$, voglio scegliere l'arco che li connette con il peso minore.
+				\item[Definizioni]:\\
+				\begin{Descr} 
+					\item[taglio] $\ra$ Dato un grafo \G non orientato e definisco $S\subset V$ e $A\subseteq E$. Allora un taglio $(S,V-S)$ è una partizione dei vertici $V$ in due insiemi disgiunti $S$ e $V-S$. Un arco $(u,v)$ \bo{attraversa} un taglio \SSE $u\in S$ e $v\in V-S$ (o viceversa). Infine un arco \bo{rispetta} un insieme di archi $A$ \SSE nessun arco attraversa il taglio. 
+					\item[arco leggero] $\ra$ un arco è leggero per un taglio \SSE ha il peso minimo tra tutti gli archi che attraversano il taglio.
+				\end{Descr}
+				\item[Teorema]: Dato \G, sia $A$ un sottoinsieme di un MST di $G$, sia $(S,V-S)$ un taglio che rispetta l'insieme di archi $A$ e sia $(u,v)$ un arco leggero di che attraversa il taglio $(S,V-S)\implies (u,v)$ è un \bo{arco sicuro} per $A$.
+				%TODO aggiungere dimostrazione ... 
+				\item[Corollario]: Sia $G_A=(V,A)$ la foresta che contiene le singole componenti connesse (all'inizio un albero per ogni nodo), sia $C=(V_C,E_C)$ una componente connessa di $G_A$, allora se $(u,v)$ è un arco leggero che connette $C$ a una qualsiasi altra componente in $G_A\implies(u,v)$ è un arco sicuro per $A$.
+				%TODO dimostrazione uguale a quella precedente ma con S=V_C
+			\end{Descr}
+In $\proc{GenericMST}$, iterando $\modulo{V}-1$ volte, alla fine ottengo $\modulo{V}-1$ archi sicuri per $A$ ovvero un MST. Questa affermazione e il corollario ci portano alla formulazione di Kruskal.
+		\end{subParagraph}
+		\begin{subParagraph}{MST Kruskal}
+
+%continua...
+
+
+
+
+		\end{subParagraph}
+		\begin{subParagraph}{MST Prim}
+		\end{subParagraph}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\end{myParagraphEnd}
 \end{formulario}
 \end{document}
