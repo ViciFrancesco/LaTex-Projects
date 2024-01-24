@@ -1515,17 +1515,57 @@ li \IF{massimo\neq i}
 L'heap è alto $O(\log_2 n)$ poiché è un albero quasi completo. Il costo ad ogni livello è costante (3 confronti e max 2 scambi)$\implies$ il costo complessivo è intuitivamente $O(\log_2 n)$. \\
 \bo{Correttezza}\\ 
 Si può ottenere con l'invariante di ciclo (perché è ricorsivo in coda).
-		
-			
-			
-			
-			
-			
-			
-			
-			
+				\begin{descr}{1}
+					\item[\underline{Costruire un heap}:] Dato un array non ordinato, produce un max-heap bottom-up. Lo pseudocodice è: 
+				\end{descr}
+				\begin{code}{BuildMaxHeap(A)}
+\li $\attrib{A}{heap-size}\get \attrib{A}{lenght}$
+\li \FOR{i \get \floor{\attrib{A}{lenght}/2} \DOWNTO 1}
+	\li $\proc{Max-Heapify}(A,i)$
+\END
+				\end{code}
+			\begin{subParagraph}{Code con Priorità}
+Posso implementare una coda con priorità usando un max-heap. Ogni elemento dell'insieme dinamico $S$ ha una chiave che indica la priorità dell'elemento. Implementando una coda con un max-heap si ottiene un compromesso tra \underline{coda} (inserimento veloce, estrazione lenta) e \underline{coda ordinata} (inserimento lento ed estrazione veloce). Con il max-heap le operazioni di inserimento ed estrazione prendono entrambe $O(\log_2 n)$. Le operazioni di gestione della coda con priorità sono le seguenti:
+				\begin{code}{Heap-Maximum(A)}
+\li \RETURN $A[1]$
+				\end{code}
+\bo{Costo}\\
+Il tempo totale è $\Theta(1)$\\
+				\begin{code}{Heap-Extract-Max(A)}
+\li \IF{\attrib{A}{heap-size}<1}
+	\li \Error "overflow dell'heap"
+\END
+\li $max\get A[1]$
+\li $A[1]\get A[\attrib{A}{heap-size}]$
+\li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}-1$
+\li $\proc{Max-Heapify}(A,1)$
+\li \RETURN $max$
+				\end{code}
 			\end{subParagraph}
-			\begin{subParagraph}{Cammini minimi}
+\bo{Costo}\\
+Il tempo totale è $O(\log_2 n)$\\
+				\begin{code}{Heap-Increase-Key(A,i,key)}
+\li \IF{key<A[i]}
+	\li \Error "la nuova chiave è più piccola della corrente"
+\END
+\li $A[i]\get key$
+\li \WHILE{i>1 \text{ AND } A[\proc{Parent}(i)]<A[i]}
+	\li \bo{scambia } $A[i] \sse A[\proc{Parent}(i)]$
+	\li $i\get \proc{Parent}(i)$
+\END
+				\end{code}
+\bo{Costo}\\
+Il tempo totale è $O(\log_2 n)$\\
+				\begin{code}{Max-Heap-Insert(A,key)}
+\li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}+1$
+\li $\attrib{A}{heap-size}\get -\infty$
+\li $\proc{Heap-Increase-Key}(A,\attrib{A}{heap-size},key)$
+				\end{code}
+\bo{Costo}\\
+Il tempo totale è $O(\log_2 n)$\\
+			\end{subParagraph}
+			\begin{subParagraph}{Alberi di Connessione Minimi}
+			
 			\end{subParagraph}
 	
 	
