@@ -1600,14 +1600,52 @@ Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$.
 In $\proc{GenericMST}$, iterando $\modulo{V}-1$ volte, alla fine ottengo $\modulo{V}-1$ archi sicuri per $A$ ovvero un MST. Questa affermazione e il corollario ci portano alla formulazione di Kruskal.
 		\end{subParagraph}
 		\begin{subParagraph}{MST Kruskal}
-
-%continua...
-
-
-
-
+Uso le operazione per le strutture dati per in insiemi disgiunti. Quindi chiamo $\proc{MakeSet}$ per ogni nodo e chiamo $\proc{Union}$ ogni volta che trovo un arco sicuro. Lo pseudocodice è:
+			\begin{code}{MST-Kruskal(G,w)}
+\li $A\get\emptyset$
+\li \FOR{\text{ogni vertice }v\in\attrib{G}{V}}
+	\li $\proc{MakeSet}(v)$
+\END
+\li \bo{ordina} gli archi $\attrib{G}{E}$ in ordine di peso non decrescente
+\li \FOR{\text{ogni arco }(u,v)\in \attrib{G}{E} \text{ in ordine di peso non decresc.}}
+	\li \IF{\proc{FindSet}(u)\neq \proc{FindSet}(v)}
+		\li $A\get A\cup\{(u,v)\}$
+		\li $\proc{Union}(u,v)$
+	\END
+\END
+\li \RETURN $A$
+			\end{code}
+\bo{Costo}\\
+Il tempo di esecuzione dipende dall'implementazione di union-find.
 		\end{subParagraph}
 		\begin{subParagraph}{MST Prim}
+L'algoritmo di Prim è un caso particolare del $\proc{GenericMST}$. $A$ è sempre un albero, $r$ è una radice arbitraria. Ad ogni passo trova un arco leggero che attraversa il taglio $(V_A, V-V_A)$, dove $V_A$ è l'insieme dei vertici toccati da archi di $A$, e lo aggiunge ad $A$. Lo pseudocodice è:
+			\begin{code}{Prim-MST(G,w,r)}
+\li $Q\get\emptyset$ \COMMENT{uso coda priorità implementata con min-heap}
+\li \FOR{\text{ogni }u\in \attrib{G}{V}}
+	\li $\attrib{u}{key}\get \infty$
+	\li $\attrib{u}{\pi}\get\const{nil}$
+	\li $\proc{Insert}(Q,u)$
+\END
+\li $\proc{Decrease-Key}(Q,r,0)$ \COMMENT{imposta la chiave della radice a 0}
+\li \WHILE{Q\neq\emptyset}
+	\li $u\get\proc{Extract-Min}(Q)$
+	\li \FOR{\text{ogni }v\in\attrib{G}{adj[u]}}
+		\li \IF{v\in Q \text{ AND } w(u,v)<\attrib{v}{key}}
+			\li $\attrib{v}{\pi}\get u$
+			\li $\proc{Decrease-Key}(Q,v,w(u,v))$
+		\END
+	\END
+\END
+			\end{code}
+\bo{I.C.}\\
+"Prima di ogni iterazione del $while$:
+\begin{descr} {1}
+	\item[1)] $A={(v,\attrib{v}{\pi}) \text{ tale che } v\in V-\{r\}-Q}$;
+	\item[2)] in vertici inseriti in MST sono quelli in $V-Q$;
+	\item[3)] $\forall v\in Q$ se $\attrib{v}{\pi}\neq \const{nil}$ allora $\attrib{v}{key}<\infty$ ed è il peso dell'arco leggero $(v,\attrib{v}{\pi})$ che collega $v$ ad un qualche vertice in $A$."
+\end{descr}
+Alla fine dell'esecuzione avrò che $V_A=V\implies Q=\emptyset \implies A$ è un MST.
 		\end{subParagraph}
 	
 	
