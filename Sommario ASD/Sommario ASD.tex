@@ -1533,7 +1533,7 @@ Posso implementare una coda con priorità usando un max-heap. Ogni elemento dell
 Il tempo totale è $\Theta(1)$\\
 				\begin{code}{Heap-Extract-Max(A)}
 \li \IF{\attrib{A}{heap-size}<1}
-	\li \Error "overflow dell'heap"
+	\li \Error "underflow dell'heap"
 \END
 \li $max\get A[1]$
 \li $A[1]\get A[\attrib{A}{heap-size}]$
