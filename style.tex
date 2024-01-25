@@ -100,6 +100,15 @@
 
 
 
+\newenvironment{myParagraphEnd}[1]
+{
+\begin{tcenter}
+\textbf{#1}
+\end{tcenter}
+}{}
+
+
+
 \newenvironment{subParagraph}[1]
 {
 \dashrule
@@ -126,6 +135,7 @@
 \newcommand{\modulo}[1]{\left\vert #1 \right\vert}
 \newcommand{\dashrule}{\begin{tcenter}- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \; \end{tcenter}}
 \newcommand{\scalare}{\mathbin{\vcenter{\hbox{\scalebox{.6}{\;$\bullet$\;}}}}}
+\newcommand{\G}{$G=(V,E)$}
 
 \newcommand{\FOR}[1]{\For $#1$ \Do}
 \newcommand{\WHILE}[1]{\While $#1$ \Do}
@@ -137,6 +147,7 @@
 \newcommand{\END}{\End}
 \newcommand{\get}{\la}
 \newcommand{\TO}{\To}
+\newcommand{\DOWNTO}{\Downto}
 
 
 

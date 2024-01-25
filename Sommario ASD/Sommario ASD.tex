@@ -897,9 +897,9 @@ Posso usare l'attraversamento Inorder, ma questo comporta un aumento del costo (
 			\begin{tcenter}
 			$\attrib{x}{size}\get\attribb{x}{left}{size}+\attribb{x}{right}{size}+1$
 			\end{tcenter}
-Gli psuedocodici sono:
+Gli pseudocodici sono:
 			\begin{code}{OS-Select(x,i)}
-\li $r\get \attribb{x}{left}{size}$
+\li $r\get \attribb{x}{left}{size} +1$ 
 \li \IF{i\gets r}
 	\li \RETURN $x$
 \li \ELSEIF{i<r}
@@ -1398,13 +1398,254 @@ Posso anche classificare gli archi durante la $\proc{DFS}$ utilizzando i colori 
 				\item[\underline{Teorema}] $\ra$ Se il grafo $G=(V,E)$ è indiretto $\implies$ la foresta DF ho solo archi T e B.
 				\begin{Descr} 
 					\item[LEMMA:] un grafo diretto è \bo{aciclico} \SSE una visita $\proc{DFS}$ di $G$ non genera archi B.
-					\item[DIM:] $\ra$
 				\end{Descr}
 			\end{Descr}
 		\end{subParagraph}
 		\begin{subParagraph}{Ordinamento Topologico}
+L'ordinamento topologico di un grafo aciclico (sia diretto che indiretto) $G=(V,E)$ è un ordinamento lineare di tutti i suoi vertici tale che se $(u,v)\in E$ allora da qualche parte nell'ordinamento $u$ appare prima di $v$ (è diverso dall'ordinamento di un insieme di numeri). Non è possibile effettuare un ordinamento lineare su un grafo ciclico. E' utile per gestire oggetti che hanno un ordine parziale, ad esempio:
+			\begin{tcenter}
+$a>b$ e $b>c \implies a>c$. 
+			\end{tcenter}
+Ma potrei anche non sapere con precisione l'ordinamento totale:
+			\begin{tcenter}
+$a>c$ e $b>c\implies a>b$ o $a<b$. 
+			\end{tcenter}
+E' comunque possibile trovare un ordinamento totale anche da un ordinamento parziale, usando la $\proc{DFS}$. Lo pseudocodice è:
+			\begin{code}{TopologicalSort(G)}
+\li Chiama $\proc{DFS(G)}$ per calcolare i tempi di completamento \\ $v.f$ per ogni vertice $v$
+\li Completata l'ispezione di ogni vertice, lo inserisce in testa \\ ad una lista concatenata
+\li \RETURN lista concatenata di vertici
+			\end{code}
+\bo{Costo}\\
+Il tempo complessivo è $\Theta(V+E)$.\\
+\bo{Correttezza}\\
+Mostriamo che se $(u,v)\in E$ allora $v.f<u.f$. Quando esploro $(u,v)$ di che colore è e $v$?
+			\begin{descr}{1}
+				\item[Grigio] $\ra$ impossibile altrimenti $(u,v)$ sarebbe un arco B(back) $\implies$ contraddizione con ipotesi (no grafi ciclici);
+				\item[Bianco] $\ra$ allora $v$ diventa discendente di $u$ $\implies u.d<v.d<v.f<u.f$ (per th. Parentesi) $\implies v.f<u.f$;
+				\item[Nero] $\ra$ allora $v$ è terminato ma $u$ ancora no $\implies v.f<u.f$
+ 			\end{descr} 
 		\end{subParagraph}
 		\begin{subParagraph}{Componenti Fortemente Connesse}
+Dato il grafo diretto \G una componente fortemente connessa (SCC) di $G$ è un insieme massimale di vertici $C\subseteq V$ tale che per ogni $u,v\in C$ esistono entrambi i cammini "$u\to v$" e "$v\to u$". Uso la matrice di adiacenza $G$ e la sua trasposta $G^\proc{t}$ per ottenere singolarmente le componenti connesse del grafo \G.
+			\begin{Descr} 
+				\item[Trasposta di $G$] $\ra$ $G^\proc{t}=(V,E^\proc{t})$, ovvero inverto la direzione di tutti gli archi del grafo. Se rappresento il grafo con la matrice di adiacenza il tempo è lineare altrimenti, se lo faccio con le liste di adiacenza il costo diventa $\Theta(V+E)$. Inoltre $G$ e $G^\proc{t}$ hanno le stesse SCC.\\
+Definisco anche il grafo delle componenti fortemente connesse $G^{SCC}=(V^{SCC},E^{SCC})$ che ha un vertice per ogni SCC di $G$ e un arco solo se c'è un arco che connette le SCC in $G$.  
+				\item [Lemma] $G^{SCC}$ è un DAG (grafo diretto aciclico).
+				%TODO aggiungere dimostrazione ...
+			\end{Descr}
+L'algoritmo che restituisce il $G^{SCC}$ è il seguente:
+			\begin{code}{Strongly-Connected-Components(G)}
+\li Chiama $\proc{DFS}(G)$ \COMMENT{per calcolare $v.f$ di ogni vertice $v$}
+\li Calcola $G^\proc{t}$ 
+\li Chiama $\proc{DFS}(G^\proc{t})$ \COMMENT{i tempi $u.f$ sono considerati in ord. decresc.}
+\li Genera come output le radici di ogni SCC generata da\\ $\proc{DFS}(G^\proc{t})$ come foresta DF. \COMMENT{In pratica crea un grafo $G^{SCC}$}
+			\end{code}
+		\end{subParagraph}
+\bo{Costo}
+Il tempo complessivo è $\Theta(V+E)$.
+%TODO Aggiungere Dimostrazione di Correttezza ...
+		\end{myParagraph}
+
+		\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
+Questa pratica è anche nota come UnionFind. Serve a gestire una collezione $S={S_1,...,S_k}$ di \bo{insiemi disgiunti dinamici}. Ogni insieme è rappresentato da un \bo{rappresentante}, non è rilevante quale sia, ma devo necessariamente essere sempre lo stesso. Le operazioni che implementano questa tecnica sono:
+			\begin{Descr} 
+		\item[$\bm{\proc{Make-Set}(x)}$] $\ra$ crea un nuovo insieme $S_i={x}$ e lo aggiunge ad $S$;
+		\item[$\bm{\proc{Union}(x,y)}$] $\ra$ elimina gli insiemi disgiunti di $x,y$ da $S$ e ci aggiunge la loro unione: $S\get S-S_x-S_y+(S_x\bigcup S_y)$;
+		\item[$\bm{\proc{Find-Set}(x)}$] $\ra$ ritorna il rappresentante dell'insieme che contiene $x$.
+			\end{Descr}
+			\begin{subParagraph}{Componenti Connesse}
+In un grafo \G i vertici $u$ e $v$ sono nella stessa componente connessa \SSE c'è un cammino tra di loro. La componente connessa è una classe di equivalenza che risponde alla domanda "E' raggiungibile da?". Un grafo \bo{indiretto} può essere connesso, mentre un grafo \bo{diretto} può essere fortemente connesso. L'algoritmo che trova le componenti connesse é:
+				\begin{code}{Connected-Components(G)}
+\li \FOR{\text{ogni vertice }v\in G.V}
+	\li $\proc{Make-Set}(v)$
+\END
+\li \FOR{\text{ogni arco }(u,v)\in G.E}
+	\li \IF{\proc{Find-Set}(u)\neq\proc{Find-Set}(v)}
+		\li $\proc{Union}(u,v)$
+	\END
+\END
+				\end{code}
+Gli insiemi sono implementati con le \textbf{liste concatenate}:\\
+ogni insieme è rappresentato come una lista concatenata diversa e ogni elemento della lista contiene elemento, puntatore al rappresentante e puntatore all'elemento successivo.
+\bo{Operazioni:}
+\begin{descr}{1}
+		\item[$\bm{\proc{Make-Set}(x)}$] $\ra$ crea una lista con un solo elemento;
+		\item[$\bm{\proc{Union}(x,y)}$] $\ra$ è la parte costosa dell'algoritmo (accodare una lista lunga ad una lista corta può richiedere molte operazioni)
+		\begin{Descr} 
+			\item[Soluzione:] \underline{Unione Pesata} $\ra$ tra la due liste da unire si accoda sempre la più corta alla più lunga.
+		\end{Descr}
+		\item[$\bm{\proc{Find-Set}(x)}$] $\ra$ ritorna il puntatore al rappresentante.
+\end{descr}
+\bo{Costo}\\
+Utilizzando l'Unione Pesata per una sequenza di $m$ operazioni su $n$ elementi il costo è $O(m+n\log_2 n)$
+			\end{subParagraph}
+			\begin{subParagraph}{Heap}
+Un heap è un'albero binario quasi completo. l'altezza di un nodo è il numero di archi nel cammino più semplice dal nodo ad una foglia. L'altezza dell'heap, che è uguale all'altezza della radice è $\Theta(\log_2 n)$. L'heap può essere implementato usando un'array:
+				\begin{descr}{1}
+					\item[Radice dell'albero]: è il primo elemento cioè $A[1]$;
+					\item[Padre dell'i-esimo elemento]: il padre di $A[i]$ è $A[i/2]$; 
+					\item[Figlio sx dell'i-esimo elemento]: il figlio sx di $A[i]$ è $A[2\cdot i]$
+					\item[Figlio sx dell'i-esimo elemento]: il figlio dx di $A[i]$ è $A[2\cdot i+1]$
+				\end{descr}		
+Esistono due tipi di heap:
+				\begin{descr}{0}
+					\item[max-heap] $\ra\forall$ nodo $i$, eccetto la radice $A[\proc{Parent}(i)]\geq A[i]$ 
+					\item[min-heap] $\ra\forall$ nodo $i$, eccetto la radice $A[\proc{Parent}(i)]\leq A[i]$ 
+				\end{descr}
+Da qui in poi useremo sempre il \bo{max-heap} per comodità, infatti il nodo con chiave massima è sempre la radice.\\
+Serve un algoritmo che conservi le proprietà del max-heap, ovvero che aggiusti l'heap dopo l'inserimento del nodo $i$. Lo pseudocodice è:
+				\begin{code}{Max-Heapify(A,i)}
+\li $l\get\proc{left}(i)$
+\li $r\get\proc{right}(i)$
+\li \IF{l\leq A.heap-size \text{ AND } A[l]>A[i]}
+	\li $massimo\get l$
+\li \ELSE
+	\li $massimo\get i$
+\END
+\li \IF{r\leq A.heap-size \text{ AND } A[r]>A[massimo]}
+	\li $massimo\get r$
+\END
+li \IF{massimo\neq i}
+	\li \bo{scambia} $A[i] \sse A[massimo]$
+	\li $\proc{Max-Heapify}(A,massimo)$
+\END
+				\end{code}
+\bo{Costo}\\
+L'heap è alto $O(\log_2 n)$ poiché è un albero quasi completo. Il costo ad ogni livello è costante (3 confronti e max 2 scambi)$\implies$ il costo complessivo è intuitivamente $O(\log_2 n)$. \\
+\bo{Correttezza}\\ 
+Si può ottenere con l'invariante di ciclo (perché è ricorsivo in coda).
+				\begin{descr}{1}
+					\item[\underline{Costruire un heap}:] Dato un array non ordinato, produce un max-heap bottom-up. Lo pseudocodice è: 
+				\end{descr}
+				\begin{code}{BuildMaxHeap(A)}
+\li $\attrib{A}{heap-size}\get \attrib{A}{lenght}$
+\li \FOR{i \get \floor{\attrib{A}{lenght}/2} \DOWNTO 1}
+	\li $\proc{Max-Heapify}(A,i)$
+\END
+				\end{code}
+			\begin{subParagraph}{Code con Priorità}
+Posso implementare una coda con priorità usando un max-heap. Ogni elemento dell'insieme dinamico $S$ ha una chiave che indica la priorità dell'elemento. Implementando una coda con un max-heap si ottiene un compromesso tra \underline{coda} (inserimento veloce, estrazione lenta) e \underline{coda ordinata} (inserimento lento ed estrazione veloce). Con il max-heap le operazioni di inserimento ed estrazione prendono entrambe $O(\log_2 n)$. Le operazioni di gestione della coda con priorità sono le seguenti:
+				\begin{code}{Heap-Maximum(A)}
+\li \RETURN $A[1]$
+				\end{code}
+\bo{Costo}\\
+Il tempo totale è $\Theta(1)$\\
+				\begin{code}{Heap-Extract-Max(A)}
+\li \IF{\attrib{A}{heap-size}<1}
+	\li \Error "overflow dell'heap"
+\END
+\li $max\get A[1]$
+\li $A[1]\get A[\attrib{A}{heap-size}]$
+\li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}-1$
+\li $\proc{Max-Heapify}(A,1)$
+\li \RETURN $max$
+				\end{code}
+			\end{subParagraph}
+\bo{Costo}\\
+Il tempo totale è $O(\log_2 n)$\\
+				\begin{code}{Heap-Increase-Key(A,i,key)}
+\li \IF{key<A[i]}
+	\li \Error "la nuova chiave è più piccola della corrente"
+\END
+\li $A[i]\get key$
+\li \WHILE{i>1 \text{ AND } A[\proc{Parent}(i)]<A[i]}
+	\li \bo{scambia } $A[i] \sse A[\proc{Parent}(i)]$
+	\li $i\get \proc{Parent}(i)$
+\END
+				\end{code}
+\bo{Costo}\\
+Il tempo totale è $O(\log_2 n)$\\
+				\begin{code}{Max-Heap-Insert(A,key)}
+\li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}+1$
+\li $\attrib{A}{heap-size}\get -\infty$
+\li $\proc{Heap-Increase-Key}(A,\attrib{A}{heap-size},key)$
+				\end{code}
+\bo{Costo}\\
+Il tempo totale è $O(\log_2 n)$\\
+			\end{subParagraph}
+	\end{myParagraph}
+	
+	\begin{myParagraphEnd}{Alberi di Connessione Minimi}
+Dato un grafo non diretto \G con $V$ nodi ed $E$ archi ognuno avente il peso $w$. Quello che vogliamo è trovare un albero di connessione $T$ che connette tutti i vertici. Un albero di connessione minimo invece connette tutti i nodi con gli archi con il minimo peso (MST - Minimum Spanning Tree).
+		\begin{Descr} 
+			\item[Proprità MST] $\ra$ un MST ha $\modulo{V}-1$ archi ed è aciclico. Inoltre può esistere più di un MST per lo stesso albero.
+		\end{Descr}
+		\begin{subParagraph}{Generic MST}
+Per questo problema, è conveniente prima cercare un'invariante di ciclo e poi costruire un algoritmo. Prendiamo un insieme di archi $A$ che all'inizio vuoto ($A=\emptyset$). 
+			\begin{Descr} 
+				\item[I.C.] $\ra$ "ad ogni iterazione aggiungo un arco ad $A$ solo se $A$ rimane un sottoinsieme di qualche MST".
+			\end{Descr}
+Se $A\subseteq \text{MST}$ all'ultima iterazione abbiamo aggiunto un \bo{arco sicuro}, cioè che fa sicuramente parte di un qualche MST. Matematicamente: $(u,v) \text{ è sicuro per } A \sse (A\cup \{(u,v)\})\subseteq$ MST. Lo pseudocodice è:
+			\begin{code}{GenericMST(G,w)}
+\li $A\get\emptyset$
+\li \WHILE{A \text{non forma un albero di connessione}}
+	\li trova un arco $(u,v)$ sicuro per $A$
+	\li $A \get A\cup(u,v)$
+\END
+			\end{code}
+			\begin{Descr} 
+				\item[Trovare un arco sicuro]: $\ra$ Dato \G, l'arco con il peso minore $(c,f)$ è un arco sicuro per $G$ \SSE non c'è un altro cammino che connette $f$ e $f$, cioè:\\
+Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$. Ogni MST deve avere almeno un arco che connetta $S$ con $V-S$, voglio scegliere l'arco che li connette con il peso minore.
+				\item[Definizioni]:\\
+				\begin{Descr} 
+					\item[taglio] $\ra$ Dato un grafo \G non orientato e definisco $S\subset V$ e $A\subseteq E$. Allora un taglio $(S,V-S)$ è una partizione dei vertici $V$ in due insiemi disgiunti $S$ e $V-S$. Un arco $(u,v)$ \bo{attraversa} un taglio \SSE $u\in S$ e $v\in V-S$ (o viceversa). Infine un arco \bo{rispetta} un insieme di archi $A$ \SSE nessun arco attraversa il taglio. 
+					\item[arco leggero] $\ra$ un arco è leggero per un taglio \SSE ha il peso minimo tra tutti gli archi che attraversano il taglio.
+				\end{Descr}
+				\item[Teorema]: Dato \G, sia $A$ un sottoinsieme di un MST di $G$, sia $(S,V-S)$ un taglio che rispetta l'insieme di archi $A$ e sia $(u,v)$ un arco leggero di che attraversa il taglio $(S,V-S)\implies (u,v)$ è un \bo{arco sicuro} per $A$.
+				%TODO aggiungere dimostrazione ... 
+				\item[Corollario]: Sia $G_A=(V,A)$ la foresta che contiene le singole componenti connesse (all'inizio un albero per ogni nodo), sia $C=(V_C,E_C)$ una componente connessa di $G_A$, allora se $(u,v)$ è un arco leggero che connette $C$ a una qualsiasi altra componente in $G_A\implies(u,v)$ è un arco sicuro per $A$.
+				%TODO dimostrazione uguale a quella precedente ma con S=V_C
+			\end{Descr}
+In $\proc{GenericMST}$, iterando $\modulo{V}-1$ volte, alla fine ottengo $\modulo{V}-1$ archi sicuri per $A$ ovvero un MST. Questa affermazione e il corollario ci portano alla formulazione di Kruskal.
+		\end{subParagraph}
+		\begin{subParagraph}{MST Kruskal}
+Uso le operazione per le strutture dati per in insiemi disgiunti. Quindi chiamo $\proc{MakeSet}$ per ogni nodo e chiamo $\proc{Union}$ ogni volta che trovo un arco sicuro. Lo pseudocodice è:
+			\begin{code}{MST-Kruskal(G,w)}
+\li $A\get\emptyset$
+\li \FOR{\text{ogni vertice }v\in\attrib{G}{V}}
+	\li $\proc{MakeSet}(v)$
+\END
+\li \bo{ordina} gli archi $\attrib{G}{E}$ in ordine di peso non decrescente
+\li \FOR{\text{ogni arco }(u,v)\in \attrib{G}{E} \text{ in ordine di peso non decresc.}}
+	\li \IF{\proc{FindSet}(u)\neq \proc{FindSet}(v)}
+		\li $A\get A\cup\{(u,v)\}$
+		\li $\proc{Union}(u,v)$
+	\END
+\END
+\li \RETURN $A$
+			\end{code}
+\bo{Costo}\\
+Il tempo di esecuzione dipende dall'implementazione di union-find.
+		\end{subParagraph}
+		\begin{subParagraph}{MST Prim}
+L'algoritmo di Prim è un caso particolare del $\proc{GenericMST}$. $A$ è sempre un albero, $r$ è una radice arbitraria. Ad ogni passo trova un arco leggero che attraversa il taglio $(V_A, V-V_A)$, dove $V_A$ è l'insieme dei vertici toccati da archi di $A$, e lo aggiunge ad $A$. Lo pseudocodice è:
+			\begin{code}{Prim-MST(G,w,r)}
+\li $Q\get\emptyset$ \COMMENT{uso coda priorità implementata con min-heap}
+\li \FOR{\text{ogni }u\in \attrib{G}{V}}
+	\li $\attrib{u}{key}\get \infty$
+	\li $\attrib{u}{\pi}\get\const{nil}$
+	\li $\proc{Insert}(Q,u)$
+\END
+\li $\proc{Decrease-Key}(Q,r,0)$ \COMMENT{imposta la chiave della radice a 0}
+\li \WHILE{Q\neq\emptyset}
+	\li $u\get\proc{Extract-Min}(Q)$
+	\li \FOR{\text{ogni }v\in\attrib{G}{adj[u]}}
+		\li \IF{v\in Q \text{ AND } w(u,v)<\attrib{v}{key}}
+			\li $\attrib{v}{\pi}\get u$
+			\li $\proc{Decrease-Key}(Q,v,w(u,v))$
+		\END
+	\END
+\END
+			\end{code}
+\bo{I.C.}\\
+"Prima di ogni iterazione del $while$:
+\begin{descr} {1}
+	\item[1)] $A={(v,\attrib{v}{\pi}) \text{ tale che } v\in V-\{r\}-Q}$;
+	\item[2)] in vertici inseriti in MST sono quelli in $V-Q$;
+	\item[3)] $\forall v\in Q$ se $\attrib{v}{\pi}\neq \const{nil}$ allora $\attrib{v}{key}<\infty$ ed è il peso dell'arco leggero $(v,\attrib{v}{\pi})$ che collega $v$ ad un qualche vertice in $A$."
+\end{descr}
+Alla fine dell'esecuzione avrò che $V_A=V\implies Q=\emptyset \implies A$ è un MST.
 		\end{subParagraph}
 	
 	
@@ -1418,23 +1659,6 @@ Posso anche classificare gli archi durante la $\proc{DFS}$ utilizzando i colori 
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	\end{myParagraph}
-	\begin{myParagraph}{STRUTTURE DATI PER INSIEMI DISGIUNTI}
-	\end{myParagraph}
+	\end{myParagraphEnd}
 \end{formulario}
 \end{document}
