@@ -1506,7 +1506,7 @@ Serve un algoritmo che conservi le proprietà del max-heap, ovvero che aggiusti 
 \li \IF{r\leq A.heap-size \text{ AND } A[r]>A[massimo]}
 	\li $massimo\get r$
 \END
-li \IF{massimo\neq i}
+\li \IF{massimo\neq i}
 	\li \bo{scambia} $A[i] \sse A[massimo]$
 	\li $\proc{Max-Heapify}(A,massimo)$
 \END
@@ -1558,7 +1558,7 @@ Il tempo totale è $O(\log_2 n)$\\
 Il tempo totale è $O(\log_2 n)$\\
 				\begin{code}{Max-Heap-Insert(A,key)}
 \li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}+1$
-\li $\attrib{A}{heap-size}\get -\infty$
+\li $A[heap-size]\get -\infty$
 \li $\proc{Heap-Increase-Key}(A,\attrib{A}{heap-size},key)$
 				\end{code}
 \bo{Costo}\\
