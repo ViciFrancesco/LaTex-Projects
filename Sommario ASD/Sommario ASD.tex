@@ -748,7 +748,7 @@ Il costo dipende anche in questo caso esclusivamente dell'altezza infatti è $O(
 \li \IF{\attrib{z}{left}=\const{nil}}
 	\li \proc{Transplant(T,z,\attrib{z}{right})}
 \li \ELSEIF{\attrib{z}{right}=\const{nil}}
-	\li \proc{Transplant(T,z,\attrib{z}{right})}
+	\li \proc{Transplant(T,z,\attrib{z}{left})}
 \li \ELSE 
 	\li $y\la\proc{TreeMinimum(\attrib{z}{right})}$
 	\li \IF{\attrib{y}{p}\neq z}
