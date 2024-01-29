@@ -135,7 +135,7 @@ Per categorizzare la complessità degli algoritmi faccio riferimento alla cresci
 		\end{tcenter}
 È un algoritmo molto semplice, opera "in place". Il suo obbiettivo è quello di trovare il minimo all'interno dell'array e inserirlo nella sequenza ordinata fino a qual momento. Lo pseudocodice è: \\		
 		\begin{code}{SelectionSort(A)}
-\li $n\la\attrib{A}{lenght}$
+\li $n\la\attrib{A}{length}$
 \li \For $j\la1 \To n-1$ \Do
 	\li $\id{smallest}\la j$
 	\li \For $i \la j+1 \To n$ \Do
@@ -390,7 +390,7 @@ $\bm{I\{A\}\text{ oppure }X_A=}
 		\end{tcenter}
 Poiché non posso conoscere l'ordine in cui l'algoritmo riceverà gli input, non posso, allo stesso modo, conoscere la probabilità delle $n!$ possibili permutazioni. Uso l'algoritmo "random" per forzare l'ordine casuale. Lo pseudocodice è:
 		\begin{code}{RandomizeInPlace(A)}
-\li $n \la A.lenght$
+\li $n \la A.length$
 \li \FOR{i \la 1 \To n}
 	\li $\proc{excange } A[i]\sse A[\proc{Random}(i,n)]$
 \End
@@ -451,13 +451,13 @@ Gli algoritmi visti fino ad ora non raggiungono un costo minore di $\Theta(n\log
 \li \FOR{i\la 0\To k}
 	\li $C[i]\la 0$
 \End
-\li \FOR{j\la 1 \To \attrib{A}{lenght}}
+\li \FOR{j\la 1 \To \attrib{A}{length}}
 	\li $C[A[j]]\la C[A[j]]+1$
 \End
 \li \FOR{i\la 1\To k}
 	\li $C[i]\la C[i]+C[i-1]$
 \End
-\li \FOR{j\la \attrib{A}{lenght}\Downto 1}
+\li \FOR{j\la \attrib{A}{length}\Downto 1}
 	\li $B[C[A[j]]]\la A[j]$
 	\li $C[A[j]]\la C[A[j]]-1$
 \End
@@ -1506,7 +1506,7 @@ Serve un algoritmo che conservi le proprietà del max-heap, ovvero che aggiusti 
 \li \IF{r\leq A.heap-size \text{ AND } A[r]>A[massimo]}
 	\li $massimo\get r$
 \END
-li \IF{massimo\neq i}
+\li \IF{massimo\neq i}
 	\li \bo{scambia} $A[i] \sse A[massimo]$
 	\li $\proc{Max-Heapify}(A,massimo)$
 \END
@@ -1519,7 +1519,7 @@ Si può ottenere con l'invariante di ciclo (perché è ricorsivo in coda).
 					\item[\underline{Costruire un heap}:] Dato un array non ordinato, produce un max-heap bottom-up. Lo pseudocodice è: 
 				\end{descr}
 				\begin{code}{BuildMaxHeap(A)}
-\li $\attrib{A}{heap-size}\get \attrib{A}{lenght}$
+\li $\attrib{A}{heap-size}\get \attrib{A}{length}$
 \li \FOR{i \get \floor{\attrib{A}{lenght}/2} \DOWNTO 1}
 	\li $\proc{Max-Heapify}(A,i)$
 \END
@@ -1533,7 +1533,7 @@ Posso implementare una coda con priorità usando un max-heap. Ogni elemento dell
 Il tempo totale è $\Theta(1)$\\
 				\begin{code}{Heap-Extract-Max(A)}
 \li \IF{\attrib{A}{heap-size}<1}
-	\li \Error "overflow dell'heap"
+	\li \Error "underflow dell'heap"
 \END
 \li $max\get A[1]$
 \li $A[1]\get A[\attrib{A}{heap-size}]$
@@ -1558,7 +1558,7 @@ Il tempo totale è $O(\log_2 n)$\\
 Il tempo totale è $O(\log_2 n)$\\
 				\begin{code}{Max-Heap-Insert(A,key)}
 \li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}+1$
-\li $\attrib{A}{heap-size}\get -\infty$
+\li $A[heap-size]\get -\infty$
 \li $\proc{Heap-Increase-Key}(A,\attrib{A}{heap-size},key)$
 				\end{code}
 \bo{Costo}\\
