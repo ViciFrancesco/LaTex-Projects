@@ -148,7 +148,7 @@ Per categorizzare la complessità degli algoritmi faccio riferimento alla cresci
 \textbf{Correttezza con I.C.}
 		\begin{descr}{1}
 \item[Ciclo Interno] $\rightarrow$ "All'inizio della $i$-esima iterazione del \textit{for} interno, $A[min]$ è minore o uguale di ogni elemento di $A[j,\dots,i-1]$ cioè $\forall j\in [j,\dots,i-1]$ si ha che $A[min]\leq A[j]$". 
-\item[Ciclo Esterno] $\rightarrow$ "All'inizio di ogni iterazione del ciclo \textit{for} esterno, il sottoarray $A[1,\dots,j-1]$ è ordinatoe composto solo dagli elementi più piccoli dell'array $A$".
+\item[Ciclo Esterno] $\rightarrow$ "All'inizio di ogni iterazione del ciclo \textit{for} esterno, il sottoarray $A[1,\dots,j-1]$ è ordinato e composto solo dagli elementi più piccoli dell'array $A$".
 		\end{descr}
 \bo{Costo}\\
 In questo caso è sempre $O(n^2)$ perché, sia nel caso migliore sia nel caso peggiore, i due cicli \co{for} vengono comunque eseguiti. L'unica riga che può non essere eseguita è la 6, che è trascurabile al fine del calcolo del costo.\\
