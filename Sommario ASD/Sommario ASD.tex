@@ -607,7 +607,7 @@ Si studia il tempo per eseguire una sequenza di operazioni (diverse) su una stru
 	\li "inserisci gli elementi di $\attrib{T}{table}$ in NT"
 	\li \func{free} $\attrib{T}{table}$
 	\li $\attrib{T}{table}\la$ NT
-	\li $\attrib{T}{size}\la 2\attrib{T}{size}$
+	\li $\attrib{T}{size}\la 2\cdot\attrib{T}{size}$
 \End
 \li "inserisci $x$ in $\attrib{T}{table}$"
 \li $\attrib{T}{num}\la \attrib{T}{num}+1$
@@ -1593,8 +1593,19 @@ Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$.
 					\item[arco leggero] $\ra$ un arco è leggero per un taglio \SSE ha il peso minimo tra tutti gli archi che attraversano il taglio.
 				\end{Descr}
 				\item[Teorema]: Dato \G, sia $A$ un sottoinsieme di un MST di $G$, sia $(S,V-S)$ un taglio che rispetta l'insieme di archi $A$ e sia $(u,v)$ un arco leggero di che attraversa il taglio $(S,V-S)\implies (u,v)$ è un \bo{arco sicuro} per $A$.
-				%TODO aggiungere dimostrazione ... 
+				\item[Dimostrazione]: Sia $T$ un qualsiasi MST che contiene $A$ allora se:
+				\begin{Descr} 
+					\item[\bm{$(u,v)\subseteq T$}] $\implies$ $(u,v)$ è sicuro per $A$; 
+					\item[\bm{$(u,v)\not\subseteq T$}] $\implies$ costruisco $T'$ un altro MST tale che $A\cup (u,v)\subseteq T'$.\\	
+					Infatti poiché $T$ è un MST, ha un cammino unico, detto $p$ tra $u$ e $v$. \\
+					Supponendo che esista un altro arco $(x,y)\subseteq T$ oltre a $(u,v)$ che attraversa il taglio $(S,V-S)$. \\
+					Allora se $(u,v)$ è leggero significa che i pesi degli archi sono $w(u,v)\leq w(x,y)$. \\
+					Quindi $T'$ avrà come peso $w(T')=w(T)-w(x,y)+w(u,v)\leq w(T)$ poiché $w(u,v)\leq w(x,y)$. \\
+					Infine poiché $T'$ è un albero di copertura e $T$ è un MST con $w(T)\geq w(T')$ allora anche $T'$ sarà un MST.
+					$\implies (u,v)$ è sicuro per $A$.
+				\end{Descr} 
 				\item[Corollario]: Sia $G_A=(V,A)$ la foresta che contiene le singole componenti connesse (all'inizio un albero per ogni nodo), sia $C=(V_C,E_C)$ una componente connessa di $G_A$, allora se $(u,v)$ è un arco leggero che connette $C$ a una qualsiasi altra componente in $G_A\implies(u,v)$ è un arco sicuro per $A$.
+				\item[Dimostrazione]: (uguale a quella precedente, basta porre $S=V_C$).
 				%TODO dimostrazione uguale a quella precedente ma con S=V_C
 			\end{Descr}
 In $\proc{GenericMST}$, iterando $\modulo{V}-1$ volte, alla fine ottengo $\modulo{V}-1$ archi sicuri per $A$ ovvero un MST. Questa affermazione e il corollario ci portano alla formulazione di Kruskal.
