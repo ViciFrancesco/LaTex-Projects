@@ -1207,7 +1207,7 @@ c[i-1,j]+\text{cost}\proc{(insert)}\qquad\text{sempre}\\
 \end{cases}$}
 			\end{tcenter}
 Scrivo quindi un algoritmo che usa le due tabelle $c$, dei costi, e $op$ delle operazioni. Lo pseudocodice è:
-			\begin{code}{EditDistance(x,y)}
+			\begin{code}{EditDistance(X,Y)}
 \li $m \get X.length$
 \li $n \get Y.length$
 \li Siano $c[0,...,m\; ; \;0,...,n]$ e $op[0,...,m\; ; \;0,...,n]$ due nuove tabelle
@@ -1215,7 +1215,7 @@ Scrivo quindi un algoritmo che usa le due tabelle $c$, dei costi, e $op$ delle o
 	\li $c[i,0] \get i\cdot \text{cost}(\proc{Delete})$
 	\li $op[i,0] \get$ "DELETE"
 \END
-\li \FOR{i \get 0 \TO m}
+\li \FOR{j \get 0 \TO n}
 	\li $c[0,j] \get j\cdot \text{cost}(\proc{Insert})$
 	\li $op[0,j] \get$ "INSERT"
 \END
@@ -1308,12 +1308,12 @@ Un grafo $G=(V,E)$ questo può essere rappresentato in due modi:
 			\end{Descr}
 		\end{subParagraph}
 		\begin{subParagraph}{Visita in Ampiezza}
-Scopre tutti i vertici raggiungibili da un nodo sorgente $s\in V$. Come input ho il grafo $G$ e il nodo sorgente $s$ mentre come output avrò $\forall v\in V$ la distanza $v.d$ da $s$ a $v$ e il predecessore $v.\pi=u$ di $v$ ovvero il penultimo nodo nel cammino da $s$ a $v$. L'insieme degli archi $\{v.\pi,v\} tale che v\neq s$ forma un albero. Per la Visita in Ampiezza uso una coda "FIFO" $Q$ con $\proc{Enqueue}$ e $\proc{Dequeue}$. Si può mostrare che i valori di $d$ presenti in $Q$ sono al massimo 2 e se sono due, quelli più piccoli sono stati inseriti prima, quindi saranno i primi ad uscire. Lo pseudocodice è:
+Scopre tutti i vertici raggiungibili da un nodo sorgente $s\in V$. Come input ho il grafo $G$ e il nodo sorgente $s$ mentre come output avrò $\forall v\in V$ la distanza $v.d$ da $s$ a $v$ e il predecessore $v.\pi=u$ di $v$ ovvero il penultimo nodo nel cammino da $s$ a $v$. L'insieme degli archi $\{v.\pi,v\} \text{ tale che } v\neq s$ forma un albero. Per la Visita in Ampiezza uso una coda "FIFO" $Q$ con $\proc{Enqueue}$ e $\proc{Dequeue}$. Si può mostrare che i valori di $d$ presenti in $Q$ sono al massimo 2 e se sono due, quelli più piccoli sono stati inseriti prima, quindi saranno i primi ad uscire. Lo pseudocodice è:
 			\begin{code}{BFS(G,s)}
-\li \FOR{\text{ogni vertice }u\in \attrib{G}{V}-\{s\}} \COMMENT{imposto i nodi bianchi}
+\li \FOR{\text{ogni vertice }u\in \attrib{G}{V}-\{s\}\COMMENT{imposto i nodi bianchi}} 
 	\li $\attrib{u}{color}\get\text{WHITE}$
 	\li $\attrib{u}{d}\get\infty$
-	\li $\attrib{u}{\pi}get\const{nil}$
+	\li $\attrib{u}{\pi}\get\const{nil}$
 \END
 \li $\attrib{s}{color}\get\text{GRAY}$ \COMMENT{Imposto la sorgente}
 \li $\attrib{s}{d}\get0$
@@ -1323,8 +1323,8 @@ Scopre tutti i vertici raggiungibili da un nodo sorgente $s\in V$. Come input ho
 \li \WHILE{Q\neq\emptyset}
 	\li $u\get\proc{Dequeue}(Q)$ \COMMENT{estrae il nodo corrente e lo salva}
 	\li \FOR{\text{ogni }v\in \attrib{G}{adj}[u]\COMMENT{esplora i nodi adiacenti  a quello corrente}} 
-		\li \IF{\attrib{u}{color}=\text{WHITE}} 
-			\li $\attrib{u}{color}\get\text{GRAY}$
+		\li \IF{\attrib{v}{color}=\text{WHITE}} 
+			\li $\attrib{v}{color}\get\text{GRAY}$
 			\li $\attrib{v}{d}\get u.d+1$
 			\li $\attrib{v}{\pi}\get u$
 			\li $\proc{Enqueue}(Q,v)$
@@ -1337,7 +1337,8 @@ Scopre tutti i vertici raggiungibili da un nodo sorgente $s\in V$. Come input ho
 Il tempo di esecuzione complessivo sarà $O(V+E)$ poiché $\proc{Enqueue}$ e $\proc{Dequeue}$ costano $O(1)$, ogni nodo è messo nella coda al massimo una volta e ogni arco viene esplorato al massimo una volta se il grafo è diretto (o al massimo due volte sei il grafo è indiretto). Inoltre si usa $O$ e \underline{non} $\Theta$ perché alcuni nodi potrebbero non essere esplorati.
 		\end{subParagraph}
 		\begin{subParagraph}{Visita in Profondità}
-Esplora sistematicamente ogni arco, anche ri-iniziando da nodi diversi. Come input ho il grafo $G$ mentre come output avrò $\forall v\in V$ il tempo di scoperta $v.d$, il tempo di fine $v.f$ e il predecessore $v.\pi$. I tempi di scoperta e di fine rispettano la relazione $1\leq v.d < v.f \leq 2\modulo{V}$. Lo pseudocodice è:
+Esplora sistematicamente ogni arco, anche ri-iniziando da nodi diversi. Come input ho il grafo $G$ mentre come output avrò $\forall v\in V$ il tempo di scoperta $v.d$, il tempo di fine $v.f$ e il predecessore $v.\pi$.\\
+I tempi di scoperta e di fine rispettano la relazione $1\leq v.d < v.f \leq 2\modulo{V}$. Lo pseudocodice è:
 			\begin{code}{DFS(G)}
 \li \FOR{\text{ogni vertice }u\in \attrib{G}{V}}
 	\li $\attrib{u}{color}\get \text{WHITE}$
@@ -1362,7 +1363,7 @@ Esplora sistematicamente ogni arco, anche ri-iniziando da nodi diversi. Come inp
 \END
 \li $\attrib{u}{color}\get \text{BLACK}$ \COMMENT{conclude l'esplorazione del nodo corrente}
 \li $time \get time+1$ \COMMENT{aggiorna il tempo corrente}
-\li $attrib{u}{f}\get time$
+\li $\attrib{u}{f}\get time$
 			\end{code}
 \bo{Costo}\\
 Esplora ogni nodo e ramo quindi il costo totale sarà $\Theta(V+E)$.
