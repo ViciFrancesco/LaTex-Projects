@@ -746,17 +746,17 @@ Il costo dipende anche in questo caso esclusivamente dell'altezza infatti è $O(
 			\end{descr}
 			\begin{code}{TreeDelete(T,z)}
 \li \IF{\attrib{z}{left}=\const{nil}}
-	\li \proc{Transplant(T,z,\attrib{z}{right})}
+	\li $\proc{Transplant}(T,z,\attrib{z}{right})$
 \li \ELSEIF{\attrib{z}{right}=\const{nil}}
-	\li \proc{Transplant(T,z,\attrib{z}{left})}
+	\li $\proc{Transplant}(T,z,\attrib{z}{left})$
 \li \ELSE 
-	\li $y\la\proc{TreeMinimum(\attrib{z}{right})}$
+	\li $y\la\proc{TreeMinimum}(\attrib{z}{right})$
 	\li \IF{\attrib{y}{p}\neq z}
-		\li \proc{Transplant(T,y,\attrib{y}{right})}
+		\li $\proc{Transplant}(T,y,\attrib{y}{right})$
 		\li $\attrib{y}{right}\la\attrib{z}{right}$
 		\li $\attribb{y}{right}{p}\la y$
 	\END
-	\li \proc{Transplant(T,z,y)}
+	\li $\proc{Transplant}(T,z,y)$
 	\li $\attrib{y}{left}\la\attrib{z}{left}$ 
 	\li $\attribb{y}{left}{p}\la y$
 \END
@@ -805,6 +805,7 @@ Gli alberi AVL sono alberi quasi bilanciati", infatti ,per qualsiasi nodo, le al
 Gli AVL ereditano anche tutte le operazioni tipiche degli ABR, cioè MIN, MAX, SUCCESSOR, PREDECESSOR e SEARCH, ma il costo diventa dipendente dal numero di nodi infatti si eseguono in $O(log_2 \;n)$. Ci sono invece altre operazioni, come inserimento e cancellazione, che rischiano di violare le proprietà dell'AVL. A questo scopo si introducono le ROTAZIONI che permettono di ripristinare, se usate in modo corretto, il bilanciamento dei nodi. Lo pseudocodice è:
 		\begin{code}{LeftRotate(T,x)}
 \li $y \get \attrib{x}{right}$ \COMMENT{assegna y, che verrà ruotato insieme ad x}
+\li $\attrib{x}{right}\get\attrib{y}{left}$
 \li $\attrib{x}{h}\get \proc{max(\attribb{x}{left}{h},\attribb{x}{right}{h})}+1$
 \li \IF{y.left \neq \attrib{T}{\const{nil}}}
 	\li $\attribb{y}{left}{p}\get x$ \COMMENT{collega x e il sottoalbero sinistro di y}
@@ -843,7 +844,7 @@ Gli AVL ereditano anche tutte le operazioni tipiche degli ABR, cioè MIN, MAX, S
 \li $\attrib{z}{left}\get\attrib{T}{\const{nil}}$\COMMENT{Crea le due foglie \const{nil} di z}
 \li $\attrib{z}{right}\get\attrib{T}{\const{nil}}$
 \li $\attrib{z}{h}\get 1$
-\li \proc{AVLInsertFixup(T,z)}\COMMENT{chiamata alg. che aggiusta il bilanciamento}
+\li $\proc{AVLInsertFixup}(T,z)$\COMMENT{chiamata alg. che aggiusta il bilanciamento}
 		\end{code}
 Quando si inserisce/cancella una nuova foglia $z$ bisogna aggiustare il bilanciamento di qualche $x$ antenato di $z$. Infatti esisterà almeno un nodo $x$ per cui $-2\leq BF(x)\leq2$, violando cioè le regole degli AVL. Esistono quindi due possibilità:
 Posso dividere il problema in 4 sottocasi:
@@ -866,15 +867,15 @@ Lo pseudocodice è:
 	\li $\attrib{x}{h}\get\proc{max(\attribb{x}{left}{h},\attribb{x}{right}{h})}+1$
 	\li \IF{(\attribb{x}{left}{h}-\attribb{x}{right}{h})=2}
 		\li \IF{(\attribbb{x}{left}{left}{h}-\attribbb{x}{left}{right}{h})=-1}
-			\li \proc{LeftRotate(T,x.left)}
+			\li $\proc{LeftRotate}(T,x.left)$
 		\END
-		\li \proc{RightRotate(T,x)}
+		\li $\proc{RightRotate}(T,x)$
 		\li $x\get\attrib{x}{p}$
 	\li \ELSEIF{(\attribb{x}{left}{h}-\attribb{x}{right}{h})=-2}
 		\li \IF{(\attribbb{x}{right}{left}{h}-\attribbb{x}{right}{right}{h})=1}
-			\li \proc{RightRotate(T,x.right)}
+			\li $\proc{RightRotate}(T,x.right)$
 		\END
-		\li \proc{LeftRotate(T,x)}
+		\li $\proc{LeftRotate}(T,x)$
 		\li $x\get\attrib{x}{p}$
 	\END
 	\li $x\get\attrib{x}{p}$
@@ -1030,7 +1031,7 @@ Per risolvere questo problema utilizzando la programmazione dinamica devo:
 \END
 \li $q \get -\infty$
 \li \FOR{i \get 1 \TO n}
-	\li $q \get \max\;(q, p[i]+\proc{CutRod}(p, n-i))$
+	\li $q \get \proc{max}(q, p[i]+\proc{CutRod}(p, n-i))$
 \END
 \li \RETURN $q$
 					\end{code}
@@ -1058,7 +1059,7 @@ Memorizzo i problemi risolti in una tabella affinché possano essere riutilizzat
 \li \ELSE
 	\li $q \get -infty$
 	\li \FOR{i \get 1 \TO n}
-		\li $q \get \max\;(q, p[i]+\proc{MemoizedCutRodAux}(p, n-i, r))$
+		\li $q \get \proc{max}(q, p[i]+\proc{MemoizedCutRodAux}(p, n-i, r))$
 	\END
 \END
 \li $r[n] \get q$
@@ -1075,7 +1076,7 @@ Ogni sottoproblema è risolto una sola volta, avrò in totale $n+(n-1)+(n-2)+\cd
 \li \FOR{j \get 1 \TO n}
 	\li $q \get -infty$
 	\li \FOR{i \get 1 \TO j}
-		\li $q \get \max\;(q, p[i]+r[j-i])$
+		\li $q \get \proc{max}(q, p[i]+r[j-i])$
 	\END
 	\li $r[j] \get q$
 \END
@@ -1172,12 +1173,12 @@ Usando le 2 tabelle $b$ e $c$ posso scrivere un algoritmo che individui e stampi
 	\li \RETURN
 \END
 \li \IF{b[i,j]="\nwarrow"}
-	\li $\proc{Print-LCS(b,X,i-1,j-1)}$
+	\li $\proc{Print-LCS}(b,X,i-1,j-1)$
 	\li print $x_i$
 \li \ELSEIF{b[i,j]="\uparrow"}
-	\li $\proc{Print-LCS(b,X,i-1,j)}$
+	\li $\proc{Print-LCS}(b,X,i-1,j)$
 \li \ELSE
-	\li $\proc{Print-LCS(b,X,i,j-1)}$
+	\li $\proc{Print-LCS}(b,X,i,j-1)$
 \END
 				\end{code}
 			\end{itemize}
@@ -1212,35 +1213,35 @@ Scrivo quindi un algoritmo che usa le due tabelle $c$, dei costi, e $op$ delle o
 \li $n \get Y.length$
 \li Siano $c[0,...,m\; ; \;0,...,n]$ e $op[0,...,m\; ; \;0,...,n]$ due nuove tabelle
 \li \FOR{i \get 0 \TO m}
-	\li $c[i,0] \get i\cdot \text{cost}(\proc{Delete})$
+	\li $c[i,0] \get i\cdot \proc{cost}(\text{DELETE})$
 	\li $op[i,0] \get$ "DELETE"
 \END
 \li \FOR{j \get 0 \TO n}
-	\li $c[0,j] \get j\cdot \text{cost}(\proc{Insert})$
+	\li $c[0,j] \get j\cdot \proc{cost}(\text{INSERT})$
 	\li $op[0,j] \get$ "INSERT"
 \END
 \li \FOR{i \get 1 \TO m}
 	\li \FOR{j \get 1 \TO n}
 		\li $c[i,j] \get \infty$
 		\li \IF{x_i=y_j}
-			\li $c[i,j] \get c[i-1,j-1]+\text{cost}(\proc{copy})$
+			\li $c[i,j] \get c[i-1,j-1]+\proc{cost}(\text{COPY})$
 			\li $op[i,j] \get$ "COPY"
 		\END
-		\li \IF{x_i \neq y_j \text{ AND } c[i-1,j-1]+\text{cost}(\proc{replace})<c[i,j]}
-			\li $c[i,j] \get c[i-1,j-1]+\text{cost}(\proc{replace})$
+		\li \IF{x_i \neq y_j \text{ AND } c[i-1,j-1]+\proc{cost}(\text{REPLACE})<c[i,j]}
+			\li $c[i,j] \get c[i-1,j-1]+\proc{cost}(\text{REPLACE})$
 			\li $op[i,j] \get$ "REPLACE"
 		\END
 		\li \IF{i,j \geq 2 \text{ AND } x_i=y_{j-1} \text{ AND }y_j=x_{i-1} \text{ AND }...}
-			\li$...\text{ AND }c[i-2,j-2]+\text{cost}(\proc{twiddle})<c[i,j]$
-			\li $c[i,j] \get c[i-2,j-2]+\text{cost}(\proc{twiddle})$
+			\li$...\text{ AND }c[i-2,j-2]+\proc{cost}(\text{TWIDDLE})<c[i,j]$
+			\li $c[i,j] \get c[i-2,j-2]+\proc{cost}(\text{TWIDDLE})$
 			\li $op[i,j] \get$ "TWIDDLE"
 		\END
-		\li \IF{c[i-1,j]+\text{cost}(\proc{delete})<c[i,j]}
-			\li $c[i,j] \get c[i-1,j]+\text{cost}(\proc{delte})$
+		\li \IF{c[i-1,j]+\proc{cost}(\text{DELETE})<c[i,j]}
+			\li $c[i,j] \get c[i-1,j]+\proc{cost}(\text{DELETE})$
 			\li $op[i,j] \get$ "DELETE"
 		\END
-		\li \IF{c[i,j-1]+\text{cost}(\proc{insert})<c[i,j]}
-			\li $c[i,j] \get c[i,j-1]+\text{cost}(\proc{insert})$
+		\li \IF{c[i,j-1]+\proc{cost}(\text{INSERT})<c[i,j]}
+			\li $c[i,j] \get c[i,j-1]+\proc{cost}(\text{INSERT})$
 			\li $op[i,j] \get$ "INSERT"
 		\END
 	\END
