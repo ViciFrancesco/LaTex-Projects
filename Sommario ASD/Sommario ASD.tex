@@ -148,7 +148,7 @@ Per categorizzare la complessità degli algoritmi faccio riferimento alla cresci
 \textbf{Correttezza con I.C.}
 		\begin{descr}{1}
 \item[Ciclo Interno] $\rightarrow$ "All'inizio della $i$-esima iterazione del \textit{for} interno, $A[min]$ è minore o uguale di ogni elemento di $A[j,\dots,i-1]$ cioè $\forall j\in [j,\dots,i-1]$ si ha che $A[min]\leq A[j]$". 
-\item[Ciclo Esterno] $\rightarrow$ "All'inizio di ogni iterazione del ciclo \textit{for} esterno, il sottoarray $A[1,\dots,j-1]$ è ordinatoe composto solo dagli elementi più piccoli dell'array $A$".
+\item[Ciclo Esterno] $\rightarrow$ "All'inizio di ogni iterazione del ciclo \textit{for} esterno, il sottoarray $A[1,\dots,j-1]$ è ordinato e composto solo dagli elementi più piccoli dell'array $A$".
 		\end{descr}
 \bo{Costo}\\
 In questo caso è sempre $O(n^2)$ perché, sia nel caso migliore sia nel caso peggiore, i due cicli \co{for} vengono comunque eseguiti. L'unica riga che può non essere eseguita è la 6, che è trascurabile al fine del calcolo del costo.\\
@@ -1591,7 +1591,7 @@ Se $A\subseteq \text{MST}$ all'ultima iterazione abbiamo aggiunto un \bo{arco si
 Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$. Ogni MST deve avere almeno un arco che connetta $S$ con $V-S$, voglio scegliere l'arco che li connette con il peso minore.
 				\item[Definizioni]:\\
 				\begin{Descr} 
-					\item[taglio] $\ra$ Dato un grafo \G non orientato e definisco $S\subset V$ e $A\subseteq E$. Allora un taglio $(S,V-S)$ è una partizione dei vertici $V$ in due insiemi disgiunti $S$ e $V-S$. Un arco $(u,v)$ \bo{attraversa} un taglio \SSE $u\in S$ e $v\in V-S$ (o viceversa). Infine un arco \bo{rispetta} un insieme di archi $A$ \SSE nessun arco attraversa il taglio. 
+					\item[taglio] $\ra$ Dato un grafo \G non orientato e definisco $S\subset V$ e $A\subseteq E$. Allora un taglio $(S,V-S)$ è una partizione dei vertici $V$ in due insiemi disgiunti $S$ e $V-S$. Un arco $(u,v)$ \bo{attraversa} un taglio \SSE $u\in S$ e $v\in V-S$ (o viceversa). Infine un taglio \bo{rispetta} un insieme di archi $A$ \SSE nessun arco attraversa il taglio. 
 					\item[arco leggero] $\ra$ un arco è leggero per un taglio \SSE ha il peso minimo tra tutti gli archi che attraversano il taglio.
 				\end{Descr}
 				\item[Teorema]: Dato \G, sia $A$ un sottoinsieme di un MST di $G$, sia $(S,V-S)$ un taglio che rispetta l'insieme di archi $A$ e sia $(u,v)$ un arco leggero di che attraversa il taglio $(S,V-S)\implies (u,v)$ è un \bo{arco sicuro} per $A$.
@@ -1613,7 +1613,7 @@ Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$.
 In $\proc{GenericMST}$, iterando $\modulo{V}-1$ volte, alla fine ottengo $\modulo{V}-1$ archi sicuri per $A$ ovvero un MST. Questa affermazione e il corollario ci portano alla formulazione di Kruskal.
 		\end{subParagraph}
 		\begin{subParagraph}{MST Kruskal}
-Uso le operazione per le strutture dati per in insiemi disgiunti. Quindi chiamo $\proc{MakeSet}$ per ogni nodo e chiamo $\proc{Union}$ ogni volta che trovo un arco sicuro. Lo pseudocodice è:
+Uso le operazioni per le strutture dati per gli insiemi disgiunti. Quindi chiamo $\proc{MakeSet}$ per ogni nodo e chiamo $\proc{Union}$ ogni volta che trovo un arco sicuro. Lo pseudocodice è:
 			\begin{code}{MST-Kruskal(G,w)}
 \li $A\get\emptyset$
 \li \FOR{\text{ogni vertice }v\in\attrib{G}{V}}
