@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.4)  25 JAN 2024 13:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.12.4)  1 FEB 2024 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -360,46 +360,46 @@ Overfull \hbox (4.41907pt too wide) in paragraph at lines 481--481
 Warning: Indentation ends at level 1 in codebox on page 4.
 [4{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 [5]
-Overfull \hbox (9.65695pt too wide) in paragraph at lines 847--847
+Overfull \hbox (10.15492pt too wide) in paragraph at lines 848--848
 []| []  
  []
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
-(Font)              using `OT1/cmr/bx/n' instead on input line 893.
+(Font)              using `OT1/cmr/bx/n' instead on input line 894.
 
 [6]
-Overfull \hbox (19.82927pt too wide) in paragraph at lines 1066--1066
+Overfull \hbox (17.43506pt too wide) in paragraph at lines 1067--1067
 []| []  
  []
 
 [7]
-Overfull \hbox (7.17194pt too wide) in paragraph at lines 1167--1167
+Overfull \hbox (7.17194pt too wide) in paragraph at lines 1168--1168
 []| []  
  []
 
 
-Overfull \hbox (4.05823pt too wide) in paragraph at lines 1199--1208
+Overfull \hbox (4.05823pt too wide) in paragraph at lines 1200--1209
  [] []$ 
  []
 
 [8]
-Overfull \hbox (0.76749pt too wide) in paragraph at lines 1249--1249
+Overfull \hbox (3.92607pt too wide) in paragraph at lines 1250--1250
 []| []  
  []
 
 
-Overfull \hbox (16.48015pt too wide) in paragraph at lines 1335--1335
+Overfull \hbox (16.48015pt too wide) in paragraph at lines 1336--1336
 []| []  
  []
 
 [9]
-Overfull \hbox (24.29657pt too wide) in paragraph at lines 1443--1443
+Overfull \hbox (24.29657pt too wide) in paragraph at lines 1445--1445
 []| []  
  []
 
 [10] [11]
-Overfull \hbox (10.55273pt too wide) in paragraph at lines 1640--1640
+Overfull \hbox (10.55273pt too wide) in paragraph at lines 1653--1653
 []| []  
  []
 
@@ -418,7 +418,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  5462 strings out of 474267
  82681 string characters out of 5751465
- 1973558 words of memory out of 5000000
+ 1974558 words of memory out of 5000000
  27603 multiletter control sequences out of 15000+600000
  569765 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -448,7 +448,7 @@ e1/public/amsfonts/cm/cmti8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-s
 uper/sfbx0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0
 700.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb>
-Output written on "Sommario ASD.pdf" (12 pages, 421787 bytes).
+Output written on "Sommario ASD.pdf" (12 pages, 423227 bytes).
 PDF statistics:
  185 PDF objects out of 1000 (max. 8388607)
  113 compressed objects within 2 object streams
