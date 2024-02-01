@@ -1057,7 +1057,7 @@ Memorizzo i problemi risolti in una tabella affinché possano essere riutilizzat
 \li \IF{n=0}
 	\li $q=0$
 \li \ELSE
-	\li $q \get -infty$
+	\li $q \get -\infty$
 	\li \FOR{i \get 1 \TO n}
 		\li $q \get \proc{max}(q, p[i]+\proc{MemoizedCutRodAux}(p, n-i, r))$
 	\END
@@ -1090,7 +1090,7 @@ Gli algoritmi appena visti tengono traccia solo del massimo ricavo ma non dei ta
 \li Siano $r[0,...,n]$ ed $s[0,...,n]$ due nuovi array
 \li $r[0] \get 0$
 \li \FOR{j \get 1 \TO n}
-	\li $q \get -infty$
+	\li $q \get -\infty$
 	\li \FOR{i \get 1 \TO j}
 		\li \IF{q<p[i]+r[j-i]}
 			\li $q \get p[i]+r[j-i]$
@@ -1560,7 +1560,7 @@ Il tempo totale è $O(\log_2 n)$\\
 Il tempo totale è $O(\log_2 n)$\\
 				\begin{code}{Max-Heap-Insert(A,key)}
 \li $\attrib{A}{heap-size}\get \attrib{A}{heap-size}+1$
-\li $A[heap-size]\get -\infty$
+\li $A[\attrib{A}{heap-size}]\get -\infty$
 \li $\proc{Heap-Increase-Key}(A,\attrib{A}{heap-size},key)$
 				\end{code}
 \bo{Costo}\\
