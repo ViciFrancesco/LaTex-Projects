@@ -1613,7 +1613,7 @@ Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$.
 In $\proc{GenericMST}$, iterando $\modulo{V}-1$ volte, alla fine ottengo $\modulo{V}-1$ archi sicuri per $A$ ovvero un MST. Questa affermazione e il corollario ci portano alla formulazione di Kruskal.
 		\end{subParagraph}
 		\begin{subParagraph}{MST Kruskal}
-Uso le operazione per le strutture dati per in insiemi disgiunti. Quindi chiamo $\proc{MakeSet}$ per ogni nodo e chiamo $\proc{Union}$ ogni volta che trovo un arco sicuro. Lo pseudocodice è:
+Uso le operazioni per le strutture dati per gli insiemi disgiunti. Quindi chiamo $\proc{MakeSet}$ per ogni nodo e chiamo $\proc{Union}$ ogni volta che trovo un arco sicuro. Lo pseudocodice è:
 			\begin{code}{MST-Kruskal(G,w)}
 \li $A\get\emptyset$
 \li \FOR{\text{ogni vertice }v\in\attrib{G}{V}}
