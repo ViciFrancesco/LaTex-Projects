@@ -1591,7 +1591,7 @@ Se $A\subseteq \text{MST}$ all'ultima iterazione abbiamo aggiunto un \bo{arco si
 Sia $S\subset V$ un qualunque insieme di vertici tale che $c\in S$ e $f\in V-S$. Ogni MST deve avere almeno un arco che connetta $S$ con $V-S$, voglio scegliere l'arco che li connette con il peso minore.
 				\item[Definizioni]:\\
 				\begin{Descr} 
-					\item[taglio] $\ra$ Dato un grafo \G non orientato e definisco $S\subset V$ e $A\subseteq E$. Allora un taglio $(S,V-S)$ è una partizione dei vertici $V$ in due insiemi disgiunti $S$ e $V-S$. Un arco $(u,v)$ \bo{attraversa} un taglio \SSE $u\in S$ e $v\in V-S$ (o viceversa). Infine un arco \bo{rispetta} un insieme di archi $A$ \SSE nessun arco attraversa il taglio. 
+					\item[taglio] $\ra$ Dato un grafo \G non orientato e definisco $S\subset V$ e $A\subseteq E$. Allora un taglio $(S,V-S)$ è una partizione dei vertici $V$ in due insiemi disgiunti $S$ e $V-S$. Un arco $(u,v)$ \bo{attraversa} un taglio \SSE $u\in S$ e $v\in V-S$ (o viceversa). Infine un taglio \bo{rispetta} un insieme di archi $A$ \SSE nessun arco attraversa il taglio. 
 					\item[arco leggero] $\ra$ un arco è leggero per un taglio \SSE ha il peso minimo tra tutti gli archi che attraversano il taglio.
 				\end{Descr}
 				\item[Teorema]: Dato \G, sia $A$ un sottoinsieme di un MST di $G$, sia $(S,V-S)$ un taglio che rispetta l'insieme di archi $A$ e sia $(u,v)$ un arco leggero di che attraversa il taglio $(S,V-S)\implies (u,v)$ è un \bo{arco sicuro} per $A$.
