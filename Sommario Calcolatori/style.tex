@@ -1,0 +1,101 @@
+\usepackage[a4paper,headsep=10pt, top=30pt, bottom=30pt, left=30pt, right=30pt, footskip=10pt]{geometry}
+\usepackage{listings}	
+\usepackage{setspace}			%used for \begin{spacing}\end{spacing}-> vertical space setting
+\usepackage{amsfonts} 			%used for \mathbb{} -> numerical sets
+\usepackage{amsmath}			%used for \text{} inside math equations
+\usepackage{enumitem}
+\usepackage{bm}					%used for bold math expressions
+\usepackage{calc}				%used for algebric operations inside \newenvironment
+\usepackage{fancyhdr}			%used for head and foot settings
+%\usepackage{draftwatermark}		%used for watermark
+\usepackage{graphicx}
+\usepackage{environ}			% usato per definire nuovi ambienti
+\usepackage{xcolor}
+
+
+
+\fancypagestyle{plain}
+{
+	\fancyhead{}\fancyfoot{}
+	\fancyhead[C]{\vspace{0pt}   Calcolatori}
+	\fancyfoot[R]{Vici Francesco}
+	\fancyfoot[C]{\thepage}
+}
+\pagestyle{plain}
+
+
+
+\newenvironment{myDocument}[1]
+{
+	\graphicspath{ {../images/} }
+	\lstset{tabsize=3}
+	\begin{spacing}{1}
+	\begin{tcenter}
+		\LARGE\bo{\underline{#1}}
+	\end{tcenter}
+	\begin{flushleft}
+}{
+	\end{flushleft}
+	\end{spacing}
+}
+
+
+
+\newenvironment{tcenter}
+{
+  \par
+  \centering
+  \setlength{\parskip}{0pt} % Rimuovi spaziatura verticale
+  \noindent
+}{
+  \par
+}
+
+
+
+\newenvironment{Descr}
+{
+	\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+	\end{description}
+}
+
+
+
+\newenvironment{descr}[1]
+{
+	\setlist[description,1]{leftmargin=2em + (2em * #1),labelindent=0em + (2em * #1)}
+	\begin{description}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+}{
+	\end{description}
+}
+
+
+
+\NewEnviron{multimage}[1]{
+    \begin{figure}[htbp]
+        \centering
+        \setlength{\fboxsep}{0pt}% Elimina il padding attorno alle immagini
+        \renewcommand{\arraystretch}{0}% Imposta lo spaziamento tra le righe a 0
+        \edef\numimages{#1}% Numero di immagini
+        \edef\colwidth{\dimexpr\linewidth/\numimages}% Larghezza di ogni colonna
+        \begin{tabular}{@{} *{\numimages}{c} @{}}% Inizia una tabella con il numero di colonne specificato
+            \BODY% Contenuto dell'ambiente
+        \end{tabular}%
+    \end{figure}%
+}
+
+
+
+\newcommand{\bo}[1]{\textbf{#1}}
+\newcommand{\co}[1]{\textit{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\la}{\leftarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sse}{\leftrightarrow}
+\newcommand{\SSE}{$\Leftrightarrow$}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\modulo}[1]{\left\vert #1 \right\vert}
+\newcommand{\scalare}{\mathbin{\vcenter{\hbox{\scalebox{.6}{\;$\bullet$\;}}}}}
+\newcommand{\image}[1]{ \includegraphics[width=\colwidth]{#1}}
